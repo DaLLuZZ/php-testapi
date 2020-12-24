@@ -19,14 +19,14 @@ class PlayerController extends Controller
         return response()->json($players);
     }
 
-    public function GetPlayer(Request $request, $playerid)
+    public function GetPlayer(Request $request, $PlayerID)
     {
         if ($request->API_KEY != env('API_KEY'))
         {
             return response()->json('Unauthorized', 401);
         }
 
-        $player = DB::table('Player')->select('Id', 'Name', 'IsActive')->where('Id', $playerid)->first();
+        $player = DB::table('Player')->select('Id', 'Name', 'IsActive')->where('Id', $PlayerID)->first();
 
         return response()->json($player);
     }

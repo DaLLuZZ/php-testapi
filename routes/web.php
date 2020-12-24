@@ -19,5 +19,5 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'Player'], function () use ($router) {
     $router->get('/', 'PlayerController@Index');
-    $router->get('/{playerid}', 'PlayerController@GetPlayer');
+    $router->get('/{PlayerId}', 'PlayerController@GetPlayer');
 });
