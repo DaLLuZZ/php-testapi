@@ -20,4 +20,10 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'Player'], function () use ($router) {
     $router->get('/', 'PlayerController@Index');
     $router->get('/{PlayerId}', 'PlayerController@GetPlayer');
+
+    $router->post('/', 'PlayerController@InsertPlayer');
+
+    $router->put('/{PlayerId}', 'PlayerController@UpdatePlayer');
+    
+    $router->delete('/{PlayerId}', 'PlayerController@DeletePlayer');
 });

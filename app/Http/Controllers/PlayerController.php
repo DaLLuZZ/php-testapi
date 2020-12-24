@@ -30,4 +30,40 @@ class PlayerController extends Controller
 
         return response()->json($player);
     }
+
+    public function InsertPlayer(Request $request)
+    {
+        if ($request->API_KEY != env('API_KEY'))
+        {
+            return response()->json('Unauthorized', 401);
+        }
+
+        DB::table('Player')->insert(['Id' => $request->Id, 'Name' => $request->Name, 'IsActive' => $request->IsActive]);
+
+        return response()->json('OK', 200);
+    }
+
+    public function UpdatePlayer(Request $request, $PlayerId)
+    {
+        if ($request->API_KEY != env('API_KEY'))
+        {
+            return response()->json('Unauthorized', 401);
+        }
+
+        DB::table('Player')->where('Id', $PlayerId)->update(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
+
+        return response()->json('OK', 200);
+    }
+
+    public function DeletePlayer(Request $request, $PlayerId)
+    {
+        if ($request->API_KEY != env('API_KEY'))
+        {
+            return response()->json('Unauthorized', 401);
+        }
+
+        DB::table('Player')->where('Id', $PlayerId)->delete();
+
+        return response()->json('OK', 200);
+    }
 }
