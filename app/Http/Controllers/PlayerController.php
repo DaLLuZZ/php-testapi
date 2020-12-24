@@ -16,19 +16,29 @@ class PlayerController extends Controller
 
         $players = DB::table('Player')->select('Id', 'Name', 'IsActive')->get();
 
+        if (empty($players))
+        {
+            return response()->json('Not Found', 404);
+        }
+
         return response()->json($players);
     }
 
-    public function GetPlayer(Request $request, $PlayerID)
+    public function GetPlayer(Request $request, $PlayerId)
     {
         if ($request->API_KEY != env('API_KEY'))
         {
             return response()->json('Unauthorized', 401);
         }
 
-        $player = DB::table('Player')->select('Id', 'Name', 'IsActive')->where('Id', $PlayerID)->first();
+        $player = DB::table('Player')->select('Id', 'Name', 'IsActive')->where('Id', $PlayerId)->first();
 
-        return response()->json($player);
+        if (empty($player))
+        {
+            return response()->json('Not Found', 404);
+        }
+
+        return response()->json($player, 200);
     }
 
     public function InsertPlayer(Request $request)
