@@ -50,7 +50,7 @@ class PlayerController extends Controller
 
         DB::table('Player')->insert(['Id' => $request->Id, 'Name' => $request->Name, 'IsActive' => $request->IsActive]);
 
-        return response()->json('OK', 200);
+        return response()->json('Created', 201);
     }
 
     public function UpdatePlayer(Request $request, $PlayerId)
