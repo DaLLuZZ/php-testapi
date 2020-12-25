@@ -14,7 +14,7 @@ class PlayerController extends Controller
             return response()->json('Unauthorized', 401);
         }
 
-        $players = DB::table('Player')->select('Id', 'Name', 'IsActive')->get();
+        $players = DB::table('Player')->select('*')->get();
 
         if (empty($players))
         {
@@ -31,7 +31,7 @@ class PlayerController extends Controller
             return response()->json('Unauthorized', 401);
         }
 
-        $player = DB::table('Player')->select('Id', 'Name', 'IsActive')->where('Id', $PlayerId)->first();
+        $player = DB::table('Player')->select('*')->where('Id', $PlayerId)->first();
 
         if (empty($player))
         {

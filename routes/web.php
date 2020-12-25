@@ -27,3 +27,14 @@ $router->group(['prefix' => 'Player'], function () use ($router) {
     
     $router->delete('/{PlayerId}', 'PlayerController@DeletePlayer');
 });
+
+$router->group(['prefix' => 'Map'], function () use ($router) {
+    $router->get('/', 'MapController@Index');
+    $router->get('/{MapId}', 'MapController@GetMap');
+
+    $router->post('/', 'MapController@InsertMap');
+
+    $router->put('/{MapId}', 'MapController@UpdateMap');
+    
+    $router->delete('/{MapId}', 'MapController@DeleteMap');
+});
