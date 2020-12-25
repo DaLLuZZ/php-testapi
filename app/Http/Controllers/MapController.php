@@ -48,9 +48,9 @@ class MapController extends Controller
             return response()->json('Unauthorized', 401);
         }
 
-        DB::table('Map')->insert(['Id' => $request->Id, 'Name' => $request->Name, 'Tier' => $request->Tier, 'IsActive' => $request->IsActive]);
+        $request['Id'] = DB::table('Map')->insertGetId(['Name' => $request->Name, 'Tier' => $request->Tier, 'IsActive' => $request->IsActive]);
 
-        return response()->json('Created', 201);
+        return response()->json($request, 201);
     }
 
     public function UpdateMap(Request $request, $MapId)
