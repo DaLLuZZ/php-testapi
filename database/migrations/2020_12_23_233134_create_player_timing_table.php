@@ -22,8 +22,8 @@ class CreatePlayerTimingTable extends Migration
             $table->unsignedInteger('ZoneOrdinal');
             $table->time('Duration');
             $table->boolean('IsRanked')->default(1);
-            $table->timestamp('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unique(array('PlayerId', 'MapId', 'StyleId', 'ZoneType', 'ZoneOrdinal'));
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';

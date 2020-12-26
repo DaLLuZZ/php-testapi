@@ -34,8 +34,8 @@ class CreatePlayerTimingInsightTable extends Migration
             $table->double('EndVelocityX');
             $table->double('EndVelocityY');
             $table->double('EndVelocityZ');
-            $table->timestamp('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unique('PlayerTimingId');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
