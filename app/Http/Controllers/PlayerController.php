@@ -21,6 +21,10 @@ class PlayerController extends Controller
             return response()->json('Not Found', 404);
         }
 
+        foreach ($players as $player) {
+            $player->IsActive = boolval($player->IsActive);
+        }
+
         return response()->json($players);
     }
 
@@ -37,6 +41,8 @@ class PlayerController extends Controller
         {
             return response()->json('Not Found', 404);
         }
+
+        $player->IsActive = boolval($player->IsActive);
 
         return response()->json($player, 200);
     }
