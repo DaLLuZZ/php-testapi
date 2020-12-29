@@ -42,7 +42,7 @@ class MapController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        $player->IsActive = boolval($player->IsActive);
+        $map->IsActive = boolval($map->IsActive);
 
         return response()->json($map, 200);
     }
