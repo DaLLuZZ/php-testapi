@@ -25,7 +25,7 @@ class PlayerController extends Controller
             $player->IsActive = boolval($player->IsActive);
         }
 
-        return response()->json($players);
+        return response()->json($players, 200);
     }
 
     public function GetPlayer(Request $request, $PlayerId)

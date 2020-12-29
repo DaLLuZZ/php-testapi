@@ -25,7 +25,7 @@ class MapController extends Controller
             $map->IsActive = boolval($map->IsActive);
         }
 
-        return response()->json($maps);
+        return response()->json($maps, 200);
     }
 
     public function GetMap(Request $request, $MapId)
