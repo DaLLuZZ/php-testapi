@@ -209,7 +209,7 @@ class PlayerTimingController extends Controller
                 'IsRanked' => $request->IsRanked
             ]);
 
-        return response()->json('Created', 201);
+        return response()->json($request, 201);
     }
 
     public function DeleteByTimingId(Request $request, $TimingId)
