@@ -38,3 +38,14 @@ $router->group(['prefix' => 'Map'], function () use ($router) {
     
     $router->delete('/{MapId}', 'MapController@DeleteMap');
 });
+
+$router->group(['prefix' => 'Style'], function () use ($router) {
+    $router->get('/', 'StyleController@Index');
+    $router->get('/{StyleName}', 'StyleController@GetStyle');
+
+    $router->post('/', 'StyleController@InsertStyle');
+
+    $router->put('/{StyleId}', 'StyleController@UpdateStyle');
+    
+    $router->delete('/{StyleId}', 'StyleController@DeleteStyle');
+});
