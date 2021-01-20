@@ -81,6 +81,6 @@ $router->group(['prefix' => 'PlayerTiming'], function () use ($router) {
 $router->group(['prefix' => 'PlayerTimingInsight'], function () use ($router) {
     $router->get('/{TimingId}', 'PlayerTimingInsightController@GetInsight');
     $router->post('/', 'PlayerTimingInsightController@InsertInsight');
-    $router->delete('/{InsightId}', 'PlayerTimingInsightController@DeleteInsightByInsightId');
-    $router->delete('/{TimingId}', 'PlayerTimingInsightController@DeleteInsightByTimingId');
+    $router->delete('/InsightId/{InsightId}', 'PlayerTimingInsightController@DeleteInsightByInsightId');
+    $router->delete('/TimingId/{TimingId}', 'PlayerTimingInsightController@DeleteInsightByTimingId');
 });
