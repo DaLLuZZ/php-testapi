@@ -30,8 +30,8 @@ $router->group(['prefix' => 'Player'], function () use ($router) {
 
 $router->group(['prefix' => 'Map'], function () use ($router) {
     $router->get('/', 'MapController@Index');
-    $router->get('/{MapId}', 'MapController@GetMapById');
-    $router->get('/{MapName}', 'MapController@GetMapByName');
+    $router->get('/MapId/{MapId}', 'MapController@GetMapById');
+    $router->get('/MapName/{MapName}', 'MapController@GetMapByName');
 
     $router->post('/', 'MapController@InsertMap');
 
