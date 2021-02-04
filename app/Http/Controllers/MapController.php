@@ -28,7 +28,7 @@ class MapController extends Controller
         return response()->json($maps, 200);
     }
 
-    public function GetMap(Request $request, $MapId)
+    public function GetMapById(Request $request, $MapId)
     {
         if ($request->API_KEY != env('API_KEY'))
         {
@@ -36,6 +36,25 @@ class MapController extends Controller
         }
 
         $map = DB::table('Map')->select('*')->where('Id', $MapId)->first();
+
+        if (empty($map))
+        {
+            return response()->json('Not Found', 404);
+        }
+
+        $map->IsActive = boolval($map->IsActive);
+
+        return response()->json($map, 200);
+    }
+
+    public function GetMapByName(Request $request, $MapName)
+    {
+        if ($request->API_KEY != env('API_KEY'))
+        {
+            return response()->json('Unauthorized', 401);
+        }
+
+        $map = DB::table('Map')->select('*')->where('Name', $MapName)->first();
 
         if (empty($map))
         {

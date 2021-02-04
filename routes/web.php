@@ -30,7 +30,8 @@ $router->group(['prefix' => 'Player'], function () use ($router) {
 
 $router->group(['prefix' => 'Map'], function () use ($router) {
     $router->get('/', 'MapController@Index');
-    $router->get('/{MapId}', 'MapController@GetMap');
+    $router->get('/{MapId}', 'MapController@GetMapById');
+    $router->get('/{MapName}', 'MapController@GetMapByName');
 
     $router->post('/', 'MapController@InsertMap');
 
@@ -80,7 +81,9 @@ $router->group(['prefix' => 'PlayerTiming'], function () use ($router) {
 
 $router->group(['prefix' => 'PlayerTimingInsight'], function () use ($router) {
     $router->get('/{TimingId}', 'PlayerTimingInsightController@GetInsight');
+
     $router->post('/', 'PlayerTimingInsightController@InsertInsight');
+
     $router->delete('/InsightId/{InsightId}', 'PlayerTimingInsightController@DeleteInsightByInsightId');
     $router->delete('/TimingId/{TimingId}', 'PlayerTimingInsightController@DeleteInsightByTimingId');
 });
