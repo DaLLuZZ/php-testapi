@@ -9,11 +9,6 @@ class MapController extends Controller
 {
     public function Index(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $maps = DB::table('Map')->select('*')->get();
 
         if (empty($maps))
@@ -30,11 +25,6 @@ class MapController extends Controller
 
     public function GetMapById(Request $request, $MapId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $map = DB::table('Map')->select('*')->where('Id', $MapId)->first();
 
         if (empty($map))
@@ -49,11 +39,6 @@ class MapController extends Controller
 
     public function GetMapByName(Request $request, $MapName)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $map = DB::table('Map')->select('*')->where('Name', $MapName)->first();
 
         if (empty($map))
@@ -68,11 +53,6 @@ class MapController extends Controller
 
     public function InsertMap(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $request['Id'] = DB::table('Map')->insertGetId(['Name' => $request->Name, 'Tier' => $request->Tier, 'IsActive' => $request->IsActive]);
 
         return response()->json($request, 201);
@@ -80,11 +60,6 @@ class MapController extends Controller
 
     public function UpdateMap(Request $request, $MapId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('Map')->where('Id', $MapId)->update(['Name' => $request->Name, 'Tier' => $request->Tier, 'IsActive' => $request->IsActive]);
 
         return response()->json('OK', 200);
@@ -92,11 +67,6 @@ class MapController extends Controller
 
     public function DeleteMap(Request $request, $MapId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('Map')->where('Id', $MapId)->delete();
 
         return response()->json('OK', 200);

@@ -9,11 +9,6 @@ class PlayerTimingInsightController extends Controller
 {
     public function GetInsight(Request $request, $TimingId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $insight = DB::table('PlayerTimingInsight')->select('*')->where('Id', $TimingId)->first();
 
         if (empty($insight))
@@ -26,11 +21,6 @@ class PlayerTimingInsightController extends Controller
 
     public function InsertInsight(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $request['Id'] = DB::table('PlayerTimingInsight')->insertGetId([
                 'PlayerInsightId' => $request->PlayerInsightId,
                 'StartPositionX' => $request->StartPositionX,
@@ -58,11 +48,6 @@ class PlayerTimingInsightController extends Controller
 
     public function DeleteInsightByInsightId(Request $request, $InsightId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTimingInsight')->where('Id', $InsightId)->delete();
 
         return response()->json('OK', 200);
@@ -70,11 +55,6 @@ class PlayerTimingInsightController extends Controller
 
     public function DeleteInsightByTimingId(Request $request, $TimingId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTimingInsight')->where('PlayerTimingId', $TimingId)->delete();
 
         return response()->json('OK', 200);

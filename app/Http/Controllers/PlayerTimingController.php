@@ -9,11 +9,6 @@ class PlayerTimingController extends Controller
 {
     public function Index(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->get();
 
         if (empty($timings))
@@ -30,11 +25,6 @@ class PlayerTimingController extends Controller
 
     public function GetByTimingId(Request $request, $TimingId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timing = DB::table('PlayerTiming')->select('*')->where('Id', $TimingId)->first();
 
         if (empty($timing))
@@ -49,11 +39,6 @@ class PlayerTimingController extends Controller
 
     public function GetByMapId(Request $request, $MapId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId);
 
         if (empty($timings))
@@ -70,11 +55,6 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerId(Request $request, $PlayerId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId);
 
         if (empty($timings))
@@ -91,11 +71,6 @@ class PlayerTimingController extends Controller
 
     public function GetByStyleId(Request $request, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->where('StyleId', $StyleId);
 
         if (empty($timings))
@@ -112,11 +87,6 @@ class PlayerTimingController extends Controller
 
     public function GetByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId);
 
         if (empty($timings))
@@ -133,11 +103,6 @@ class PlayerTimingController extends Controller
 
     public function GetByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('StyleId', $StyleId);
 
         if (empty($timings))
@@ -154,11 +119,6 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId);
 
         if (empty($timings))
@@ -175,11 +135,6 @@ class PlayerTimingController extends Controller
 
     public function GetByAll(Request $request, $MapId, $PlayerId, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $timing = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->first();
 
         if (empty($timing))
@@ -194,11 +149,6 @@ class PlayerTimingController extends Controller
 
     public function InsertPlayer(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $request['Id'] = DB::table('PlayerTiming')->insertGetId([
                 'PlayerId' => $request->PlayerId,
                 'MapId' => $request->MapId,
@@ -214,11 +164,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByTimingId(Request $request, $TimingId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('Id', $TimingId)->delete();
 
         return response()->json('OK', 200);
@@ -226,11 +171,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByMapId(Request $request, $MapId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('MapId', $MapId)->delete();
 
         return response()->json('OK', 200);
@@ -238,11 +178,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByPlayerId(Request $request, $PlayerId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->delete();
 
         return response()->json('OK', 200);
@@ -250,11 +185,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByStyleId(Request $request, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('StyleId', $StyleId)->delete();
 
         return response()->json('OK', 200);
@@ -262,11 +192,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->delete();
 
         return response()->json('OK', 200);
@@ -274,11 +199,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('MapId', $MapId)->where('StyleId', $StyleId)->delete();
 
         return response()->json('OK', 200);
@@ -286,11 +206,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->delete();
 
         return response()->json('OK', 200);
@@ -298,11 +213,6 @@ class PlayerTimingController extends Controller
 
     public function DeleteByAll(Request $request, $PlayerId, $MapId, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->where('MapId', $MapId)->where('StyleId', $StyleId)->delete();
 
         return response()->json('OK', 200);

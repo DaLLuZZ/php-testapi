@@ -9,11 +9,6 @@ class StyleController extends Controller
 {
     public function Index(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $styles = DB::table('Style')->select('*')->get();
 
         if (empty($styles))
@@ -30,11 +25,6 @@ class StyleController extends Controller
 
     public function GetStyle(Request $request, $StyleName)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $style = DB::table('Style')->select('*')->where('Name', $StyleName)->first();
 
         if (empty($style))
@@ -49,11 +39,6 @@ class StyleController extends Controller
 
     public function InsertStyle(Request $request)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         $request['Id'] = DB::table('Style')->insertGetId(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
 
         return response()->json($request, 201);
@@ -61,11 +46,6 @@ class StyleController extends Controller
 
     public function UpdateStyle(Request $request, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('Style')->where('Id', $StyleId)->update(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
 
         return response()->json('OK', 200);
@@ -73,11 +53,6 @@ class StyleController extends Controller
 
     public function DeleteStyle(Request $request, $StyleId)
     {
-        if ($request->API_KEY != env('API_KEY'))
-        {
-            return response()->json('Unauthorized', 401);
-        }
-
         DB::table('Style')->where('Id', $StyleId)->delete();
 
         return response()->json('OK', 200);
