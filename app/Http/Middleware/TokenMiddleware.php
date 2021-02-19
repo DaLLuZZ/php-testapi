@@ -15,6 +15,11 @@ class TokenMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (!$request->hasHeader('User-Agent') || ($request->hasHeader('User-Agent') && (strpos($request->header('User-Agent'), 'fuckTimer') === false)))
+        {
+            return response()->json('Invalid User-Agent', 403);
+        }
+
         if (!$request->bearerToken())
         {
             return response()->json('No token provided', 401);
