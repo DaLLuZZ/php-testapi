@@ -123,14 +123,14 @@ class PlayerTimingController extends Controller
     public function InsertPlayer(Request $request)
     {
         $request['Id'] = DB::table('PlayerTiming')->insertGetId([
-                'PlayerId' => $request->PlayerId,
-                'MapId' => $request->MapId,
-                'StyleId' => $request->StyleId,
-                'ZoneType' => $request->ZoneType,
-                'ZoneOrdinal' => $request->ZoneOrdinal,
-                'Duration' => $request->Duration,
-                'IsRanked' => $request->IsRanked
-            ]);
+            'PlayerId' => $request->PlayerId,
+            'MapId' => $request->MapId,
+            'StyleId' => $request->StyleId,
+            'ZoneType' => $request->ZoneType,
+            'ZoneOrdinal' => $request->ZoneOrdinal,
+            'Duration' => $request->Duration,
+            'IsRanked' => $request->IsRanked
+        ]);
 
         return response()->json($request, 201);
     }

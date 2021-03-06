@@ -33,14 +33,21 @@ class PlayerController extends Controller
 
     public function InsertPlayer(Request $request)
     {
-        DB::table('Player')->insert(['Id' => $request->Id, 'Name' => $request->Name, 'IsActive' => $request->IsActive]);
+        DB::table('Player')->insert([
+            'Id' => $request->Id,
+            'Name' => $request->Name,
+            'IsActive' => $request->IsActive
+        ]);
 
         return response()->json('Created', 201);
     }
 
     public function UpdatePlayer(Request $request, $PlayerId)
     {
-        DB::table('Player')->where('Id', $PlayerId)->update(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
+        DB::table('Player')->where('Id', $PlayerId)->update([
+            'Name' => $request->Name,
+            'IsActive' => $request->IsActive
+        ]);
 
         return response()->json('OK');
     }

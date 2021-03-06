@@ -33,14 +33,20 @@ class StyleController extends Controller
 
     public function InsertStyle(Request $request)
     {
-        $request['Id'] = DB::table('Style')->insertGetId(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
+        $request['Id'] = DB::table('Style')->insertGetId([
+            'Name' => $request->Name,
+            'IsActive' => $request->IsActive
+        ]);
 
         return response()->json($request, 201);
     }
 
     public function UpdateStyle(Request $request, $StyleId)
     {
-        DB::table('Style')->where('Id', $StyleId)->update(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
+        DB::table('Style')->where('Id', $StyleId)->update([
+            'Name' => $request->Name,
+            'IsActive' => $request->IsActive
+        ]);
 
         return response()->json('OK');
     }
