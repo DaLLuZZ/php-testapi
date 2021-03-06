@@ -13,3 +13,7 @@ The PHP API for fuckTimer.
 ### Installation
 1. `composer install`
 2. Copy `.env.example` to `.env` and populate values.
+3. `php artisan migrate:fresh` if you've not set up the DB already.
+
+### Run
+1. `php -S localhost:8080 -t public/` to serve locally.
