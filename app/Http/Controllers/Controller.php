@@ -14,8 +14,8 @@ class Controller extends BaseController
      */
     public function checkExists($databaseResponse): void
     {
-        if (empty($databaseResponse)) {
-            response()->json('Not Found', 404);
+        if (!$databaseResponse) {
+            response()->json('Not Found', 404)->send();
             die;
         }
     }
