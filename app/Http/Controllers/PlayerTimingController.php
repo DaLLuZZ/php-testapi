@@ -11,8 +11,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->get();
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -27,8 +26,7 @@ class PlayerTimingController extends Controller
     {
         $timing = DB::table('PlayerTiming')->select('*')->where('Id', $TimingId)->first();
 
-        if (empty($timing))
-        {
+        if (empty($timing)) {
             return response()->json('Not Found', 404);
         }
 
@@ -41,8 +39,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId);
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -57,8 +54,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId);
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -73,8 +69,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('StyleId', $StyleId);
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -89,8 +84,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId);
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -105,8 +99,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('StyleId', $StyleId);
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -121,8 +114,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId);
 
-        if (empty($timings))
-        {
+        if (empty($timings)) {
             return response()->json('Not Found', 404);
         }
 
@@ -137,8 +129,7 @@ class PlayerTimingController extends Controller
     {
         $timing = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->first();
 
-        if (empty($timing))
-        {
+        if (empty($timing)) {
             return response()->json('Not Found', 404);
         }
 

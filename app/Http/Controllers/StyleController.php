@@ -11,8 +11,7 @@ class StyleController extends Controller
     {
         $styles = DB::table('Style')->select('*')->get();
 
-        if (empty($styles))
-        {
+        if (empty($styles)) {
             return response()->json('Not Found', 404);
         }
 
@@ -27,8 +26,7 @@ class StyleController extends Controller
     {
         $style = DB::table('Style')->select('*')->where('Name', $StyleName)->first();
 
-        if (empty($style))
-        {
+        if (empty($style)) {
             return response()->json('Not Found', 404);
         }
 

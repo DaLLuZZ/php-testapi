@@ -11,8 +11,7 @@ class PlayerController extends Controller
     {
         $players = DB::table('Player')->select('*')->get();
 
-        if (empty($players))
-        {
+        if (empty($players)) {
             return response()->json('Not Found', 404);
         }
 
@@ -27,8 +26,7 @@ class PlayerController extends Controller
     {
         $player = DB::table('Player')->select('*')->where('Id', $PlayerId)->first();
 
-        if (empty($player))
-        {
+        if (empty($player)) {
             return response()->json('Not Found', 404);
         }
 

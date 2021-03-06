@@ -11,8 +11,7 @@ class PlayerTimingInsightController extends Controller
     {
         $insight = DB::table('PlayerTimingInsight')->select('*')->where('Id', $TimingId)->first();
 
-        if (empty($insight))
-        {
+        if (empty($insight)) {
             return response()->json('Not Found', 404);
         }
 
