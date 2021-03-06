@@ -34,7 +34,7 @@ class StyleController extends Controller
 
         $style->IsActive = (bool)$style->IsActive;
 
-        return response()->json($style, 200);
+        return response()->json($style);
     }
 
     public function InsertStyle(Request $request)
@@ -48,13 +48,13 @@ class StyleController extends Controller
     {
         DB::table('Style')->where('Id', $StyleId)->update(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteStyle(Request $request, $StyleId)
     {
         DB::table('Style')->where('Id', $StyleId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 }

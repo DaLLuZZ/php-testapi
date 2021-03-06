@@ -16,7 +16,7 @@ class PlayerTimingInsightController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        return response()->json($insight, 200);
+        return response()->json($insight);
     }
 
     public function InsertInsight(Request $request)
@@ -50,13 +50,13 @@ class PlayerTimingInsightController extends Controller
     {
         DB::table('PlayerTimingInsight')->where('Id', $InsightId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteInsightByTimingId(Request $request, $TimingId)
     {
         DB::table('PlayerTimingInsight')->where('PlayerTimingId', $TimingId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 }

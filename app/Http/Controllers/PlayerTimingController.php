@@ -20,7 +20,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByTimingId(Request $request, $TimingId)
@@ -34,7 +34,7 @@ class PlayerTimingController extends Controller
 
         $timing->IsRanked = (bool)$timing->IsRanked;
 
-        return response()->json($timing, 200);
+        return response()->json($timing);
     }
 
     public function GetByMapId(Request $request, $MapId)
@@ -50,7 +50,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByPlayerId(Request $request, $PlayerId)
@@ -66,7 +66,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByStyleId(Request $request, $StyleId)
@@ -82,7 +82,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByMapPlayerId(Request $request, $MapId, $PlayerId)
@@ -98,7 +98,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByMapStyleId(Request $request, $MapId, $StyleId)
@@ -114,7 +114,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByPlayerStyleId(Request $request, $PlayerId, $StyleId)
@@ -130,7 +130,7 @@ class PlayerTimingController extends Controller
             $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
-        return response()->json($timings, 200);
+        return response()->json($timings);
     }
 
     public function GetByAll(Request $request, $MapId, $PlayerId, $StyleId)
@@ -144,7 +144,7 @@ class PlayerTimingController extends Controller
 
         $timing->IsRanked = (bool)$timing->IsRanked;
 
-        return response()->json($timing, 200);
+        return response()->json($timing);
     }
 
     public function InsertPlayer(Request $request)
@@ -166,55 +166,55 @@ class PlayerTimingController extends Controller
     {
         DB::table('PlayerTiming')->where('Id', $TimingId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByMapId(Request $request, $MapId)
     {
         DB::table('PlayerTiming')->where('MapId', $MapId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByPlayerId(Request $request, $PlayerId)
     {
         DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByStyleId(Request $request, $StyleId)
     {
         DB::table('PlayerTiming')->where('StyleId', $StyleId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
         DB::table('PlayerTiming')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByMapStyleId(Request $request, $MapId, $StyleId)
     {
         DB::table('PlayerTiming')->where('MapId', $MapId)->where('StyleId', $StyleId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
         DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteByAll(Request $request, $PlayerId, $MapId, $StyleId)
     {
         DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->where('MapId', $MapId)->where('StyleId', $StyleId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 }

@@ -34,7 +34,7 @@ class MapController extends Controller
 
         $map->IsActive = (bool)$map->IsActive;
 
-        return response()->json($map, 200);
+        return response()->json($map);
     }
 
     public function GetMapByName(Request $request, $MapName)
@@ -48,7 +48,7 @@ class MapController extends Controller
 
         $map->IsActive = (bool)$map->IsActive;
 
-        return response()->json($map, 200);
+        return response()->json($map);
     }
 
     public function InsertMap(Request $request)
@@ -62,13 +62,13 @@ class MapController extends Controller
     {
         DB::table('Map')->where('Id', $MapId)->update(['Name' => $request->Name, 'Tier' => $request->Tier, 'IsActive' => $request->IsActive]);
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeleteMap(Request $request, $MapId)
     {
         DB::table('Map')->where('Id', $MapId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 }

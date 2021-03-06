@@ -20,7 +20,7 @@ class PlayerController extends Controller
             $player->IsActive = (bool)$player->IsActive;
         }
 
-        return response()->json($players, 200);
+        return response()->json($players);
     }
 
     public function GetPlayer(Request $request, $PlayerId)
@@ -34,7 +34,7 @@ class PlayerController extends Controller
 
         $player->IsActive = (bool)$player->IsActive;
 
-        return response()->json($player, 200);
+        return response()->json($player);
     }
 
     public function InsertPlayer(Request $request)
@@ -48,13 +48,13 @@ class PlayerController extends Controller
     {
         DB::table('Player')->where('Id', $PlayerId)->update(['Name' => $request->Name, 'IsActive' => $request->IsActive]);
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 
     public function DeletePlayer(Request $request, $PlayerId)
     {
         DB::table('Player')->where('Id', $PlayerId)->delete();
 
-        return response()->json('OK', 200);
+        return response()->json('OK');
     }
 }
