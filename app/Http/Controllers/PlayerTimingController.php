@@ -17,7 +17,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -32,7 +32,7 @@ class PlayerTimingController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        $timing->IsRanked = boolval($timing->IsRanked);
+        $timing->IsRanked = (bool)$timing->IsRanked;
 
         return response()->json($timing, 200);
     }
@@ -47,7 +47,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -63,7 +63,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -79,7 +79,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -95,7 +95,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -111,7 +111,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -127,7 +127,7 @@ class PlayerTimingController extends Controller
         }
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = boolval($timing->IsRanked);
+            $timing->IsRanked = (bool)$timing->IsRanked;
         }
 
         return response()->json($timings, 200);
@@ -142,7 +142,7 @@ class PlayerTimingController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        $timing->IsRanked = boolval($timing->IsRanked);
+        $timing->IsRanked = (bool)$timing->IsRanked;
 
         return response()->json($timing, 200);
     }

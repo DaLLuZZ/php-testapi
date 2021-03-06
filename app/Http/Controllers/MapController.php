@@ -17,10 +17,10 @@ class MapController extends Controller
         }
 
         foreach ($maps as $map) {
-            $map->IsActive = boolval($map->IsActive);
+            $map->IsActive = (bool)$map->IsActive;
         }
 
-        return response()->json($maps, 200);
+        return response()->json($maps);
     }
 
     public function GetMapById(Request $request, $MapId)
@@ -32,7 +32,7 @@ class MapController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        $map->IsActive = boolval($map->IsActive);
+        $map->IsActive = (bool)$map->IsActive;
 
         return response()->json($map, 200);
     }
@@ -46,7 +46,7 @@ class MapController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        $map->IsActive = boolval($map->IsActive);
+        $map->IsActive = (bool)$map->IsActive;
 
         return response()->json($map, 200);
     }

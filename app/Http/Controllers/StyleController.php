@@ -17,7 +17,7 @@ class StyleController extends Controller
         }
 
         foreach ($styles as $style) {
-            $style->IsActive = boolval($style->IsActive);
+            $style->IsActive = (bool)$style->IsActive;
         }
 
         return response()->json($styles);
@@ -32,7 +32,7 @@ class StyleController extends Controller
             return response()->json('Not Found', 404);
         }
 
-        $style->IsActive = boolval($style->IsActive);
+        $style->IsActive = (bool)$style->IsActive;
 
         return response()->json($style, 200);
     }
