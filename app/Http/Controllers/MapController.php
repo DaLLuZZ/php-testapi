@@ -11,9 +11,7 @@ class MapController extends Controller
     {
         $maps = DB::table('Map')->select('*')->get();
 
-        if (empty($maps)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($maps);
 
         foreach ($maps as $map) {
             $map->IsActive = (bool)$map->IsActive;
@@ -26,9 +24,7 @@ class MapController extends Controller
     {
         $map = DB::table('Map')->select('*')->where('Id', $MapId)->first();
 
-        if (empty($map)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($map);
 
         $map->IsActive = (bool)$map->IsActive;
 
@@ -39,9 +35,7 @@ class MapController extends Controller
     {
         $map = DB::table('Map')->select('*')->where('Name', $MapName)->first();
 
-        if (empty($map)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($map);
 
         $map->IsActive = (bool)$map->IsActive;
 

@@ -11,9 +11,7 @@ class StyleController extends Controller
     {
         $styles = DB::table('Style')->select('*')->get();
 
-        if (empty($styles)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($styles);
 
         foreach ($styles as $style) {
             $style->IsActive = (bool)$style->IsActive;
@@ -26,9 +24,7 @@ class StyleController extends Controller
     {
         $style = DB::table('Style')->select('*')->where('Name', $StyleName)->first();
 
-        if (empty($style)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($style);
 
         $style->IsActive = (bool)$style->IsActive;
 

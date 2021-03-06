@@ -11,9 +11,7 @@ class PlayerController extends Controller
     {
         $players = DB::table('Player')->select('*')->get();
 
-        if (empty($players)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($players);
 
         foreach ($players as $player) {
             $player->IsActive = (bool)$player->IsActive;
@@ -26,9 +24,7 @@ class PlayerController extends Controller
     {
         $player = DB::table('Player')->select('*')->where('Id', $PlayerId)->first();
 
-        if (empty($player)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($player);
 
         $player->IsActive = (bool)$player->IsActive;
 

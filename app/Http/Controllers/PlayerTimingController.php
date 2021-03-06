@@ -11,9 +11,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->get();
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -26,9 +24,7 @@ class PlayerTimingController extends Controller
     {
         $timing = DB::table('PlayerTiming')->select('*')->where('Id', $TimingId)->first();
 
-        if (empty($timing)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timing);
 
         $timing->IsRanked = (bool)$timing->IsRanked;
 
@@ -39,9 +35,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId);
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -54,9 +48,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId);
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -69,9 +61,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('StyleId', $StyleId);
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -84,9 +74,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId);
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -99,9 +87,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('StyleId', $StyleId);
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -114,9 +100,7 @@ class PlayerTimingController extends Controller
     {
         $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId);
 
-        if (empty($timings)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timings);
 
         foreach ($timings as $timing) {
             $timing->IsRanked = (bool)$timing->IsRanked;
@@ -129,9 +113,7 @@ class PlayerTimingController extends Controller
     {
         $timing = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->first();
 
-        if (empty($timing)) {
-            return response()->json('Not Found', 404);
-        }
+        $this->checkExists($timing);
 
         $timing->IsRanked = (bool)$timing->IsRanked;
 
