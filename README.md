@@ -6,7 +6,8 @@ The PHP API for fuckTimer.
 ### Requirements
 1. Install PHP 7.3 or above as well as:
    1. `php-xml`
-   2. `php-mysql` 
+   2. `php-mysql`
+   3. `php-mbstring`
 2. Install MariaDB 10.5 or above.
 3. Install composer.
 
