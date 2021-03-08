@@ -14,7 +14,7 @@ class AddNormalStyle extends Migration
     public function up()
     {
         if (Schema::hasTable('Style')) {
-            DB::table('Style')->insert(['Id' => '0', 'Name' => 'Normal', 'IsActive' => '1']);
+            DB::table('Style')->insert('Name' => 'Normal']);
         }
     }
 
@@ -25,6 +25,6 @@ class AddNormalStyle extends Migration
      */
     public function down()
     {
-        DB::table('Style')->where('Id', '0')->delete();
+        DB::table('Style')->where('Id', '1')->delete();
     }
 }
