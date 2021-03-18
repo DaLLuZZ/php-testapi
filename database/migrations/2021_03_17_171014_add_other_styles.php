@@ -14,10 +14,10 @@ class AddOtherStyles extends Migration
     public function up()
     {
         if (Schema::hasTable('Style')) {
-            DB::table('Style')->insert(['Name' => 'Sideways']);
-            DB::table('Style')->insert(['Name' => 'Half-Sideways']);
-            DB::table('Style')->insert(['Name' => 'Backwards']);
-            DB::table('Style')->insert(['Name' => 'Low-Gravity']);
+            DB::table('Style')->insert(['Id' => '2', 'Name' => 'Sideways']);
+            DB::table('Style')->insert(['Id' => '3', 'Name' => 'Half-Sideways']);
+            DB::table('Style')->insert(['Id' => '4', 'Name' => 'Backwards']);
+            DB::table('Style')->insert(['Id' => '5', 'Name' => 'Low-Gravity']);
         }
     }
 
@@ -28,9 +28,9 @@ class AddOtherStyles extends Migration
      */
     public function down()
     {
-        DB::table('Style')->where('Normal', 'Sideways')->delete();
-        DB::table('Style')->where('Normal', 'Half-Sideways')->delete();
-        DB::table('Style')->where('Normal', 'Backwards')->delete();
-        DB::table('Style')->where('Normal', 'Low-Gravity')->delete();
+        DB::table('Style')->where('Id', '2')->delete();
+        DB::table('Style')->where('Id', '3')->delete();
+        DB::table('Style')->where('Id', '4')->delete();
+        DB::table('Style')->where('Id', '5')->delete();
     }
 }
