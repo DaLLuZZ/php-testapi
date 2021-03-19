@@ -44,7 +44,8 @@ $router->group(['prefix' => 'Map', 'middleware' => 'auth'], function () use ($ro
 
 $router->group(['prefix' => 'Style', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'StyleController@Index');
-    $router->get('/{StyleName}', 'StyleController@GetStyle');
+    $router->get('/{StyleId}', 'StyleController@GetStyleById');
+    $router->get('/{StyleName}', 'StyleController@GetStyleByName');
 
     $router->post('/', 'StyleController@InsertStyle');
 
