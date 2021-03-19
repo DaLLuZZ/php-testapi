@@ -21,37 +21,37 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'Player', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'PlayerController@Index');
-    $router->get('/{PlayerId}', 'PlayerController@GetPlayer');
+    $router->get('/PlayerId/{PlayerId}', 'PlayerController@GetPlayer');
 
     $router->post('/', 'PlayerController@InsertPlayer');
 
-    $router->put('/{PlayerId}', 'PlayerController@UpdatePlayer');
+    $router->put('/PlayerId/{PlayerId}', 'PlayerController@UpdatePlayer');
     
-    $router->delete('/{PlayerId}', 'PlayerController@DeletePlayer');
+    $router->delete('/PlayerId/{PlayerId}', 'PlayerController@DeletePlayer');
 });
 
 $router->group(['prefix' => 'Map', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'MapController@Index');
-    $router->get('/Id/{MapId}', 'MapController@GetMapById');
-    $router->get('/Name/{MapName}', 'MapController@GetMapByName');
+    $router->get('/MapId/{MapId}', 'MapController@GetMapById');
+    $router->get('/MapName/{MapName}', 'MapController@GetMapByName');
 
     $router->post('/', 'MapController@InsertMap');
 
-    $router->put('/{MapId}', 'MapController@UpdateMap');
+    $router->put('/MapId/{MapId}', 'MapController@UpdateMap');
     
-    $router->delete('/{MapId}', 'MapController@DeleteMap');
+    $router->delete('/MapId/{MapId}', 'MapController@DeleteMap');
 });
 
 $router->group(['prefix' => 'Style', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'StyleController@Index');
-    $router->get('/{StyleId}', 'StyleController@GetStyleById');
-    $router->get('/{StyleName}', 'StyleController@GetStyleByName');
+    $router->get('/StyleId/{StyleId}', 'StyleController@GetStyleById');
+    $router->get('/StyleName/{StyleName}', 'StyleController@GetStyleByName');
 
     $router->post('/', 'StyleController@InsertStyle');
 
-    $router->put('/{StyleId}', 'StyleController@UpdateStyle');
+    $router->put('/StyleId/{StyleId}', 'StyleController@UpdateStyle');
     
-    $router->delete('/{StyleId}', 'StyleController@DeleteStyle');
+    $router->delete('/StyleId/{StyleId}', 'StyleController@DeleteStyle');
 });
 
 $router->group(['prefix' => 'PlayerTiming', 'middleware' => 'auth'], function () use ($router) {
@@ -83,7 +83,7 @@ $router->group(['prefix' => 'PlayerTiming', 'middleware' => 'auth'], function ()
 });
 
 $router->group(['prefix' => 'PlayerTimingInsight', 'middleware' => 'auth'], function () use ($router) {
-    $router->get('/{TimingId}', 'PlayerTimingInsightController@GetInsight');
+    $router->get('/TimingId/{TimingId}', 'PlayerTimingInsightController@GetInsight');
 
     $router->post('/', 'PlayerTimingInsightController@InsertInsight');
 
