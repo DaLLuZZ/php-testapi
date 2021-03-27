@@ -93,6 +93,9 @@ $router->group(['prefix' => 'PlayerTimingInsight', 'middleware' => 'auth'], func
 $router->group(['prefix' => 'PlayerSettings', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/PlayerId/{PlayerId}/Setting/{SettingName}', 'PlayerSettingsController@GetValue');
 
+    $router->get('/PlayerId/{PlayerId}', 'PlayerSettingsController@GetValueByPlayerId');
+    $router->get('/Setting/{SettingName}', 'PlayerSettingsController@GetValueBySettingName');
+
     $router->post('/', 'PlayerSettingsController@InsertSetting');
 
     $router->delete('/PlayerId/{PlayerId}', 'PlayerSettingsController@DeleteSettingsByPlayerId');

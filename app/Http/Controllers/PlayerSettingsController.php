@@ -16,6 +16,24 @@ class PlayerSettingsController extends Controller
         return response()->json($setting);
     }
 
+    public function GetValueByPlayerId(Request $request, $PlayerId)
+    {
+        $settings = DB::table('PlayerSettings')->select('*')->where('PlayerId', $PlayerId);
+
+        $this->checkExists($settings);
+
+        return response()->json($settings);
+    }
+
+    public function GetValueBySettingName(Request $request, $SettingName)
+    {
+        $settings = DB::table('PlayerSettings')->select('*')->where('Setting', $SettingName);
+
+        $this->checkExists($settings);
+
+        return response()->json($settings);
+    }
+
     public function InsertSetting(Request $request)
     {
         DB::table('PlayerSettings')->insertGetId([
