@@ -18,7 +18,7 @@ class PlayerSettingsController extends Controller
 
     public function GetValueByPlayerId(Request $request, $PlayerId)
     {
-        $settings = DB::table('PlayerSettings')->select('*')->where('PlayerId', $PlayerId);
+        $settings = DB::table('PlayerSettings')->select('*')->where('PlayerId', $PlayerId)->get();
 
         $this->checkExists($settings);
 
@@ -27,7 +27,7 @@ class PlayerSettingsController extends Controller
 
     public function GetValueBySettingName(Request $request, $SettingName)
     {
-        $settings = DB::table('PlayerSettings')->select('*')->where('Setting', $SettingName);
+        $settings = DB::table('PlayerSettings')->select('*')->where('Setting', $SettingName)->get();
 
         $this->checkExists($settings);
 
