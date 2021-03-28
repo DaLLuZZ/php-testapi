@@ -33,7 +33,7 @@ class PlayerTimingController extends Controller
 
     public function GetByMapId(Request $request, $MapId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId);
+        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->get();
 
         $this->checkExists($timings);
 
@@ -46,7 +46,7 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerId(Request $request, $PlayerId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId);
+        $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->get();
 
         $this->checkExists($timings);
 
@@ -59,7 +59,7 @@ class PlayerTimingController extends Controller
 
     public function GetByStyleId(Request $request, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('StyleId', $StyleId);
+        $timings = DB::table('PlayerTiming')->select('*')->where('StyleId', $StyleId)->get();
 
         $this->checkExists($timings);
 
@@ -72,7 +72,7 @@ class PlayerTimingController extends Controller
 
     public function GetByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId);
+        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->get();
 
         $this->checkExists($timings);
 
@@ -85,7 +85,7 @@ class PlayerTimingController extends Controller
 
     public function GetByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('StyleId', $StyleId);
+        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('StyleId', $StyleId)->get();
 
         $this->checkExists($timings);
 
@@ -98,7 +98,7 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId);
+        $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->get();
 
         $this->checkExists($timings);
 

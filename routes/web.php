@@ -89,3 +89,16 @@ $router->group(['prefix' => 'PlayerTimingInsight', 'middleware' => 'auth'], func
     $router->delete('/InsightId/{InsightId}', 'PlayerTimingInsightController@DeleteInsightByInsightId');
     $router->delete('/TimingId/{TimingId}', 'PlayerTimingInsightController@DeleteInsightByTimingId');
 });
+
+$router->group(['prefix' => 'PlayerSettings', 'middleware' => 'auth'], function () use ($router) {
+    $router->get('/PlayerId/{PlayerId}/Setting/{SettingName}', 'PlayerSettingsController@GetValue');
+
+    $router->get('/PlayerId/{PlayerId}', 'PlayerSettingsController@GetValueByPlayerId');
+    $router->get('/Setting/{SettingName}', 'PlayerSettingsController@GetValueBySettingName');
+
+    $router->post('/', 'PlayerSettingsController@InsertSetting');
+
+    $router->delete('/PlayerId/{PlayerId}', 'PlayerSettingsController@DeleteSettingsByPlayerId');
+    $router->delete('/Setting/{SettingName}', 'PlayerSettingsController@DeleteSettingsBySettingName');
+    $router->delete('/PlayerId/{PlayerId}/Setting/{SettingName}', 'PlayerSettingsController@DeleteSettingsByIdAndName');
+});

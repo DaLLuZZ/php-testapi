@@ -39,7 +39,7 @@ class PlayerController extends Controller
             'IsActive' => $request->IsActive
         ]);
 
-        return response()->json('Created', 201);
+        return response()->json($request, 201);
     }
 
     public function UpdatePlayer(Request $request, $PlayerId)
