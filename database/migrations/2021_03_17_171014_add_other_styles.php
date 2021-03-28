@@ -18,6 +18,7 @@ class AddOtherStyles extends Migration
             DB::table('Style')->insert(['Id' => '3', 'Name' => 'Half-Sideways']);
             DB::table('Style')->insert(['Id' => '4', 'Name' => 'Backwards']);
             DB::table('Style')->insert(['Id' => '5', 'Name' => 'Low-Gravity']);
+            DB::table('Style')->insert(['Id' => '6', 'Name' => 'Slow-Motion']);
         }
     }
 
@@ -32,5 +33,6 @@ class AddOtherStyles extends Migration
         DB::table('Style')->where('Id', '3')->delete();
         DB::table('Style')->where('Id', '4')->delete();
         DB::table('Style')->where('Id', '5')->delete();
+        DB::table('Style')->where('Id', '6')->delete();
     }
 }

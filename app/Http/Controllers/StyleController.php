@@ -20,7 +20,18 @@ class StyleController extends Controller
         return response()->json($styles);
     }
 
-    public function GetStyle(Request $request, $StyleName)
+    public function GetStyleById(Request $request, $StyleId)
+    {
+        $style = DB::table('Style')->select('*')->where('Id', $StyleId)->first();
+
+        $this->checkExists($style);
+
+        $style->IsActive = (bool)$style->IsActive;
+
+        return response()->json($style);
+    }
+
+    public function GetStyleByName(Request $request, $StyleName)
     {
         $style = DB::table('Style')->select('*')->where('Name', $StyleName)->first();
 
