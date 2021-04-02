@@ -103,3 +103,14 @@ $router->group(['prefix' => 'PlayerSettings', 'middleware' => 'auth'], function 
     $router->delete('/Setting/{SettingName}', 'PlayerSettingsController@DeleteSettingsBySettingName');
     $router->delete('/PlayerId/{PlayerId}/Setting/{SettingName}', 'PlayerSettingsController@DeleteSettingsByIdAndName');
 });
+
+$router->group(['prefix' => 'PlayerHudSettings', 'middleware' => 'auth'], function () use ($router) {
+    $router->get('/PlayerId/{PlayerId}', 'PlayerHudSettingsController@GetHudSettings');
+
+    $router->post('/', 'PlayerHudSettingsController@InsertHudSetting');
+    $router->post('/Preset', 'PlayerHudSettingsController@InsertHudPreset');
+
+    $router->patch('/PlayerId/{PlayerId}/Side/{Side}/Line/{Line}', 'PlayerHudSettingsController@UpdateHudSetting');
+
+    $router->delete('/PlayerId/{PlayerId}', 'PlayerHudSettingsController@DeleteHudSettingsByPlayerId');
+});
