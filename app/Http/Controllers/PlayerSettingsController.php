@@ -45,6 +45,16 @@ class PlayerSettingsController extends Controller
         return response()->json($request, 201);
     }
 
+    public function UpdateSetting(Request $request, $PlayerId, $SettingName)
+    {
+        DB::table('PlayerSettings')
+            ->where('PlayerID', $PlayerId)
+            ->where('Setting', $SettingName)
+            ->update(['Value' => $request->Value]);
+
+        return response()->json('Success', 204);
+    }
+
     public function DeleteSettingsByPlayerId(Request $request, $PlayerId)
     {
         DB::table('PlayerSettings')->where('PlayerId', $PlayerId)->delete();
