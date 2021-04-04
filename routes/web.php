@@ -99,6 +99,8 @@ $router->group(['prefix' => 'PlayerSettings', 'middleware' => 'auth'], function 
 
     $router->post('/', 'PlayerSettingsController@InsertSetting');
 
+    $router->patch('/PlayerId/{PlayerId}/Setting/{SettingName}', 'PlayerSettingsController@UpdateSetting');
+
     $router->delete('/PlayerId/{PlayerId}', 'PlayerSettingsController@DeleteSettingsByPlayerId');
     $router->delete('/Setting/{SettingName}', 'PlayerSettingsController@DeleteSettingsBySettingName');
     $router->delete('/PlayerId/{PlayerId}/Setting/{SettingName}', 'PlayerSettingsController@DeleteSettingsByIdAndName');
