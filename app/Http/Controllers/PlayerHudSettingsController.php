@@ -21,7 +21,7 @@ class PlayerHudSettingsController extends Controller
 
     public function InsertHudSetting(Request $request)
     {
-        DB::table('PlayerHudSettings')->insertGetId([
+        DB::table('PlayerHudSettings')->insert([
             'PlayerId' => $request->PlayerId,
             'Side' => $request->Side,
             'Line' => $request->Line,
@@ -35,14 +35,19 @@ class PlayerHudSettingsController extends Controller
     {
         DB::table('PlayerHudSettings')->where('PlayerId', $request->PlayerId)->delete();
 
-        DB::table('PlayerHudSettings')->insertGetId([
-            'PlayerId' => $request->PlayerId,
-            'Side' => $request->Side,
-            'Line' => $request->Line,
-            'Key' => $request->Key
-        ]);
+        $settings = $request->all();
 
-        return response()->json($request, 201);
+        foreach ($settings as $setting)
+        {
+            DB::table('PlayerHudSettings')->insert([
+                'PlayerId' => $setting['PlayerId'],
+                'Side' => $setting['Side'],
+                'Line' => $setting['Line'],
+                'Key' => $setting['Key']
+            ]);
+        }
+
+        return response()->json($settings, 201);
     }
 
     public function UpdateHudSetting(Request $request, $PlayerId, $Side, $Line)
