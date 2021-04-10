@@ -114,4 +114,5 @@ $router->group(['prefix' => 'PlayerHud', 'middleware' => 'auth'], function () us
     $router->patch('/PlayerId/{PlayerId}', 'PlayerHudController@UpdateHud');
 
     $router->delete('/PlayerId/{PlayerId}', 'PlayerHudController@DeleteHudByPlayerId');
+    $router->delete('/PlayerId/{PlayerId}/Key/{Key}', 'PlayerHudController@DeleteHudByPlayerIdAndKey');
 });

@@ -59,4 +59,14 @@ class PlayerHudController extends Controller
 
         return response()->json('OK');
     }
+
+    public function DeleteHudByPlayerIdAndKey(Request $request, $PlayerId, $Key)
+    {
+        DB::table('PlayerHud')
+            ->where('PlayerId', $PlayerId)
+            ->where('Key', $Key)
+            ->delete();
+
+        return response()->json('OK');
+    }
 }
