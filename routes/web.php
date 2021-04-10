@@ -111,7 +111,7 @@ $router->group(['prefix' => 'PlayerHud', 'middleware' => 'auth'], function () us
 
     $router->post('/PlayerId/{PlayerId}', 'PlayerHudController@InsertHud');
 
-    $router->patch('/PlayerId/{PlayerId}/Side/{Side}/Line/{Line}', 'PlayerHudController@UpdateHud');
+    $router->patch('/PlayerId/{PlayerId}', 'PlayerHudController@UpdateHud');
 
     $router->delete('/PlayerId/{PlayerId}', 'PlayerHudController@DeleteHudByPlayerId');
 });

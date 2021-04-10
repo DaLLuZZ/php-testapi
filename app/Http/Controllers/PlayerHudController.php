@@ -40,12 +40,12 @@ class PlayerHudController extends Controller
         return response()->json($settings, 201);
     }
 
-    public function UpdateHud(Request $request, $PlayerId, $Side, $Line)
+    public function UpdateHud(Request $request, $PlayerId)
     {
         DB::table('PlayerHud')
             ->where('PlayerID', $PlayerId)
-            ->where('Side', $Side)
-            ->where('Line', $Line)
+            ->where('Side', $request->Side)
+            ->where('Line', $request->Line)
             ->update(['Key' => $request->Key]);
 
         return response()->json('Success', 204);
