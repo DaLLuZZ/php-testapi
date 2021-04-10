@@ -25,15 +25,15 @@ class PlayerHudController extends Controller
             ->where('PlayerId', $PlayerId)
             ->delete();
 
-        $settings = $request->all();
+        $keys = $request->all();
 
-        foreach ($settings as $setting)
+        foreach ($keys as $key)
         {
             DB::table('PlayerHud')->insert([
-                'PlayerId' => $setting['PlayerId'],
-                'Side' => $setting['Side'],
-                'Line' => $setting['Line'],
-                'Key' => $setting['Key']
+                'PlayerId' => $key['PlayerId'],
+                'Side' => $key['Side'],
+                'Line' => $key['Line'],
+                'Key' => $key['Key']
             ]);
         }
 
