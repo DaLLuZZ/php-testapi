@@ -9,7 +9,9 @@ class MapController extends Controller
 {
     public function Index(Request $request)
     {
-        $maps = DB::table('Map')->select('*')->get();
+        $maps = DB::table('Map')
+                    ->select('*')
+                    ->get();
 
         $this->checkExists($maps);
 
@@ -22,7 +24,10 @@ class MapController extends Controller
 
     public function GetMapById(Request $request, $MapId)
     {
-        $map = DB::table('Map')->select('*')->where('Id', $MapId)->first();
+        $map = DB::table('Map')
+                    ->select('*')
+                    ->where('Id', $MapId)
+                    ->first();
 
         $this->checkExists($map);
 
@@ -33,7 +38,10 @@ class MapController extends Controller
 
     public function GetMapByName(Request $request, $MapName)
     {
-        $map = DB::table('Map')->select('*')->where('Name', $MapName)->first();
+        $map = DB::table('Map')
+                    ->select('*')
+                    ->where('Name', $MapName)
+                    ->first();
 
         $this->checkExists($map);
 

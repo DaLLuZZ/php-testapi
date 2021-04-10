@@ -9,7 +9,9 @@ class PlayerTimingController extends Controller
 {
     public function Index(Request $request)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -22,7 +24,10 @@ class PlayerTimingController extends Controller
 
     public function GetByTimingId(Request $request, $TimingId)
     {
-        $timing = DB::table('PlayerTiming')->select('*')->where('Id', $TimingId)->first();
+        $timing = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('Id', $TimingId)
+                        ->first();
 
         $this->checkExists($timing);
 
@@ -33,7 +38,10 @@ class PlayerTimingController extends Controller
 
     public function GetByMapId(Request $request, $MapId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('MapId', $MapId)
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -46,7 +54,10 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerId(Request $request, $PlayerId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('PlayerId', $PlayerId)
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -59,7 +70,10 @@ class PlayerTimingController extends Controller
 
     public function GetByStyleId(Request $request, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('StyleId', $StyleId)->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('StyleId', $StyleId)
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -72,7 +86,11 @@ class PlayerTimingController extends Controller
 
     public function GetByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('MapId', $MapId)
+                        ->where('PlayerId', $PlayerId)
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -85,7 +103,11 @@ class PlayerTimingController extends Controller
 
     public function GetByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('StyleId', $StyleId)->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('MapId', $MapId)
+                        ->where('StyleId', $StyleId)
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -98,7 +120,11 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')->select('*')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->get();
+        $timings = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('PlayerId', $PlayerId)
+                        ->where('StyleId', $StyleId)
+                        ->get();
 
         $this->checkExists($timings);
 
@@ -111,7 +137,12 @@ class PlayerTimingController extends Controller
 
     public function GetByAll(Request $request, $MapId, $PlayerId, $StyleId)
     {
-        $timing = DB::table('PlayerTiming')->select('*')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->first();
+        $timing = DB::table('PlayerTiming')
+                        ->select('*')
+                        ->where('MapId', $MapId)
+                        ->where('PlayerId', $PlayerId)
+                        ->where('StyleId', $StyleId)
+                        ->first();
 
         $this->checkExists($timing);
 
@@ -137,56 +168,77 @@ class PlayerTimingController extends Controller
 
     public function DeleteByTimingId(Request $request, $TimingId)
     {
-        DB::table('PlayerTiming')->where('Id', $TimingId)->delete();
+        DB::table('PlayerTiming')
+            ->where('Id', $TimingId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByMapId(Request $request, $MapId)
     {
-        DB::table('PlayerTiming')->where('MapId', $MapId)->delete();
+        DB::table('PlayerTiming')
+            ->where('MapId', $MapId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByPlayerId(Request $request, $PlayerId)
     {
-        DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->delete();
+        DB::table('PlayerTiming')
+            ->where('PlayerId', $PlayerId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByStyleId(Request $request, $StyleId)
     {
-        DB::table('PlayerTiming')->where('StyleId', $StyleId)->delete();
+        DB::table('PlayerTiming')
+            ->where('StyleId', $StyleId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        DB::table('PlayerTiming')->where('MapId', $MapId)->where('PlayerId', $PlayerId)->delete();
+        DB::table('PlayerTiming')
+            ->where('MapId', $MapId)
+            ->where('PlayerId', $PlayerId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        DB::table('PlayerTiming')->where('MapId', $MapId)->where('StyleId', $StyleId)->delete();
+        DB::table('PlayerTiming')
+            ->where('MapId', $MapId)
+            ->where('StyleId', $StyleId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->where('StyleId', $StyleId)->delete();
+        DB::table('PlayerTiming')
+            ->where('PlayerId', $PlayerId)
+            ->where('StyleId', $StyleId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteByAll(Request $request, $PlayerId, $MapId, $StyleId)
     {
-        DB::table('PlayerTiming')->where('PlayerId', $PlayerId)->where('MapId', $MapId)->where('StyleId', $StyleId)->delete();
+        DB::table('PlayerTiming')
+            ->where('PlayerId', $PlayerId)
+            ->where('MapId', $MapId)
+            ->where('StyleId', $StyleId)
+            ->delete();
 
         return response()->json('OK');
     }

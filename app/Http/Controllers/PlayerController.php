@@ -9,7 +9,9 @@ class PlayerController extends Controller
 {
     public function Index(Request $request)
     {
-        $players = DB::table('Player')->select('*')->get();
+        $players = DB::table('Player')
+                        ->select('*')
+                        ->get();
 
         $this->checkExists($players);
 
@@ -22,7 +24,10 @@ class PlayerController extends Controller
 
     public function GetPlayer(Request $request, $PlayerId)
     {
-        $player = DB::table('Player')->select('*')->where('Id', $PlayerId)->first();
+        $player = DB::table('Player')
+                        ->select('*')
+                        ->where('Id', $PlayerId)
+                        ->first();
 
         $this->checkExists($player);
 

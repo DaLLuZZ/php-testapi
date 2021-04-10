@@ -21,7 +21,9 @@ class PlayerHudController extends Controller
 
     public function InsertHud(Request $request, $PlayerId)
     {
-        DB::table('PlayerHud')->where('PlayerId', $PlayerId)->delete();
+        DB::table('PlayerHud')
+            ->where('PlayerId', $PlayerId)
+            ->delete();
 
         $settings = $request->all();
 
@@ -51,7 +53,9 @@ class PlayerHudController extends Controller
 
     public function DeleteHudByPlayerId(Request $request, $PlayerId)
     {
-        DB::table('PlayerHud')->where('PlayerId', $PlayerId)->delete();
+        DB::table('PlayerHud')
+            ->where('PlayerId', $PlayerId)
+            ->delete();
 
         return response()->json('OK');
     }

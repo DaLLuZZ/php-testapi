@@ -9,7 +9,11 @@ class PlayerSettingsController extends Controller
 {
     public function GetValue(Request $request, $PlayerId, $SettingName)
     {
-        $setting = DB::table('PlayerSettings')->select('*')->where('PlayerId', $PlayerId)->where('Setting', $SettingName)->first();
+        $setting = DB::table('PlayerSettings')
+                        ->select('*')
+                        ->where('PlayerId', $PlayerId)
+                        ->where('Setting', $SettingName)
+                        ->first();
 
         $this->checkExists($setting);
 
@@ -18,7 +22,10 @@ class PlayerSettingsController extends Controller
 
     public function GetValueByPlayerId(Request $request, $PlayerId)
     {
-        $settings = DB::table('PlayerSettings')->select('*')->where('PlayerId', $PlayerId)->get();
+        $settings = DB::table('PlayerSettings')
+                        ->select('*')
+                        ->where('PlayerId', $PlayerId)
+                        ->get();
 
         $this->checkExists($settings);
 
@@ -27,7 +34,10 @@ class PlayerSettingsController extends Controller
 
     public function GetValueBySettingName(Request $request, $SettingName)
     {
-        $settings = DB::table('PlayerSettings')->select('*')->where('Setting', $SettingName)->get();
+        $settings = DB::table('PlayerSettings')
+                        ->select('*')
+                        ->where('Setting', $SettingName)
+                        ->get();
 
         $this->checkExists($settings);
 
@@ -57,21 +67,28 @@ class PlayerSettingsController extends Controller
 
     public function DeleteSettingsByPlayerId(Request $request, $PlayerId)
     {
-        DB::table('PlayerSettings')->where('PlayerId', $PlayerId)->delete();
+        DB::table('PlayerSettings')
+            ->where('PlayerId', $PlayerId)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteSettingsBySettingName(Request $request, $SettingName)
     {
-        DB::table('PlayerSettings')->where('Setting', $SettingName)->delete();
+        DB::table('PlayerSettings')
+            ->where('Setting', $SettingName)
+            ->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteSettingsByIdAndName(Request $request, $PlayerId, $SettingName)
     {
-        DB::table('PlayerSettings')->where('PlayerId', $PlayerId)->where('Setting', $SettingName)->delete();
+        DB::table('PlayerSettings')
+            ->where('PlayerId', $PlayerId)
+            ->where('Setting', $SettingName)
+            ->delete();
 
         return response()->json('OK');
     }
