@@ -37,16 +37,21 @@ class PlayerHudController extends Controller
             ]);
         }
 
-        return response()->json($settings, 201);
+        return response()->json($keys, 201);
     }
 
     public function UpdateHud(Request $request, $PlayerId)
     {
-        DB::table('PlayerHud')
-            ->where('PlayerID', $PlayerId)
-            ->where('Side', $request->Side)
-            ->where('Line', $request->Line)
-            ->update(['Key' => $request->Key]);
+        $keys = $request->all();
+
+        foreach ($keys as $key)
+        {
+            DB::table('PlayerHud')
+                ->where('PlayerID', $PlayerId)
+                ->where('Side', $key['Side'])
+                ->where('Line', $key['Line'])
+                ->update(['Key' => $key['Key']]);
+        }
 
         return response()->json('Success', 204);
     }
