@@ -33,7 +33,7 @@ $router->group(['prefix' => 'Player', 'middleware' => 'auth'], function () use (
 $router->group(['prefix' => 'Map', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'MapController@Index');
     $router->get('/Id/{MapId}', 'MapController@GetMapById');
-    $router->get('/Name/{MapName}', 'MapController@GetMapByName');
+    $router->get('/Name/{MapName}', 'MapController@GetMapsByName');
 
     $router->post('/', 'MapController@InsertMap');
 

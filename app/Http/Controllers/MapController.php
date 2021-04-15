@@ -36,18 +36,20 @@ class MapController extends Controller
         return response()->json($map);
     }
 
-    public function GetMapByName(Request $request, $MapName)
+    public function GetMapsByName(Request $request, $MapName)
     {
-        $map = DB::table('Map')
+        $maps = DB::table('Map')
                     ->select('*')
-                    ->where('Name', $MapName)
-                    ->first();
+                    ->where('Name', 'LIKE', '%' . $MapName . '%')
+                    ->get();
 
-        $this->checkExists($map);
+        $this->checkExists($maps);
 
-        $map->IsActive = (bool)$map->IsActive;
+        foreach ($maps as $map) {
+            $map->IsActive = (bool)$map->IsActive;
+        }
 
-        return response()->json($map);
+        return response()->json($maps);
     }
 
     public function InsertMap(Request $request)
