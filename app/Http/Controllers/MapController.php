@@ -36,6 +36,20 @@ class MapController extends Controller
         return response()->json($map);
     }
 
+    public function GetMapByName(Request $request, $MapName)
+    {
+        $map = DB::table('Map')
+                    ->select('*')
+                    ->where('Name', $MapName)
+                    ->first();
+
+        $this->checkExists($map);
+
+        $map->IsActive = (bool)$map->IsActive;
+
+        return response()->json($map);
+    }
+
     public function GetMapsByName(Request $request, $MapName)
     {
         $maps = DB::table('Map')
