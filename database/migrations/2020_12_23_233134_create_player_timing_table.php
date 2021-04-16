@@ -16,8 +16,8 @@ class CreatePlayerTimingTable extends Migration
     {
         Schema::create('PlayerTiming', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
-            $table->unsignedInteger('PlayerId');
             $table->unsignedInteger('MapId');
+            $table->unsignedInteger('PlayerId');
             $table->unsignedInteger('StyleId');
             $table->enum('ZoneType', ['Normal', 'Bonus', 'Checkpoint', 'Stage']);
             $table->unsignedInteger('ZoneOrdinal');
@@ -25,7 +25,7 @@ class CreatePlayerTimingTable extends Migration
             $table->boolean('IsRanked')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique(['PlayerId', 'MapId', 'StyleId', 'ZoneType', 'ZoneOrdinal']);
+            $table->unique(['MapId', 'PlayerId', 'StyleId', 'ZoneType', 'ZoneOrdinal'], 'UniqueTiming');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
