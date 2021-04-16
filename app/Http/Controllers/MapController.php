@@ -52,6 +52,8 @@ class MapController extends Controller
 
     public function GetMapsByName(Request $request, $MapName)
     {
+        $MapName = addslashes($MapName);
+
         $maps = DB::table('Map')
                     ->select('*')
                     ->where('Name', 'LIKE', '%' . $MapName . '%')
