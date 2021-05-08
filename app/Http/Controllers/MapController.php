@@ -50,6 +50,24 @@ class MapController extends Controller
         return response()->json($map);
     }
 
+    public function GetMapsByName(Request $request, $MapName)
+    {
+        $MapName = addslashes($MapName);
+
+        $maps = DB::table('Map')
+                    ->select('*')
+                    ->where('Name', 'LIKE', '%' . $MapName . '%')
+                    ->get();
+
+        $this->checkExists($maps);
+
+        foreach ($maps as $map) {
+            $map->IsActive = (bool)$map->IsActive;
+        }
+
+        return response()->json($maps);
+    }
+
     public function InsertMap(Request $request)
     {
         $request['Id'] = DB::table('Map')->insertGetId([
