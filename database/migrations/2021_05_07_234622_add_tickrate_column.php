@@ -25,12 +25,8 @@ class AddTickrateColumn extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('PlayerTiming')) {
-            if (Schema::hasColumn('PlayerTiming', 'Tickrate')) {
-                Schema::table('PlayerTiming', function (Blueprint $table) {
-                    $table->dropColumn('Tickrate');
-                });
-            }
-        }
+        Schema::table('PlayerTiming', function (Blueprint $table) {
+            $table->dropColumn('Tickrate');
+        });
     }
 }
