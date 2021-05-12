@@ -4,6 +4,7 @@ The PHP API for fuckTimer.
 ## Setup
 
 ### Requirements
+(Install Webserver. (Tested: nginx (all common versions?), Caddy 2.4.0 or above.))
 1. Install PHP 7.3 or above as well as:
    1. `php-xml`
    2. `php-mysql`
