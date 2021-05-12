@@ -38,11 +38,18 @@ class PlayerController extends Controller
 
     public function InsertPlayer(Request $request)
     {
-        DB::table('Player')->insert([
-            'Id' => $request->Id,
-            'Name' => $request->Name,
-            'IsActive' => $request->IsActive
-        ]);
+        try
+        {
+            DB::table('Player')->insert([
+                'Id' => $request->Id,
+                'Name' => $request->Name,
+                'IsActive' => $request->IsActive
+            ]);
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            return response()->json("Duplicate entry", 403);
+        }    
 
         return response()->json($request, 201);
     }
