@@ -70,11 +70,18 @@ class MapController extends Controller
 
     public function InsertMap(Request $request)
     {
-        $request['Id'] = DB::table('Map')->insertGetId([
-            'Name' => $request->Name,
-            'Tier' => $request->Tier,
-            'IsActive' => $request->IsActive
-        ]);
+        try
+        {
+            $request['Id'] = DB::table('Map')->insertGetId([
+                'Name' => $request->Name,
+                'Tier' => $request->Tier,
+                'IsActive' => $request->IsActive
+            ]);
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            return response()->json("Duplicate entry", 409);
+        }   
 
         return response()->json($request, 201);
     }

@@ -44,10 +44,17 @@ class StyleController extends Controller
 
     public function InsertStyle(Request $request)
     {
-        $request['Id'] = DB::table('Style')->insertGetId([
-            'Name' => $request->Name,
-            'IsActive' => $request->IsActive
-        ]);
+        try
+        {
+            $request['Id'] = DB::table('Style')->insertGetId([
+                'Name' => $request->Name,
+                'IsActive' => $request->IsActive
+            ]);
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            return response()->json("Duplicate entry", 409);
+        }
 
         return response()->json($request, 201);
     }

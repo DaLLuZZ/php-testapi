@@ -46,11 +46,18 @@ class PlayerSettingsController extends Controller
 
     public function InsertSetting(Request $request)
     {
-        DB::table('PlayerSettings')->insertGetId([
-            'PlayerId' => $request->PlayerId,
-            'Setting' => $request->Setting,
-            'Value' => $request->Value
-        ]);
+        try
+        {
+            DB::table('PlayerSettings')->insertGetId([
+                'PlayerId' => $request->PlayerId,
+                'Setting' => $request->Setting,
+                'Value' => $request->Value
+            ]);
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            return response()->json("Duplicate entry", 409);
+        }   
 
         return response()->json($request, 201);
     }

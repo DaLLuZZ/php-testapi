@@ -21,9 +21,16 @@ class PlayerHudController extends Controller
 
     public function InsertHud(Request $request, $PlayerId)
     {
-        DB::table('PlayerHud')
-            ->where('PlayerId', $PlayerId)
-            ->delete();
+        try
+        {
+            DB::table('PlayerHud')
+                ->where('PlayerId', $PlayerId)
+                ->delete();
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            return response()->json("Duplicate entry", 409);
+        }   
 
         $keys = $request->all();
 

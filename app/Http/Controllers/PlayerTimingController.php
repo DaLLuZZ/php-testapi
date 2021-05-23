@@ -153,15 +153,22 @@ class PlayerTimingController extends Controller
 
     public function InsertPlayer(Request $request)
     {
-        $request['Id'] = DB::table('PlayerTiming')->insertGetId([
-            'PlayerId' => $request->PlayerId,
-            'MapId' => $request->MapId,
-            'StyleId' => $request->StyleId,
-            'ZoneType' => $request->ZoneType,
-            'ZoneOrdinal' => $request->ZoneOrdinal,
-            'Duration' => $request->Duration,
-            'IsRanked' => $request->IsRanked
-        ]);
+        try
+        {
+            $request['Id'] = DB::table('PlayerTiming')->insertGetId([
+                'PlayerId' => $request->PlayerId,
+                'MapId' => $request->MapId,
+                'StyleId' => $request->StyleId,
+                'ZoneType' => $request->ZoneType,
+                'ZoneOrdinal' => $request->ZoneOrdinal,
+                'Duration' => $request->Duration,
+                'IsRanked' => $request->IsRanked
+            ]);
+        }
+        catch (\Illuminate\Database\QueryException $e)
+        {
+            return response()->json("Duplicate entry", 409);
+        }   
 
         return response()->json($request, 201);
     }
