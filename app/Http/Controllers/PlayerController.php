@@ -48,7 +48,7 @@ class PlayerController extends Controller
         }
         catch (\Illuminate\Database\QueryException $e)
         {
-            return response()->json("Duplicate entry", 403);
+            return response()->json("Duplicate entry", 409);
         }    
 
         return response()->json($request, 201);
