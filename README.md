@@ -9,8 +9,10 @@ The PHP API for fuckTimer.
    1. `php-xml`
    2. `php-mysql`
    3. `php-mbstring`
-2. Install MariaDB 10.5 or above.
-3. Install composer.
+2. Install an MySQL server.
+   1. MariaDB 10.2 or above
+   2. MySQL 5.7 or above
+4. Install composer.
 
 ### Installation
 1. `composer install`
