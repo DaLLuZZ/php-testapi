@@ -5,7 +5,7 @@ The PHP API for fuckTimer.
 
 ### Requirements
 (Install Webserver. (Tested: nginx (all common versions?))
-1. Install PHP 7.3 or above as well as:
+1. Install PHP 7.4 or above as well as:
    1. `php-xml`
    2. `php-mysql`
    3. `php-mbstring`
