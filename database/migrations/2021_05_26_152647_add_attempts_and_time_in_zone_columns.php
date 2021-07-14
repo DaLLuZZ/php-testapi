@@ -14,7 +14,7 @@ class AddAttemptsAndTimeInZoneColumns extends Migration
     public function up()
     {
         Schema::table('PlayerTiming', function (Blueprint $table) {
-            $table->unsignedInteger('TimeInZone')->after('Duration');
+            $table->double('TimeInZone')->after('Duration');
             $table->unsignedInteger('Attempts')->after('TimeInZone');
         });
     }

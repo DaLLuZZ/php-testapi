@@ -117,3 +117,8 @@ $router->group(['prefix' => 'PlayerHud', 'middleware' => 'auth'], function () us
     $router->delete('/PlayerId/{PlayerId}', 'PlayerHudController@DeleteHudByPlayerId');
     $router->delete('/PlayerId/{PlayerId}/Key/{Key}', 'PlayerHudController@DeleteHudByPlayerIdAndKey');
 });
+
+$router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use ($router) {
+    $router->get('/MapId/{MapId}', 'RecordsController@GetMapRecord');
+    $router->get('/MapId/{MapId}/PlayerId/{PlayerId}', 'RecordsController@GetMapPlayerRecord');
+});

@@ -156,12 +156,16 @@ class PlayerTimingController extends Controller
         try
         {
             $request['Id'] = DB::table('PlayerTiming')->insertGetId([
-                'PlayerId' => $request->PlayerId,
                 'MapId' => $request->MapId,
+                'PlayerId' => $request->PlayerId,
                 'StyleId' => $request->StyleId,
+                'ZoneNormal' => $request->ZoneNormal,
                 'ZoneType' => $request->ZoneType,
                 'ZoneOrdinal' => $request->ZoneOrdinal,
+                'Tickrate' => $request->Tickrate,
                 'Duration' => $request->Duration,
+                'TimeInZone' => $request->TimeInZone,
+                'Attempts' => $request->Attempts,
                 'IsRanked' => $request->IsRanked
             ]);
         }

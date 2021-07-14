@@ -14,7 +14,7 @@ class AddTickrateColumn extends Migration
     public function up()
     {
         Schema::table('PlayerTiming', function (Blueprint $table) {
-            $table->unsignedInteger('Tickrate')->after('ZoneOrdinal');
+            $table->double('Tickrate')->after('ZoneOrdinal');
         });
     }
 
