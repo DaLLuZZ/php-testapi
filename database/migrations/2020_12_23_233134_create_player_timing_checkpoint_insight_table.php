@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreatePlayerTable extends Migration
+class CreatePlayerTimingInsightTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,20 @@ class CreatePlayerTable extends Migration
      */
     public function up()
     {
-        Schema::create('Player', function (Blueprint $table) {
-            $table->unsignedInteger('Id');
-            $table->string('Name', 32);
-            $table->boolean('IsActive')->default(1);
+        Schema::create('PlayerTimingCheckpointInsight', function (Blueprint $table) {
+            $table->unsignedInteger('Id')->autoIncrement();
+            $table->unsignedInteger('PlayerTimingCheckpointId')->unique();
+            $table->double('PositionX');
+            $table->double('PositionY');
+            $table->double('PositionZ');
+            $table->double('AngleX');
+            $table->double('AngleY');
+            $table->double('AngleZ');
+            $table->double('VelocityX');
+            $table->double('VelocityY');
+            $table->double('VelocityZ');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->primary('Id');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -34,6 +41,6 @@ class CreatePlayerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Player');
+        Schema::dropIfExists('PlayerTimingCheckpointInsight');
     }
 }

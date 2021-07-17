@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreatePlayerTimingInsightTable extends Migration
+class CreatePlayerTimingStageInsightTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,9 @@ class CreatePlayerTimingInsightTable extends Migration
      */
     public function up()
     {
-        Schema::create('PlayerTimeInsight', function (Blueprint $table) {
+        Schema::create('PlayerTimingStageInsight', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
-            $table->unsignedInteger('PlayerTimingId');
+            $table->unsignedInteger('PlayerTimingStageId')->unique();
             $table->double('StartPositionX');
             $table->double('StartPositionY');
             $table->double('StartPositionZ');
@@ -37,7 +37,6 @@ class CreatePlayerTimingInsightTable extends Migration
             $table->double('EndVelocityZ');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique('PlayerTimingId');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -51,6 +50,6 @@ class CreatePlayerTimingInsightTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PlayerTimeInsight');
+        Schema::dropIfExists('PlayerTimingStageInsight');
     }
 }

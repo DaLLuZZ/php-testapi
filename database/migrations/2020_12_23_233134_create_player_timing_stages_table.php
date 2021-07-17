@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreatePlayerTimingTable extends Migration
+class CreatePlayerTimingStagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreatePlayerTimingTable extends Migration
      */
     public function up()
     {
-        Schema::create('PlayerTiming', function (Blueprint $table) {
+        Schema::create('PlayerTimingStages', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
             $table->unsignedInteger('MapId');
             $table->unsignedInteger('PlayerId');
@@ -41,6 +41,6 @@ class CreatePlayerTimingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PlayerTiming');
+        Schema::dropIfExists('PlayerTimingStages');
     }
 }

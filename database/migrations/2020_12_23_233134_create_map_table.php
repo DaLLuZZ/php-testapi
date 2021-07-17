@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreatePlayerTimingTable extends Migration
+class CreateMapTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,15 @@ class CreatePlayerTimingTable extends Migration
      */
     public function up()
     {
-        Schema::create('PlayerTiming', function (Blueprint $table) {
+        Schema::create('Map', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
-            $table->unsignedInteger('MapId');
-            $table->unsignedInteger('PlayerId');
-            $table->unsignedInteger('StyleId');
-            $table->unsignedInteger('Level');
-            $table->double('Tickrate');
-            $table->time('Time');
-            $table->double('TimeInZone');
-            $table->unsignedInteger('Attempts');
+            $table->string('Name', 64)->unique();
+            $table->unsignedTinyInteger('Tier');
             $table->tinyInteger('Status')->default(1);
+            $table->string('MapAuthor', 64);
+            $table->string('ZoneAuthor', 64);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique(['MapId', 'PlayerId', 'StyleId', 'Level']);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -41,6 +36,6 @@ class CreatePlayerTimingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PlayerTiming');
+        Schema::dropIfExists('Map');
     }
 }

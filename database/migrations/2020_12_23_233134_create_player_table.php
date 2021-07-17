@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateStyleTable extends Migration
+class CreatePlayerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,14 @@ class CreateStyleTable extends Migration
      */
     public function up()
     {
-        Schema::create('Style', function (Blueprint $table) {
-            $table->unsignedInteger('Id')->autoIncrement();
-            $table->string('Name', 32);
-            $table->boolean('IsActive')->default(1);
+        Schema::create('Player', function (Blueprint $table) {
+            $table->unsignedInteger('AccountId')->unique();
+            $table->bigInteger('CommunityId')->unique();
+            $table->string('Name', 64);
+            $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique('Name');
+            $table->primary('AccountId');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -34,6 +35,6 @@ class CreateStyleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Style');
+        Schema::dropIfExists('Player');
     }
 }
