@@ -28,7 +28,7 @@ class RecordsController extends Controller
         $this->checkExists($records);
 
         foreach ($records as $record) {
-            $record->IsRanked = (bool)$record->IsRanked;
+            $record->Status = (bool)$record->Status;
         }
 
         return response()->json($records);
@@ -49,7 +49,7 @@ class RecordsController extends Controller
         $this->checkExists($records);
 
         foreach ($records as $record) {
-            $record->IsRanked = (bool)$record->IsRanked;
+            $record->Status = (bool)$record->Status;
         }
 
         return response()->json($records);

@@ -16,7 +16,7 @@ class PlayerController extends Controller
         $this->checkExists($players);
 
         foreach ($players as $player) {
-            $player->IsActive = (bool)$player->IsActive;
+            $player->Status = (bool)$player->Status;
         }
 
         return response()->json($players);
@@ -31,7 +31,7 @@ class PlayerController extends Controller
 
         $this->checkExists($player);
 
-        $player->IsActive = (bool)$player->IsActive;
+        $player->Status = (bool)$player->Status;
 
         return response()->json($player);
     }
@@ -43,7 +43,7 @@ class PlayerController extends Controller
             DB::table('Player')->insert([
                 'Id' => $request->Id,
                 'Name' => $request->Name,
-                'IsActive' => $request->IsActive
+                'Status' => $request->Status
             ]);
         }
         catch (\Illuminate\Database\QueryException $e)
@@ -58,7 +58,7 @@ class PlayerController extends Controller
     {
         DB::table('Player')->where('Id', $PlayerId)->update([
             'Name' => $request->Name,
-            'IsActive' => $request->IsActive
+            'Status' => $request->Status
         ]);
 
         return response()->json('OK');

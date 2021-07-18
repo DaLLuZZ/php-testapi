@@ -16,7 +16,7 @@ class MapController extends Controller
         $this->checkExists($maps);
 
         foreach ($maps as $map) {
-            $map->IsActive = (bool)$map->IsActive;
+            $map->Status = (bool)$map->Status;
         }
 
         return response()->json($maps);
@@ -31,7 +31,7 @@ class MapController extends Controller
 
         $this->checkExists($map);
 
-        $map->IsActive = (bool)$map->IsActive;
+        $map->Status = (bool)$map->Status;
 
         return response()->json($map);
     }
@@ -45,7 +45,7 @@ class MapController extends Controller
 
         $this->checkExists($map);
 
-        $map->IsActive = (bool)$map->IsActive;
+        $map->Status = (bool)$map->Status;
 
         return response()->json($map);
     }
@@ -62,7 +62,7 @@ class MapController extends Controller
         $this->checkExists($maps);
 
         foreach ($maps as $map) {
-            $map->IsActive = (bool)$map->IsActive;
+            $map->Status = (bool)$map->Status;
         }
 
         return response()->json($maps);
@@ -75,7 +75,7 @@ class MapController extends Controller
             $request['Id'] = DB::table('Map')->insertGetId([
                 'Name' => $request->Name,
                 'Tier' => $request->Tier,
-                'IsActive' => $request->IsActive
+                'Status' => $request->Status
             ]);
         }
         catch (\Illuminate\Database\QueryException $e)
@@ -91,7 +91,7 @@ class MapController extends Controller
         DB::table('Map')->where('Id', $MapId)->update([
             'Name' => $request->Name,
             'Tier' => $request->Tier,
-            'IsActive' => $request->IsActive
+            'Status' => $request->Status
         ]);
 
         return response()->json('OK');

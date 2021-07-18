@@ -16,7 +16,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -31,7 +31,7 @@ class PlayerTimingController extends Controller
 
         $this->checkExists($timing);
 
-        $timing->IsRanked = (bool)$timing->IsRanked;
+        $timing->Status = (bool)$timing->Status;
 
         return response()->json($timing);
     }
@@ -46,7 +46,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -62,7 +62,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -78,7 +78,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -95,7 +95,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -112,7 +112,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -129,7 +129,7 @@ class PlayerTimingController extends Controller
         $this->checkExists($timings);
 
         foreach ($timings as $timing) {
-            $timing->IsRanked = (bool)$timing->IsRanked;
+            $timing->Status = (bool)$timing->Status;
         }
 
         return response()->json($timings);
@@ -146,7 +146,7 @@ class PlayerTimingController extends Controller
 
         $this->checkExists($timing);
 
-        $timing->IsRanked = (bool)$timing->IsRanked;
+        $timing->Status = (bool)$timing->Status;
 
         return response()->json($timing);
     }
@@ -166,7 +166,7 @@ class PlayerTimingController extends Controller
                 'Duration' => $request->Duration,
                 'TimeInZone' => $request->TimeInZone,
                 'Attempts' => $request->Attempts,
-                'IsRanked' => $request->IsRanked
+                'Status' => $request->Status
             ]);
         }
         catch (\Illuminate\Database\QueryException $e)

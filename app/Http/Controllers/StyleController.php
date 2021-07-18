@@ -14,7 +14,7 @@ class StyleController extends Controller
         $this->checkExists($styles);
 
         foreach ($styles as $style) {
-            $style->IsActive = (bool)$style->IsActive;
+            $style->Status = (bool)$style->Status;
         }
 
         return response()->json($styles);
@@ -26,7 +26,7 @@ class StyleController extends Controller
 
         $this->checkExists($style);
 
-        $style->IsActive = (bool)$style->IsActive;
+        $style->Status = (bool)$style->Status;
 
         return response()->json($style);
     }
@@ -37,7 +37,7 @@ class StyleController extends Controller
 
         $this->checkExists($style);
 
-        $style->IsActive = (bool)$style->IsActive;
+        $style->Status = (bool)$style->Status;
 
         return response()->json($style);
     }
@@ -48,7 +48,7 @@ class StyleController extends Controller
         {
             $request['Id'] = DB::table('Style')->insertGetId([
                 'Name' => $request->Name,
-                'IsActive' => $request->IsActive
+                'Status' => $request->Status
             ]);
         }
         catch (\Illuminate\Database\QueryException $e)
@@ -63,7 +63,7 @@ class StyleController extends Controller
     {
         DB::table('Style')->where('Id', $StyleId)->update([
             'Name' => $request->Name,
-            'IsActive' => $request->IsActive
+            'Status' => $request->Status
         ]);
 
         return response()->json('OK');
