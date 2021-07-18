@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PlayerTimingController extends Controller
+class PlayerTimingStagesController extends Controller
 {
     public function Index(Request $request)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->get();
 
@@ -24,7 +24,7 @@ class PlayerTimingController extends Controller
 
     public function GetByTimingId(Request $request, $TimingId)
     {
-        $timing = DB::table('PlayerTiming')
+        $timing = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('Id', $TimingId)
                         ->first();
@@ -38,7 +38,7 @@ class PlayerTimingController extends Controller
 
     public function GetByMapId(Request $request, $MapId)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('MapId', $MapId)
                         ->get();
@@ -54,7 +54,7 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerId(Request $request, $PlayerId)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('PlayerId', $PlayerId)
                         ->get();
@@ -70,7 +70,7 @@ class PlayerTimingController extends Controller
 
     public function GetByStyleId(Request $request, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('StyleId', $StyleId)
                         ->get();
@@ -86,7 +86,7 @@ class PlayerTimingController extends Controller
 
     public function GetByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('MapId', $MapId)
                         ->where('PlayerId', $PlayerId)
@@ -103,7 +103,7 @@ class PlayerTimingController extends Controller
 
     public function GetByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('MapId', $MapId)
                         ->where('StyleId', $StyleId)
@@ -120,7 +120,7 @@ class PlayerTimingController extends Controller
 
     public function GetByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        $timings = DB::table('PlayerTiming')
+        $timings = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('PlayerId', $PlayerId)
                         ->where('StyleId', $StyleId)
@@ -137,7 +137,7 @@ class PlayerTimingController extends Controller
 
     public function GetByAll(Request $request, $MapId, $PlayerId, $StyleId)
     {
-        $timing = DB::table('PlayerTiming')
+        $timing = DB::table('PlayerTimingStages')
                         ->select('*')
                         ->where('MapId', $MapId)
                         ->where('PlayerId', $PlayerId)
@@ -155,7 +155,7 @@ class PlayerTimingController extends Controller
     {
         try
         {
-            $request['Id'] = DB::table('PlayerTiming')->insertGetId([
+            $request['Id'] = DB::table('PlayerTimingStages')->insertGetId([
                 'MapId' => $request->MapId,
                 'PlayerId' => $request->PlayerId,
                 'StyleId' => $request->StyleId,
@@ -177,7 +177,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByTimingId(Request $request, $TimingId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('Id', $TimingId)
             ->delete();
 
@@ -186,7 +186,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByMapId(Request $request, $MapId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('MapId', $MapId)
             ->delete();
 
@@ -195,7 +195,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByPlayerId(Request $request, $PlayerId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('PlayerId', $PlayerId)
             ->delete();
 
@@ -204,7 +204,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByStyleId(Request $request, $StyleId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('StyleId', $StyleId)
             ->delete();
 
@@ -213,7 +213,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByMapPlayerId(Request $request, $MapId, $PlayerId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('MapId', $MapId)
             ->where('PlayerId', $PlayerId)
             ->delete();
@@ -223,7 +223,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByMapStyleId(Request $request, $MapId, $StyleId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('MapId', $MapId)
             ->where('StyleId', $StyleId)
             ->delete();
@@ -233,7 +233,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByPlayerStyleId(Request $request, $PlayerId, $StyleId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('PlayerId', $PlayerId)
             ->where('StyleId', $StyleId)
             ->delete();
@@ -243,7 +243,7 @@ class PlayerTimingController extends Controller
 
     public function DeleteByAll(Request $request, $PlayerId, $MapId, $StyleId)
     {
-        DB::table('PlayerTiming')
+        DB::table('PlayerTimingStages')
             ->where('PlayerId', $PlayerId)
             ->where('MapId', $MapId)
             ->where('StyleId', $StyleId)
