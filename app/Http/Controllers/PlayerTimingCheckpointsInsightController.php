@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PlayerTimingInsightController extends Controller
+class PlayerTimingCheckpointsInsightController extends Controller
 {
     public function GetInsight(Request $request, $TimingId)
     {
-        $insight = DB::table('PlayerTimingInsight')->select('*')->where('Id', $TimingId)->first();
+        $insight = DB::table('PlayerTimingCheckpointsInsight')->select('*')->where('Id', $TimingId)->first();
 
         $this->checkExists($insight);
 
@@ -20,8 +20,8 @@ class PlayerTimingInsightController extends Controller
     {
         try
         {
-            $request['Id'] = DB::table('PlayerTimingInsight')->insertGetId([
-                'PlayerTimingId' => $request->PlayerTimingId,
+            $request['Id'] = DB::table('PlayerTimingCheckpointsInsight')->insertGetId([
+                'PlayerTimingCheckpointsId' => $request->PlayerTimingCheckpointsId,
                 'StartPositionX' => $request->StartPositionX,
                 'StartPositionY' => $request->StartPositionY,
                 'StartPositionZ' => $request->StartPositionZ,
@@ -52,14 +52,14 @@ class PlayerTimingInsightController extends Controller
 
     public function DeleteInsightByInsightId(Request $request, $InsightId)
     {
-        DB::table('PlayerTimingInsight')->where('Id', $InsightId)->delete();
+        DB::table('PlayerTimingCheckpointsInsight')->where('Id', $InsightId)->delete();
 
         return response()->json('OK');
     }
 
     public function DeleteInsightByTimingId(Request $request, $TimingId)
     {
-        DB::table('PlayerTimingInsight')->where('PlayerTimingId', $TimingId)->delete();
+        DB::table('PlayerTimingCheckpointsInsight')->where('PlayerTimingCheckpointsId', $TimingId)->delete();
 
         return response()->json('OK');
     }
