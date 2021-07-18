@@ -75,7 +75,9 @@ class MapController extends Controller
             $request['Id'] = DB::table('Map')->insertGetId([
                 'Name' => $request->Name,
                 'Tier' => $request->Tier,
-                'Status' => $request->Status
+                'Status' => $request->Status,
+                'MapAuthor' => $request->MapAuthor,
+                'ZoneAuthor' => $request->ZoneAuthor
             ]);
         }
         catch (\Illuminate\Database\QueryException $e)
@@ -91,7 +93,9 @@ class MapController extends Controller
         DB::table('Map')->where('Id', $MapId)->update([
             'Name' => $request->Name,
             'Tier' => $request->Tier,
-            'Status' => $request->Status
+            'Status' => $request->Status,
+            'MapAuthor' => $request->MapAuthor,
+            'ZoneAuthor' => $request->ZoneAuthor
         ]);
 
         return response()->json('OK');

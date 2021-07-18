@@ -42,6 +42,7 @@ class PlayerController extends Controller
         {
             DB::table('Player')->insert([
                 'Id' => $request->Id,
+                'CommunityId' => $request->CommunityId,
                 'Name' => $request->Name,
                 'Status' => $request->Status
             ]);
