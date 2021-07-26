@@ -22,7 +22,7 @@ class RecordsController extends Controller
                         ->where('ZoneType', 'Main')
                         ->where('StyleId', '0')
                         ->groupBy('ZoneNormal')
-                        ->orderBy('Duration', 'asc')
+                        ->orderBy('Time', 'asc')
                         ->get();
 
         $this->checkExists($records);
@@ -43,7 +43,7 @@ class RecordsController extends Controller
                         ->where('ZoneNormal', 0)
                         ->where('ZoneType', 'Main')
                         ->where('ZoneOrdinal', 0)
-                        ->orderBy('Duration', 'asc')
+                        ->orderBy('Time', 'asc')
                         ->get();
 
         $this->checkExists($records);
