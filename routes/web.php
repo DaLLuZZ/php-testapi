@@ -36,7 +36,7 @@ $router->group(['prefix' => 'Map', 'middleware' => 'auth'], function () use ($ro
     $router->get('/Name/{MapName}', 'MapController@GetMapByName');
     $router->get('/MatchName/{MapName}', 'MapController@GetMapsByName');
 
-    $router->post('/', 'MapController@InsertMap');
+    $router->post('/', 'MapController@InsertMaps');
 
     $router->put('/Id/{MapId}', 'MapController@UpdateMap');
     

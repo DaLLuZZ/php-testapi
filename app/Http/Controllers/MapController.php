@@ -68,11 +68,13 @@ class MapController extends Controller
         return response()->json($maps);
     }
 
-    public function InsertMap(Request $request)
+    public function InsertMaps(Request $request)
     {
-        try
+        $maps = $request->all();
+
+        foreach ($maps as $map)
         {
-            $request['Id'] = DB::table('Map')->insertGetId([
+            DB::table('Map')->insertOrIgnore([
                 'Name' => $request->Name,
                 'Tier' => $request->Tier,
                 'Status' => $request->Status,
@@ -80,12 +82,8 @@ class MapController extends Controller
                 'ZoneAuthor' => $request->ZoneAuthor
             ]);
         }
-        catch (\Illuminate\Database\QueryException $e)
-        {
-            return response()->json("Duplicate entry", 409);
-        }   
 
-        return response()->json($request, 201);
+        return response()->json($maps, 201);
     }
 
     public function UpdateMap(Request $request, $MapId)
