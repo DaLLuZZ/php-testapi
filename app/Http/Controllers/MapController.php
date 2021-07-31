@@ -75,11 +75,11 @@ class MapController extends Controller
         foreach ($maps as $map)
         {
             DB::table('Map')->insertOrIgnore([
-                'Name' => $request->Name,
-                'Tier' => $request->Tier,
-                'Status' => $request->Status,
-                'MapAuthor' => $request->MapAuthor,
-                'ZoneAuthor' => $request->ZoneAuthor
+                'Name' => $map['Name'],
+                'Tier' => $map['Tier'],
+                'Status' => $map['Status'],
+                'MapAuthor' => $map['MapAuthor'],
+                'ZoneAuthor' => $map['ZoneAuthor']
             ]);
         }
 
