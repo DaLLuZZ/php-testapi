@@ -99,6 +99,16 @@ class MapController extends Controller
         return response()->json('OK');
     }
 
+    public function UpdateMapAuthor(Request $request, $MapId)
+    {
+        DB::table('Map')->where('Id', $MapId)->update([
+            'MapAuthor' => $request->MapAuthor,
+            'ZoneAuthor' => $request->ZoneAuthor
+        ]);
+
+        return response()->json('OK');
+    }
+
     public function DeleteMap(Request $request, $MapId)
     {
         DB::table('Map')->where('Id', $MapId)->delete();
