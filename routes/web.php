@@ -39,7 +39,6 @@ $router->group(['prefix' => 'Map', 'middleware' => 'auth'], function () use ($ro
     $router->post('/', 'MapController@InsertMaps');
 
     $router->put('/Id/{MapId}', 'MapController@UpdateMap');
-    $router->put('/Id/{MapId}/UpdateAuthor', 'MapController@UpdateMapAuthor');
     
     $router->delete('/Id/{MapId}', 'MapController@DeleteMap');
 });
