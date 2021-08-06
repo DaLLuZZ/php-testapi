@@ -17,7 +17,7 @@ class PlayerSeeder extends Seeder
         for ($i=1; $i < 100000; $i++) {
             DB::table('Player')->insertGetId([
                 'Id' => $i,
-                'CommunityId' => random_int(100000, 999999999),
+                'CommunityId' => $i * 100,
                 'Name' => 'Player' . $i,
                 'Status' => random_int(0, 1)
             ]);
