@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class PlayerSeeder extends Seeder
 {
@@ -19,7 +18,7 @@ class PlayerSeeder extends Seeder
             DB::table('Player')->insertGetId([
                 'Id' => $i,
                 'CommunityId' => random_int(100000, 999999999),
-                'Name' => Str::random(32),
+                'Name' => 'Player' . $i,
                 'Status' => random_int(0, 1)
             ]);
 
