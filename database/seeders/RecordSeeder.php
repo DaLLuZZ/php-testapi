@@ -15,10 +15,10 @@ class RecordSeeder extends Seeder
     public function run()
     {
         // Main Times
-        for ($i=0; $i < 10000; $i++) {
+        for ($i=0; $i < 100000; $i++) {
             $id = DB::table('PlayerTiming')->insertGetId([
-                'MapId' => random_int(1, 9999),
-                'PlayerId' => random_int(1, 9999),
+                'MapId' => random_int(1, 500),
+                'PlayerId' => $i,
                 'StyleId' => random_int(1, 10),
                 'Level' => random_int(0, 10),
                 'Tickrate' => 100,
