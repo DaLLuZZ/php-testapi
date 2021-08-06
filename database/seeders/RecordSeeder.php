@@ -54,8 +54,8 @@ class RecordSeeder extends Seeder
         // Stage times
         for ($i=0; $i < 100000; $i++) {
             $id = DB::table('PlayerTimingStages')->insertGetId([
-                'MapId' => random_int(1, 9999),
-                'PlayerId' => random_int(1, 9999),
+                'MapId' => random_int(1, 500),
+                'PlayerId' => $i,
                 'StyleId' => random_int(1, 10),
                 'Level' => random_int(0, 10),
                 'Tickrate' => 100,
@@ -91,8 +91,8 @@ class RecordSeeder extends Seeder
         // Checkpoint times
         for ($i=0; $i < 100000; $i++) {
             $id = DB::table('PlayerTimingCheckpoints')->insertGetId([
-                'MapId' => random_int(1, 9999),
-                'PlayerId' => random_int(1, 9999),
+                'MapId' => random_int(1, 500),
+                'PlayerId' => $i,
                 'StyleId' => random_int(1, 10),
                 'Level' => random_int(0, 10),
                 'Tickrate' => 100,
