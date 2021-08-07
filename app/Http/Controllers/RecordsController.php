@@ -38,35 +38,35 @@ class RecordsController extends Controller
 
             array_push($mainRecord, $mainInsight);
 
-            $type = $mainRecord['MapId'] % 2 == 0 ? "Stage" : "Checkpoint";
+            # Checkpoint/Stage Start
+            $type = $mainRecord['MapId'] % 2 == 0 ? "Stage" : "Checkpoint"; // TODO: This is for testing, we'll remove it when we're ready
+            $stageRecords = DB::table('PlayerTiming' . $type . 's')
+                                ->select('*')
+                                ->where('MapId', $mainRecord['MapId'])
+                                ->where('PlayerId', $mainRecord['PlayerId'])
+                                ->where('StyleId', $mainRecord['StyleId'])
+                                ->where('Level', $mainRecord['Level'])
+                                ->get();
 
-                $stageRecords = DB::table('PlayerTiming' . $type . 's')
+            $this->checkExists($stageRecords);
+
+            $detailedStageRecords = [];
+            foreach ($stageRecords as $stageRecord)
+            {
+                $stageInsight = DB::table('PlayerTiming' . $type . 'Insight')
                                     ->select('*')
-                                    ->where('MapId', $mainRecord['MapId'])
-                                    ->where('PlayerId', $mainRecord['PlayerId'])
-                                    ->where('StyleId', $mainRecord['StyleId'])
-                                    ->where('Level', $mainRecord['Level'])
-                                    ->get();
+                                    ->where('PlayerTiming' . $type . 'Id', $stageRecord->Id)
+                                    ->first();
+                
+                $stageRecord = (array)$stageRecord;
+                $stageInsight = (array)$stageInsight;
 
-                $this->checkExists($stageRecords);
+                array_push($stageRecord, $stageInsight);
+                array_push($detailedStageRecords, $stageRecord);
+            }
 
-
-                $detailedStageRecords = [];
-                foreach ($stageRecords as $stageRecord)
-                {
-                    $stageInsight = DB::table('PlayerTiming' . $type . 'Insight')
-                                        ->select('*')
-                                        ->where('PlayerTiming' . $type . 'Id', $stageRecord->Id)
-                                        ->first();
-                    
-                    $stageRecord = (array)$stageRecord;
-                    $stageInsight = (array)$stageInsight;
-
-                    array_push($stageRecord, $stageInsight);
-                    array_push($detailedStageRecords, $stageRecord);
-                }
-
-                array_push($mainRecord, $detailedStageRecords);
+            array_push($mainRecord, $detailedStageRecords);
+            # Checkpoint/Stage End
 
             array_push($detailedRecords, $mainRecord);
         }
