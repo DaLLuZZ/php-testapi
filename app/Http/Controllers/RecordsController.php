@@ -20,57 +20,56 @@ class RecordsController extends Controller
                         ->where('MapId', $MapId)
                         ->groupBy(['StyleId', 'Level'])
                         ->orderBy('Time', 'asc')
-                        ->first();
+                        ->get();
 
         $this->checkExists($mainRecords);
 
         $detailedRecords = [];
 
-        // foreach ($mainRecords as $mainRecord)
-        // {
-        $mainInsight = DB::table('PlayerTimingInsight')
-                        ->select('*')
-                        ->where('PlayerTimingId', $mainRecords->Id) // TODO: mainRecord -> mainRecords
-                        ->first();
+        foreach ($mainRecords as $mainRecord)
+        {
+            $mainInsight = DB::table('PlayerTimingInsight')
+                            ->select('*')
+                            ->where('PlayerTimingId', $mainRecord->Id)
+                            ->first();
 
-        $mainRecords = (array)$mainRecords; // TODO: mainRecord -> mainRecords
-        $mainInsight = (array)$mainInsight;
+            $mainRecord = (array)$mainRecord;
+            $mainInsight = (array)$mainInsight;
 
-        array_push($mainRecords, $mainInsight); // TODO: mainRecord -> mainRecords
+            array_push($mainRecord, $mainInsight);
 
-        $type = $mainRecords['MapId'] % 2 == 0 ? "Stage" : "Checkpoint";
-        echo $type;
+            $type = $mainRecord['MapId'] % 2 == 0 ? "Stage" : "Checkpoint";
 
-            $stageRecords = DB::table('PlayerTiming' . $type . 's')
-                                ->select('*')
-                                ->where('MapId', $mainRecords['MapId']) // TODO: mainRecord -> mainRecords
-                                ->where('PlayerId', $mainRecords['PlayerId']) // TODO: mainRecord -> mainRecords
-                                ->where('StyleId', $mainRecords['StyleId']) // TODO: mainRecord -> mainRecords
-                                ->where('Level', $mainRecords['Level']) // TODO: mainRecord -> mainRecords
-                                ->get();
-
-            $this->checkExists($stageRecords);
-
-
-            $detailedStageRecords = [];
-            foreach ($stageRecords as $stageRecord)
-            {
-                $stageInsight = DB::table('PlayerTiming' . $type . 'Insight')
+                $stageRecords = DB::table('PlayerTiming' . $type . 's')
                                     ->select('*')
-                                    ->where('PlayerTiming' . $type . 'Id', $stageRecord->Id)
-                                    ->first();
-                
-                $stageRecord = (array)$stageRecord;
-                $stageInsight = (array)$stageInsight;
+                                    ->where('MapId', $mainRecord['MapId'])
+                                    ->where('PlayerId', $mainRecord['PlayerId'])
+                                    ->where('StyleId', $mainRecord['StyleId'])
+                                    ->where('Level', $mainRecord['Level'])
+                                    ->get();
 
-                array_push($stageRecord, $stageInsight);
-                array_push($detailedStageRecords, $stageRecord);
-            }
+                $this->checkExists($stageRecords);
 
-            array_push($mainRecords, $detailedStageRecords);
 
-        array_push($detailedRecords, $mainRecords); // TODO: mainRecord -> mainRecords
-        //}
+                $detailedStageRecords = [];
+                foreach ($stageRecords as $stageRecord)
+                {
+                    $stageInsight = DB::table('PlayerTiming' . $type . 'Insight')
+                                        ->select('*')
+                                        ->where('PlayerTiming' . $type . 'Id', $stageRecord->Id)
+                                        ->first();
+                    
+                    $stageRecord = (array)$stageRecord;
+                    $stageInsight = (array)$stageInsight;
+
+                    array_push($stageRecord, $stageInsight);
+                    array_push($detailedStageRecords, $stageRecord);
+                }
+
+                array_push($mainRecord, $detailedStageRecords);
+
+            array_push($detailedRecords, $mainRecord);
+        }
 
         return response()->json($detailedRecords);
     }
