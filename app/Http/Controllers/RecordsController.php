@@ -38,8 +38,7 @@ class RecordsController extends Controller
 
         array_push($mainRecords, $mainInsight); // TODO: mainRecord -> mainRecords
 
-
-        $type = $mainRecords['Id'] % 2 == 0 ? "Checkpoint" : "Stage";
+        $type = $mainRecords['MapId'] % 2 == 0 ? "Stage" : "Checkpoint";
         echo $type;
 
             $stageRecords = DB::table('PlayerTiming' . $type . 's')

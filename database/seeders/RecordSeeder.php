@@ -54,7 +54,7 @@ class RecordSeeder extends Seeder
                 'EndVelocityZ' => random_int(0, 255),
             ]);
 
-            if ($main % 2 == 0) {
+            if ($map % 2 == 0) {
                 // Stage times
                 for ($stage=0; $stage < 100; $stage++) {
                     $id = DB::table('PlayerTimingStages')->insertGetId([
