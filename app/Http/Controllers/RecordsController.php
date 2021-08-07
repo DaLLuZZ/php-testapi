@@ -14,22 +14,15 @@ class RecordsController extends Controller
             Select fatest main/bonus run per map
             get the player id
             select the other runs like checkpoints/stages
-
         */
         $records = DB::table('PlayerTiming')
                         ->select('*')
                         ->where('MapId', $MapId)
-                        ->where('ZoneType', 'Main')
-                        ->where('StyleId', '0')
-                        ->groupBy('ZoneNormal')
+                        ->groupBy(['StyleId', 'Level'])
                         ->orderBy('Time', 'asc')
                         ->get();
 
         $this->checkExists($records);
-
-        foreach ($records as $record) {
-            $record->Status = (bool)$record->Status;
-        }
 
         return response()->json($records);
     }
@@ -40,17 +33,11 @@ class RecordsController extends Controller
                         ->select('*')
                         ->where('MapId', $MapId)
                         ->where('PlayerId', $PlayerId)
-                        ->where('ZoneNormal', 0)
-                        ->where('ZoneType', 'Main')
-                        ->where('ZoneOrdinal', 0)
+                        ->groupBy(['StyleId', 'Level'])
                         ->orderBy('Time', 'asc')
                         ->get();
 
         $this->checkExists($records);
-
-        foreach ($records as $record) {
-            $record->Status = (bool)$record->Status;
-        }
 
         return response()->json($records);
     }
