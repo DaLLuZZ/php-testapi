@@ -42,33 +42,33 @@ class RecordsController extends Controller
 
             if ($type == 'Stage')
             {
-                $stageRecords = DB::table('PlayerTimingStages')
-                        ->join('PlayerTimingStageInsight', 'PlayerTimingStages.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
-                        ->select('PlayerTimingStages.Id', 'PlayerTimingStages.MapId', 'PlayerTimingStages.PlayerId', 'PlayerTimingStages.StyleId', 'PlayerTimingStages.Level', 'PlayerTimingStages.Stage', 'PlayerTimingStages.Time', 'PlayerTimingStages.TimeInZone', 'PlayerTimingStages.Attempts', 'PlayerTimingStages.Status',
+                $stageRecords = DB::table('PlayerTimingStage')
+                        ->join('PlayerTimingStageInsight', 'PlayerTimingStage.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
+                        ->select('PlayerTimingStage.Id', 'PlayerTimingStage.MapId', 'PlayerTimingStage.PlayerId', 'PlayerTimingStage.StyleId', 'PlayerTimingStage.Level', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts', 'PlayerTimingStage.Status',
                                 'PlayerTimingStageInsight.StartPositionX', 'PlayerTimingStageInsight.StartPositionY', 'PlayerTimingStageInsight.StartPositionZ',
                                 'PlayerTimingStageInsight.EndPositionX', 'PlayerTimingStageInsight.EndPositionY', 'PlayerTimingStageInsight.EndPositionZ',
                                 'PlayerTimingStageInsight.StartAngleX', 'PlayerTimingStageInsight.StartAngleY', 'PlayerTimingStageInsight.StartAngleZ',
                                 'PlayerTimingStageInsight.EndAngleX', 'PlayerTimingStageInsight.EndAngleY', 'PlayerTimingStageInsight.EndAngleZ',
                                 'PlayerTimingStageInsight.StartVelocityX', 'PlayerTimingStageInsight.StartVelocityY', 'PlayerTimingStageInsight.StartVelocityZ',
                                 'PlayerTimingStageInsight.EndVelocityX', 'PlayerTimingStageInsight.EndVelocityY', 'PlayerTimingStageInsight.EndVelocityZ' )
-                        ->where('PlayerTimingStages.MapId', $mainRecord->MapId)
-                        ->where('PlayerTimingStages.PlayerId', $mainRecord->PlayerId)
-                        ->where('PlayerTimingStages.StyleId', $mainRecord->StyleId)
-                        ->where('PlayerTimingStages.Level', $mainRecord->Level)
+                        ->where('PlayerTimingStage.MapId', $mainRecord->MapId)
+                        ->where('PlayerTimingStage.PlayerId', $mainRecord->PlayerId)
+                        ->where('PlayerTimingStage.StyleId', $mainRecord->StyleId)
+                        ->where('PlayerTimingStage.Level', $mainRecord->Level)
                         ->get();
             }
             else if ($type == 'Checkpoint')
             {
-                $stageRecords = DB::table('PlayerTimingCheckpoints')
-                        ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoints.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
-                        ->select('PlayerTimingCheckpoints.Id', 'PlayerTimingCheckpoints.MapId', 'PlayerTimingCheckpoints.PlayerId', 'PlayerTimingCheckpoints.StyleId', 'PlayerTimingCheckpoints.Level', 'PlayerTimingCheckpoints.Checkpoint', 'PlayerTimingCheckpoints.Time', 'PlayerTimingCheckpoints.Status',
+                $stageRecords = DB::table('PlayerTimingCheckpoint')
+                        ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoint.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
+                        ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.MapId', 'PlayerTimingCheckpoint.PlayerId', 'PlayerTimingCheckpoint.StyleId', 'PlayerTimingCheckpoint.Level', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time', 'PlayerTimingCheckpoint.Status',
                                 'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
                                 'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
                                 'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
-                        ->where('PlayerTimingCheckpoints.MapId', $mainRecord->MapId)
-                        ->where('PlayerTimingCheckpoints.PlayerId', $mainRecord->PlayerId)
-                        ->where('PlayerTimingCheckpoints.StyleId', $mainRecord->StyleId)
-                        ->where('PlayerTimingCheckpoints.Level', $mainRecord->Level)
+                        ->where('PlayerTimingCheckpoint.MapId', $mainRecord->MapId)
+                        ->where('PlayerTimingCheckpoint.PlayerId', $mainRecord->PlayerId)
+                        ->where('PlayerTimingCheckpoint.StyleId', $mainRecord->StyleId)
+                        ->where('PlayerTimingCheckpoint.Level', $mainRecord->Level)
                         ->get();
             }
 
