@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreatePlayerTimingCheckpointsInsightTable extends Migration
+class CreatePlayerTimingStageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,21 @@ class CreatePlayerTimingCheckpointsInsightTable extends Migration
      */
     public function up()
     {
-        Schema::create('PlayerTimingCheckpointInsight', function (Blueprint $table) {
+        Schema::create('PlayerTimingStage', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
-            $table->unsignedInteger('PlayerTimingCheckpointId')->unique();
-            $table->double('PositionX');
-            $table->double('PositionY');
-            $table->double('PositionZ');
-            $table->double('AngleX');
-            $table->double('AngleY');
-            $table->double('AngleZ');
-            $table->double('VelocityX');
-            $table->double('VelocityY');
-            $table->double('VelocityZ');
+            $table->unsignedInteger('MapId');
+            $table->unsignedInteger('PlayerId');
+            $table->unsignedInteger('StyleId');
+            $table->unsignedInteger('Level');
+            $table->unsignedInteger('Stage');
+            $table->double('Tickrate');
+            $table->time('Time');
+            $table->double('TimeInZone');
+            $table->unsignedInteger('Attempts');
+            $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->unique(['MapId', 'PlayerId', 'StyleId', 'Level', 'Stage']);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -41,6 +42,6 @@ class CreatePlayerTimingCheckpointsInsightTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PlayerTimingCheckpointInsight');
+        Schema::dropIfExists('PlayerTimingStage');
     }
 }
