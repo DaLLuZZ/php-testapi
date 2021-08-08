@@ -16,10 +16,18 @@ class RecordsController extends Controller
             select the other runs like checkpoints/stages
         */
         $mainRecords = DB::table('PlayerTiming')
-                        ->select('*')
-                        ->where('MapId', $MapId)
-                        ->groupBy(['StyleId', 'Level'])
-                        ->orderBy('Time', 'asc')
+                        ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
+                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
+                                'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
+                                'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
+                                'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
+                                'PlayerTimingInsight.EndAngleX', 'PlayerTimingInsight.EndAngleY', 'PlayerTimingInsight.EndAngleZ',
+                                'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
+                                'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
+                        ->where('PlayerTiming.MapId', $MapId)
+                        ->where('PlayerTiming.StyleId', 9)
+                        ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
+                        ->orderBy('PlayerTiming.Time', 'asc')
                         ->get();
 
         $this->checkExists($mainRecords);
@@ -28,44 +36,48 @@ class RecordsController extends Controller
 
         foreach ($mainRecords as $mainRecord)
         {
-            $mainInsight = DB::table('PlayerTimingInsight')
-                            ->select('*')
-                            ->where('PlayerTimingId', $mainRecord->Id)
-                            ->first();
-
-            $mainRecord = (array)$mainRecord;
-            $mainInsight = (array)$mainInsight;
-
-            array_push($mainRecord, $mainInsight);
-
             # Checkpoint/Stage Start
-            $type = $mainRecord['MapId'] % 2 == 0 ? "Stage" : "Checkpoint"; // TODO: This is for testing, we'll remove it when we're ready
-            $stageRecords = DB::table('PlayerTiming' . $type . 's')
-                                ->select('*')
-                                ->where('MapId', $mainRecord['MapId'])
-                                ->where('PlayerId', $mainRecord['PlayerId'])
-                                ->where('StyleId', $mainRecord['StyleId'])
-                                ->where('Level', $mainRecord['Level'])
-                                ->get();
+            $type = $mainRecord->MapId % 2 == 0 ? "Stage" : "Checkpoint"; // TODO: This is for testing, we'll remove it when we're ready
+            $stageRecords = null;
+
+            if ($type == 'Stage')
+            {
+                $stageRecords = DB::table('PlayerTimingStages')
+                        ->join('PlayerTimingStageInsight', 'PlayerTimingStages.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
+                        ->select('PlayerTimingStages.Id', 'PlayerTimingStages.MapId', 'PlayerTimingStages.PlayerId', 'PlayerTimingStages.StyleId', 'PlayerTimingStages.Level', 'PlayerTimingStages.Stage', 'PlayerTimingStages.Time', 'PlayerTimingStages.TimeInZone', 'PlayerTimingStages.Attempts', 'PlayerTimingStages.Status',
+                                'PlayerTimingStageInsight.StartPositionX', 'PlayerTimingStageInsight.StartPositionY', 'PlayerTimingStageInsight.StartPositionZ',
+                                'PlayerTimingStageInsight.EndPositionX', 'PlayerTimingStageInsight.EndPositionY', 'PlayerTimingStageInsight.EndPositionZ',
+                                'PlayerTimingStageInsight.StartAngleX', 'PlayerTimingStageInsight.StartAngleY', 'PlayerTimingStageInsight.StartAngleZ',
+                                'PlayerTimingStageInsight.EndAngleX', 'PlayerTimingStageInsight.EndAngleY', 'PlayerTimingStageInsight.EndAngleZ',
+                                'PlayerTimingStageInsight.StartVelocityX', 'PlayerTimingStageInsight.StartVelocityY', 'PlayerTimingStageInsight.StartVelocityZ',
+                                'PlayerTimingStageInsight.EndVelocityX', 'PlayerTimingStageInsight.EndVelocityY', 'PlayerTimingStageInsight.EndVelocityZ' )
+                        ->where('PlayerTimingStages.MapId', $mainRecord->MapId)
+                        ->where('PlayerTimingStages.PlayerId', $mainRecord->PlayerId)
+                        ->where('PlayerTimingStages.StyleId', $mainRecord->StyleId)
+                        ->where('PlayerTimingStages.Level', $mainRecord->Level)
+                        ->get();
+            }
+            else if ($type == 'Checkpoint')
+            {
+                $stageRecords = DB::table('PlayerTimingCheckpoints')
+                        ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoints.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
+                        ->select('PlayerTimingCheckpoints.Id', 'PlayerTimingCheckpoints.MapId', 'PlayerTimingCheckpoints.PlayerId', 'PlayerTimingCheckpoints.StyleId', 'PlayerTimingCheckpoints.Level', 'PlayerTimingCheckpoints.Checkpoint', 'PlayerTimingCheckpoints.Time', 'PlayerTimingCheckpoints.Status',
+                                'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
+                                'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
+                                'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
+                        ->where('PlayerTimingCheckpoints.MapId', $mainRecord->MapId)
+                        ->where('PlayerTimingCheckpoints.PlayerId', $mainRecord->PlayerId)
+                        ->where('PlayerTimingCheckpoints.StyleId', $mainRecord->StyleId)
+                        ->where('PlayerTimingCheckpoints.Level', $mainRecord->Level)
+                        ->get();
+            }
 
             $this->checkExists($stageRecords);
 
-            $detailedStageRecords = [];
-            foreach ($stageRecords as $stageRecord)
-            {
-                $stageInsight = DB::table('PlayerTiming' . $type . 'Insight')
-                                    ->select('*')
-                                    ->where('PlayerTiming' . $type . 'Id', $stageRecord->Id)
-                                    ->first();
-                
-                $stageRecord = (array)$stageRecord;
-                $stageInsight = (array)$stageInsight;
+            $stageRecords = (array)$stageRecords;
+            $mainRecord = (array)$mainRecord;
 
-                array_push($stageRecord, $stageInsight);
-                array_push($detailedStageRecords, $stageRecord);
-            }
-
-            array_push($mainRecord, $detailedStageRecords);
+            array_push($mainRecord, $stageRecords);
             # Checkpoint/Stage End
 
             array_push($detailedRecords, $mainRecord);
