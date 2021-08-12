@@ -16,10 +16,7 @@ class CreatePlayerTimingStageTable extends Migration
     {
         Schema::create('PlayerTimingStage', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
-            $table->unsignedInteger('MapId');
-            $table->unsignedInteger('PlayerId');
-            $table->unsignedInteger('StyleId');
-            $table->unsignedInteger('Level');
+            $table->unsignedInteger('PlayerTimingId');
             $table->unsignedInteger('Stage');
             $table->double('Tickrate');
             $table->time('Time');
@@ -28,7 +25,7 @@ class CreatePlayerTimingStageTable extends Migration
             $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique(['MapId', 'PlayerId', 'StyleId', 'Level', 'Stage']);
+            $table->unique(['PlayerTimingId', 'Stage']);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
