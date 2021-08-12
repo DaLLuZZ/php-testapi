@@ -20,20 +20,21 @@ class RecordSeeder extends Seeder
             $style = random_int(1, 10);
             $level = random_int(0, 10);
 
-            $id = DB::table('PlayerTiming')->insertGetId([
+            $mainid = DB::table('PlayerTiming')->insertGetId([
                 'MapId' => $map,
                 'PlayerId' => $main,
                 'StyleId' => $style,
                 'Level' => $level,
+                'Type' => ($map % 2 == 0) ? "Stage" : "Checkpoint",
                 'Tickrate' => 100,
-                'Time' => random_int(10, 200) / M_PI,
-                'TimeInZone' => random_int(1, 10) / M_PI,
+                'Time' => random_int(30, 200) / M_PI,
+                'TimeInZone' => random_int(4, 10) / M_PI,
                 'Attempts' => random_int(1, 20),
                 'Status' => 0
             ]);
 
             DB::table('PlayerTimingInsight')->insert([
-                'PlayerTimingId' => $id,
+                'PlayerTimingId' => $mainid,
                 'StartPositionX' => random_int(0, 255),
                 'StartPositionY' => random_int(0, 255),
                 'StartPositionZ' => random_int(0, 255),
@@ -56,22 +57,19 @@ class RecordSeeder extends Seeder
 
             if ($map % 2 == 0) {
                 // Stage times
-                for ($stage=0; $stage < 100; $stage++) {
-                    $id = DB::table('PlayerTimingStages')->insertGetId([
-                        'MapId' => $map,
-                        'PlayerId' => $main,
-                        'StyleId' => $style,
-                        'Level' => $level,
+                for ($stage=1; $stage < 51; $stage++) {
+                    $stageid = DB::table('PlayerTimingStage')->insertGetId([
+                        'PlayerTimingId' => $mainid,
                         'Stage' => $stage,
                         'Tickrate' => 100,
-                        'Time' => random_int(10, 200) / M_PI,
+                        'Time' => random_int(30, 200) / M_PI,
                         'TimeInZone' => random_int(5, 10) / M_PI,
                         'Attempts' => random_int(1, 20),
                         'Status' => 0
                     ]);
 
                     DB::table('PlayerTimingStageInsight')->insert([
-                        'PlayerTimingStageId' => $id,
+                        'PlayerTimingStageId' => $stageid,
                         'StartPositionX' => random_int(0, 255),
                         'StartPositionY' => random_int(0, 255),
                         'StartPositionZ' => random_int(0, 255),
@@ -95,20 +93,17 @@ class RecordSeeder extends Seeder
             }
             else {
                 // Checkpoint times
-                for ($checkpoint=0; $checkpoint < 100; $checkpoint++) {
-                    $id = DB::table('PlayerTimingCheckpoints')->insertGetId([
-                        'MapId' => $map,
-                        'PlayerId' => $main,
-                        'StyleId' => $style,
-                        'Level' => $level,
+                for ($checkpoint=1; $checkpoint < 51; $checkpoint++) {
+                    $stageid = DB::table('PlayerTimingCheckpoint')->insertGetId([
+                        'PlayerTimingId' => $mainid,
                         'Checkpoint' => $checkpoint,
                         'Tickrate' => 100,
-                        'Time' => random_int(10, 200) / M_PI,
+                        'Time' => random_int(30, 200) / M_PI,
                         'Status' => 0
                     ]);
 
                     DB::table('PlayerTimingCheckpointInsight')->insert([
-                        'PlayerTimingCheckpointId' => $id,
+                        'PlayerTimingCheckpointId' => $stageid,
                         'PositionX' => random_int(0, 255),
                         'PositionY' => random_int(0, 255),
                         'PositionZ' => random_int(0, 255),
