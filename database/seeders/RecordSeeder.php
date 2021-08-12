@@ -61,11 +61,9 @@ class RecordSeeder extends Seeder
                     $stageid = DB::table('PlayerTimingStage')->insertGetId([
                         'PlayerTimingId' => $mainid,
                         'Stage' => $stage,
-                        'Tickrate' => 100,
                         'Time' => random_int(30, 200) / M_PI,
                         'TimeInZone' => random_int(5, 10) / M_PI,
                         'Attempts' => random_int(1, 20),
-                        'Status' => 0
                     ]);
 
                     DB::table('PlayerTimingStageInsight')->insert([
@@ -97,9 +95,7 @@ class RecordSeeder extends Seeder
                     $stageid = DB::table('PlayerTimingCheckpoint')->insertGetId([
                         'PlayerTimingId' => $mainid,
                         'Checkpoint' => $checkpoint,
-                        'Tickrate' => 100,
                         'Time' => random_int(30, 200) / M_PI,
-                        'Status' => 0
                     ]);
 
                     DB::table('PlayerTimingCheckpointInsight')->insert([

@@ -18,9 +18,7 @@ class CreatePlayerTimingCheckpointTable extends Migration
             $table->unsignedInteger('Id')->autoIncrement();
             $table->unsignedInteger('PlayerTimingId');
             $table->unsignedInteger('Checkpoint');
-            $table->double('Tickrate');
             $table->time('Time');
-            $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unique(['PlayerTimingId', 'Checkpoint']);
