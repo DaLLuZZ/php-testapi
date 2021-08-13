@@ -15,7 +15,7 @@ class CreatePlayerTable extends Migration
     public function up()
     {
         Schema::create('Player', function (Blueprint $table) {
-            $table->unsignedInteger('Id')->unique();
+            $table->unsignedInteger('Id');
             $table->bigInteger('CommunityId')->unique();
             $table->string('Name', 64);
             $table->tinyInteger('Status')->default(1);
