@@ -21,7 +21,7 @@ class CreatePlayerTimingTable extends Migration
             $table->unsignedInteger('StyleId');
             $table->unsignedInteger('Level');
             $table->enum('Type', ['Linear', 'Stage', 'Checkpoint']);
-            $table->double('Tickrate');
+            $table->float('Tickrate');
             $table->double('Time')->nullable(true);
             $table->double('TimeInZone');
             $table->unsignedInteger('Attempts');
