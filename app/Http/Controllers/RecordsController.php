@@ -73,7 +73,9 @@ class RecordsController extends Controller
             $addRecords = (array)$addRecords;
             $mainRecord = (array)$mainRecord;
 
-            array_push($mainRecord, $addRecords);
+            $mainRecord = array_merge($mainRecord, $addRecords);
+            $mainRecord = str_replace('\\u0000', '', json_encode($mainRecord));
+            $mainRecord = json_decode($mainRecord);
             # Checkpoint/Stage End
 
             array_push($detailedRecords, $mainRecord);
@@ -149,7 +151,9 @@ class RecordsController extends Controller
             $addRecords = (array)$addRecords;
             $mainRecord = (array)$mainRecord;
 
-            array_push($mainRecord, $addRecords);
+            $mainRecord = array_merge($mainRecord, $addRecords);
+            $mainRecord = str_replace('\\u0000', '', json_encode($mainRecord));
+            $mainRecord = json_decode($mainRecord);
             # Checkpoint/Stage End
 
             array_push($detailedRecords, $mainRecord);
