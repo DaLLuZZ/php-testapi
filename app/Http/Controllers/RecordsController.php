@@ -9,12 +9,13 @@ class RecordsController extends Controller
 {
     public function GetMapRecord(Request $request, $MapId)
     {
-        /*
+        $StyleId = 1;
 
-            Select fatest main/bonus run per map
-            get the player id
-            select the other runs like checkpoints/stages
-        */
+        if (isset($_GET['StyleId']) && is_numeric($_GET['StyleId']))
+        {
+            $StyleId = ($_GET['StyleId'] > 1) ? $_GET['StyleId'] : 1;
+        }
+
         $mainRecords = DB::table('PlayerTiming')
                         ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
                         ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
@@ -25,7 +26,7 @@ class RecordsController extends Controller
                                 'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
                                 'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
                         ->where('PlayerTiming.MapId', $MapId)
-                        ->where('PlayerTiming.StyleId', 4)
+                        ->where('PlayerTiming.StyleId', $StyleId)
                         ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
                         ->orderBy('PlayerTiming.Time', 'asc')
                         ->get();
@@ -83,6 +84,13 @@ class RecordsController extends Controller
 
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId)
     {
+        $StyleId = 1;
+
+        if (isset($_GET['StyleId']) && is_numeric($_GET['StyleId']))
+        {
+            $StyleId = ($_GET['StyleId'] > 1) ? $_GET['StyleId'] : 1;
+        }
+
         $mainRecords = DB::table('PlayerTiming')
                         ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
                         ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
@@ -94,6 +102,7 @@ class RecordsController extends Controller
                                 'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
                         ->where('PlayerTiming.MapId', $MapId)
                         ->where('PlayerTiming.PlayerId', $PlayerId)
+                        ->where('PlayerTiming.StyleId', $StyleId)
                         ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
                         ->orderBy('PlayerTiming.Time', 'asc')
                         ->get();
