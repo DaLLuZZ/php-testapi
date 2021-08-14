@@ -9,16 +9,10 @@ class RecordsController extends Controller
 {
     public function GetMapRecord(Request $request, $MapId)
     {
-        $StyleId = 1;
-
-        if (isset($_GET['StyleId']) && is_numeric($_GET['StyleId']))
-        {
-            $StyleId = ($_GET['StyleId'] > 1) ? $_GET['StyleId'] : 1;
-        }
-
         $mainRecords = DB::table('PlayerTiming')
                         ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
-                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
+                        ->join('Player', 'PlayerTiming.PlayerId', '=', 'Player.Id')
+                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'Player.Name', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Type', 'PlayerTiming.Tickrate', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
                                 'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
                                 'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
                                 'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
@@ -26,7 +20,6 @@ class RecordsController extends Controller
                                 'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
                                 'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
                         ->where('PlayerTiming.MapId', $MapId)
-                        ->where('PlayerTiming.StyleId', $StyleId)
                         ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
                         ->orderBy('PlayerTiming.Time', 'asc')
                         ->get();
@@ -86,16 +79,10 @@ class RecordsController extends Controller
 
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId)
     {
-        $StyleId = 1;
-
-        if (isset($_GET['StyleId']) && is_numeric($_GET['StyleId']))
-        {
-            $StyleId = ($_GET['StyleId'] > 1) ? $_GET['StyleId'] : 1;
-        }
-
         $mainRecords = DB::table('PlayerTiming')
                         ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
-                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
+                        ->join('Player', 'PlayerTiming.PlayerId', '=', 'Player.Id')
+                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'Player.Name', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Tickrate', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
                                 'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
                                 'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
                                 'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
@@ -104,7 +91,6 @@ class RecordsController extends Controller
                                 'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
                         ->where('PlayerTiming.MapId', $MapId)
                         ->where('PlayerTiming.PlayerId', $PlayerId)
-                        ->where('PlayerTiming.StyleId', $StyleId)
                         ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
                         ->orderBy('PlayerTiming.Time', 'asc')
                         ->get();
