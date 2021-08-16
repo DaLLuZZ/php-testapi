@@ -153,6 +153,9 @@ class PlayerTimingController extends Controller
 
     public function InsertPlayer(Request $request)
     {
+        // Add 0.01, because JSONObject.GetFloat always returns 0 if we've an integer as tickrate value.
+        $request->tickrate += 0.01;
+
         try
         {
             $request['Id'] = DB::table('PlayerTiming')->insertGetId([
