@@ -114,14 +114,14 @@ class RecordsController extends Controller
             }
             else if ($mainRecord->Type == 'Checkpoint') {
                 $addRecords = DB::table('PlayerTimingCheckpoint')
-                        ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoint.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
-                        ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time',
-                                'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
-                                'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
-                                'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
-                        ->where('PlayerTimingCheckpoint.PlayerTimingId', $mainRecord->Id)
-                        ->orderBy('Checkpoint', 'asc')
-                        ->get();
+                                    ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoint.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
+                                    ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time',
+                                            'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
+                                            'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
+                                            'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
+                                    ->where('PlayerTimingCheckpoint.PlayerTimingId', $mainRecord->Id)
+                                    ->orderBy('Checkpoint', 'asc')
+                                    ->get();
             }
 
             $this->checkExists($addRecords);
@@ -188,24 +188,24 @@ class RecordsController extends Controller
 
                     DB::table('PlayerTimingStageInsight')->insert([
                         'PlayerTimingStageId' => $PlayerTimingStageId,
-                        'StartPositionX' => $request->StartPositionX,
-                        'StartPositionY' => $request->StartPositionY,
-                        'StartPositionZ' => $request->StartPositionZ,
-                        'EndPositionX' => $request->EndPositionX,
-                        'EndPositionY' => $request->EndPositionY,
-                        'EndPositionZ' => $request->EndPositionZ,
-                        'StartAngleX' => $request->StartAngleX,
-                        'StartAngleY' => $request->StartAngleY,
-                        'StartAngleZ' => $request->StartAngleZ,
-                        'EndAngleX' => $request->EndAngleX,
-                        'EndAngleY' => $request->EndAngleY,
-                        'EndAngleZ' => $request->EndAngleZ,
-                        'StartVelocityX' => $request->StartVelocityX,
-                        'StartVelocityY' => $request->StartVelocityY,
-                        'StartVelocityZ' => $request->StartVelocityZ,
-                        'EndVelocityX' => $request->EndVelocityX,
-                        'EndVelocityY' => $request->EndVelocityY,
-                        'EndVelocityZ' => $request->EndVelocityZ
+                        'StartPositionX' => $record['StartPositionX'],
+                        'StartPositionY' => $record['StartPositionY'],
+                        'StartPositionZ' => $record['StartPositionZ'],
+                        'EndPositionX' => $record['EndPositionX'],
+                        'EndPositionY' => $record['EndPositionY'],
+                        'EndPositionZ' => $record['EndPositionZ'],
+                        'StartAngleX' => $record['StartAngleX'],
+                        'StartAngleY' => $record['StartAngleY'],
+                        'StartAngleZ' => $record['StartAngleZ'],
+                        'EndAngleX' => $record['EndAngleX'],
+                        'EndAngleY' => $record['EndAngleY'],
+                        'EndAngleZ' => $record['EndAngleZ'],
+                        'StartVelocityX' => $record['StartVelocityX'],
+                        'StartVelocityY' => $record['StartVelocityY'],
+                        'StartVelocityZ' => $record['StartVelocityZ'],
+                        'EndVelocityX' => $record['EndVelocityX'],
+                        'EndVelocityY' => $record['EndVelocityY'],
+                        'EndVelocityZ' => $record['EndVelocityZ']
                     ]);
                 }
             }
@@ -219,15 +219,15 @@ class RecordsController extends Controller
 
                     DB::table('PlayerTimingCheckpointInsight')->insert([
                         'PlayerTimingCheckpointId' => $PlayerTimingCheckpointId,
-                        'PositionX' => $request->PositionX,
-                        'PositionY' => $request->PositionY,
-                        'PositionZ' => $request->PositionZ,
-                        'AngleX' => $request->AngleX,
-                        'AngleY' => $request->AngleY,
-                        'AngleZ' => $request->AngleZ,
-                        'VelocityX' => $request->VelocityX,
-                        'VelocityY' => $request->VelocityY,
-                        'VelocityZ' => $request->VelocityZ
+                        'PositionX' => $record['PositionX'],
+                        'PositionY' => $record['PositionY'],
+                        'PositionZ' => $record['PositionZ'],
+                        'AngleX' => $record['AngleX'],
+                        'AngleY' => $record['AngleY'],
+                        'AngleZ' => $record['AngleZ'],
+                        'VelocityX' => $record['VelocityX'],
+                        'VelocityY' => $record['VelocityY'],
+                        'VelocityZ' => $record['VelocityZ']
                     ]);
                 }
             }
