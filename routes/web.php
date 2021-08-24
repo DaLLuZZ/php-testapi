@@ -121,4 +121,6 @@ $router->group(['prefix' => 'PlayerHud', 'middleware' => 'auth'], function () us
 $router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/MapId/{MapId}', 'RecordsController@GetMapRecord');
     $router->get('/MapId/{MapId}/PlayerId/{PlayerId}', 'RecordsController@GetMapPlayerRecord');
+
+    $router->post('/', 'RecordsController@InsertRecord');
 });
