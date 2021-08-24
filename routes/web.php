@@ -123,4 +123,6 @@ $router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use 
     $router->get('/MapId/{MapId}/PlayerId/{PlayerId}', 'RecordsController@GetMapPlayerRecord');
 
     $router->post('/', 'RecordsController@InsertRecord');
+
+    $router->put('/', 'RecordsController@UpdateRecord');
 });

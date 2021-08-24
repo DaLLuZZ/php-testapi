@@ -238,4 +238,107 @@ class RecordsController extends Controller
 
         return response()->json($request, 201);
     }
+
+    public function UpdateRecord(Request $request) {
+        $PlayerTiming = DB::table('PlayerTiming')
+                                ->select('Id', 'Type')
+                                ->where('MapId', $request->MapId)
+                                ->where('PlayerId', $request->PlayerId)
+                                ->where('StyleId', $request->StyleId)
+                                ->where('Level', $request->Level)
+                                ->first();
+
+        DB::table('PlayerTiming')->where('Id', $PlayerTiming->Id)->update([
+            'Time' => $request->Time,
+            'TimeInZone' => $request->TimeInZone,
+            'Attempts' => $request->Attempts
+        ]);
+
+        DB::table('PlayerTimingInsight')->where('PlayerTimingId', $PlayerTiming->Id)->update([
+            'StartPositionX' => $request->StartPositionX,
+            'StartPositionY' => $request->StartPositionY,
+            'StartPositionZ' => $request->StartPositionZ,
+            'EndPositionX' => $request->EndPositionX,
+            'EndPositionY' => $request->EndPositionY,
+            'EndPositionZ' => $request->EndPositionZ,
+            'StartAngleX' => $request->StartAngleX,
+            'StartAngleY' => $request->StartAngleY,
+            'StartAngleZ' => $request->StartAngleZ,
+            'EndAngleX' => $request->EndAngleX,
+            'EndAngleY' => $request->EndAngleY,
+            'EndAngleZ' => $request->EndAngleZ,
+            'StartVelocityX' => $request->StartVelocityX,
+            'StartVelocityY' => $request->StartVelocityY,
+            'StartVelocityZ' => $request->StartVelocityZ,
+            'EndVelocityX' => $request->EndVelocityX,
+            'EndVelocityY' => $request->EndVelocityY,
+            'EndVelocityZ' => $request->EndVelocityZ
+        ]);
+
+        if ($request->Type == "Stage") {
+            foreach ($request->Details as $record) {
+                $PlayerTimingStage = DB::table('PlayerTimingStage')
+                                ->select('Id')
+                                ->where('PlayerTimingId', $PlayerTiming->Id)
+                                ->where('Stage', $record['Stage'])
+                                ->first();
+
+                DB::table('PlayerTimingStage')->where('Id', $PlayerTimingStage->Id)->update([
+                    'Time' => $record['Time'],
+                    'TimeInZone' => $record['TimeInZone'],
+                    'Attempts' => $record['Attempts']
+                ]);
+
+                DB::table('PlayerTimingStageInsight')->where('Id', $PlayerTimingStage->Id)->update([
+                    'StartPositionX' => $record['StartPositionX'],
+                    'StartPositionY' => $record['StartPositionY'],
+                    'StartPositionZ' => $record['StartPositionZ'],
+                    'EndPositionX' => $record['EndPositionX'],
+                    'EndPositionY' => $record['EndPositionY'],
+                    'EndPositionZ' => $record['EndPositionZ'],
+                    'StartAngleX' => $record['StartAngleX'],
+                    'StartAngleY' => $record['StartAngleY'],
+                    'StartAngleZ' => $record['StartAngleZ'],
+                    'EndAngleX' => $record['EndAngleX'],
+                    'EndAngleY' => $record['EndAngleY'],
+                    'EndAngleZ' => $record['EndAngleZ'],
+                    'StartVelocityX' => $record['StartVelocityX'],
+                    'StartVelocityY' => $record['StartVelocityY'],
+                    'StartVelocityZ' => $record['StartVelocityZ'],
+                    'EndVelocityX' => $record['EndVelocityX'],
+                    'EndVelocityY' => $record['EndVelocityY'],
+                    'EndVelocityZ' => $record['EndVelocityZ']
+                ]);
+            }
+        }
+        else if ($request->Type == "Checkpoint") {
+            foreach ($request->Details as $record) {
+                $PlayerTimingCheckpoint = DB::table('PlayerTimingCheckpoint')
+                                ->select('Id')
+                                ->where('PlayerTimingId', $PlayerTiming->Id)
+                                ->where('Checkpoint', $record['Checkpoint'])
+                                ->first();
+
+                DB::table('PlayerTimingCheckpoint')->where('Id', $PlayerTimingCheckpoint->Id)->update([
+                    'Time' => $record['Time'],
+                    'TimeInZone' => $record['TimeInZone'],
+                    'Attempts' => $record['Attempts']
+                ]);
+
+                DB::table('PlayerTimingCheckpointInsight')->where('Id', $PlayerTimingCheckpoint->Id)->update([
+                    'PositionX' => $record['PositionX'],
+                    'PositionY' => $record['PositionY'],
+                    'PositionZ' => $record['PositionZ'],
+                    'AngleX' => $record['AngleX'],
+                    'AngleY' => $record['AngleY'],
+                    'AngleZ' => $record['AngleZ'],
+                    'VelocityX' => $record['VelocityX'],
+                    'VelocityY' => $record['VelocityY'],
+                    'VelocityZ' => $record['VelocityZ']
+                ]);
+            }
+        }
+
+        return response()->json('OK';
+    }
 }
