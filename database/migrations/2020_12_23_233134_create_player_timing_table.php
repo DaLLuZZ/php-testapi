@@ -25,7 +25,7 @@ class CreatePlayerTimingTable extends Migration
             $table->double('Time')->nullable(true);
             $table->double('TimeInZone');
             $table->unsignedInteger('Attempts');
-            $table->tinyInteger('Status')->default(1);
+            $table->tinyInteger('Status')->default(0);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unique(['MapId', 'PlayerId', 'StyleId', 'Level']);

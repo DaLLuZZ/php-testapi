@@ -18,7 +18,7 @@ class CreateMapTable extends Migration
             $table->unsignedInteger('Id')->autoIncrement();
             $table->string('Name', 64)->unique();
             $table->unsignedTinyInteger('Tier');
-            $table->tinyInteger('Status')->default(1);
+            $table->tinyInteger('Status')->default(0);
             $table->string('MapAuthor', 64);
             $table->string('ZoneAuthor', 64);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));

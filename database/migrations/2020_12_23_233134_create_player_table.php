@@ -18,7 +18,7 @@ class CreatePlayerTable extends Migration
             $table->unsignedInteger('Id');
             $table->bigInteger('CommunityId')->unique();
             $table->string('Name', 64);
-            $table->tinyInteger('Status')->default(1);
+            $table->tinyInteger('Status')->default(0);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->primary('Id');
