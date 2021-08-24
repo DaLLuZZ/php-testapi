@@ -339,6 +339,6 @@ class RecordsController extends Controller
             }
         }
 
-        return response()->json('OK';
+        return response()->json('OK');
     }
 }
