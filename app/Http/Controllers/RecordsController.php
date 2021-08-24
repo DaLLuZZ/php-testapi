@@ -75,20 +75,20 @@ class RecordsController extends Controller
 
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId) {
         $mainRecords = DB::table('PlayerTiming')
-                        ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
-                        ->join('Player', 'PlayerTiming.PlayerId', '=', 'Player.Id')
-                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'Player.Name', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Tickrate', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
-                                'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
-                                'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
-                                'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
-                                'PlayerTimingInsight.EndAngleX', 'PlayerTimingInsight.EndAngleY', 'PlayerTimingInsight.EndAngleZ',
-                                'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
-                                'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
-                        ->where('PlayerTiming.MapId', $MapId)
-                        ->where('PlayerTiming.PlayerId', $PlayerId)
-                        ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
-                        ->orderBy('PlayerTiming.Time', 'asc')
-                        ->get();
+                            ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
+                            ->join('Player', 'PlayerTiming.PlayerId', '=', 'Player.Id')
+                            ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'Player.Name', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Tickrate', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
+                                    'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
+                                    'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
+                                    'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
+                                    'PlayerTimingInsight.EndAngleX', 'PlayerTimingInsight.EndAngleY', 'PlayerTimingInsight.EndAngleZ',
+                                    'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
+                                    'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
+                            ->where('PlayerTiming.MapId', $MapId)
+                            ->where('PlayerTiming.PlayerId', $PlayerId)
+                            ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
+                            ->orderBy('PlayerTiming.Time', 'asc')
+                            ->get();
 
         $this->checkExists($mainRecords);
 
@@ -100,17 +100,17 @@ class RecordsController extends Controller
 
             if ($mainRecord->Type == 'Stage') {
                 $addRecords = DB::table('PlayerTimingStage')
-                        ->join('PlayerTimingStageInsight', 'PlayerTimingStage.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
-                        ->select('PlayerTimingStage.Id', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts',
-                                'PlayerTimingStageInsight.StartPositionX', 'PlayerTimingStageInsight.StartPositionY', 'PlayerTimingStageInsight.StartPositionZ',
-                                'PlayerTimingStageInsight.EndPositionX', 'PlayerTimingStageInsight.EndPositionY', 'PlayerTimingStageInsight.EndPositionZ',
-                                'PlayerTimingStageInsight.StartAngleX', 'PlayerTimingStageInsight.StartAngleY', 'PlayerTimingStageInsight.StartAngleZ',
-                                'PlayerTimingStageInsight.EndAngleX', 'PlayerTimingStageInsight.EndAngleY', 'PlayerTimingStageInsight.EndAngleZ',
-                                'PlayerTimingStageInsight.StartVelocityX', 'PlayerTimingStageInsight.StartVelocityY', 'PlayerTimingStageInsight.StartVelocityZ',
-                                'PlayerTimingStageInsight.EndVelocityX', 'PlayerTimingStageInsight.EndVelocityY', 'PlayerTimingStageInsight.EndVelocityZ' )
-                        ->where('PlayerTimingStage.PlayerTimingId', $mainRecord->Id)
-                        ->orderBy('Stage', 'asc')
-                        ->get();
+                                    ->join('PlayerTimingStageInsight', 'PlayerTimingStage.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
+                                    ->select('PlayerTimingStage.Id', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts',
+                                            'PlayerTimingStageInsight.StartPositionX', 'PlayerTimingStageInsight.StartPositionY', 'PlayerTimingStageInsight.StartPositionZ',
+                                            'PlayerTimingStageInsight.EndPositionX', 'PlayerTimingStageInsight.EndPositionY', 'PlayerTimingStageInsight.EndPositionZ',
+                                            'PlayerTimingStageInsight.StartAngleX', 'PlayerTimingStageInsight.StartAngleY', 'PlayerTimingStageInsight.StartAngleZ',
+                                            'PlayerTimingStageInsight.EndAngleX', 'PlayerTimingStageInsight.EndAngleY', 'PlayerTimingStageInsight.EndAngleZ',
+                                            'PlayerTimingStageInsight.StartVelocityX', 'PlayerTimingStageInsight.StartVelocityY', 'PlayerTimingStageInsight.StartVelocityZ',
+                                            'PlayerTimingStageInsight.EndVelocityX', 'PlayerTimingStageInsight.EndVelocityY', 'PlayerTimingStageInsight.EndVelocityZ' )
+                                    ->where('PlayerTimingStage.PlayerTimingId', $mainRecord->Id)
+                                    ->orderBy('Stage', 'asc')
+                                    ->get();
             }
             else if ($mainRecord->Type == 'Checkpoint') {
                 $addRecords = DB::table('PlayerTimingCheckpoint')
