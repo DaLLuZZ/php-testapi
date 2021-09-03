@@ -1,4 +1,4 @@
-FROM php:8.0.8-fpm
+FROM php:8.0.10-fpm
 # Both 7.4 and 8.0.3 works
 
 COPY composer.lock composer.json /var/www/
