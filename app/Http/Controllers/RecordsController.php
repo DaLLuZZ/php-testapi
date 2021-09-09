@@ -320,9 +320,7 @@ class RecordsController extends Controller
                                 ->first();
 
                 DB::table('PlayerTimingCheckpoint')->where('Id', $PlayerTimingCheckpoint->Id)->update([
-                    'Time' => $record['Time'],
-                    'TimeInZone' => $record['TimeInZone'],
-                    'Attempts' => $record['Attempts']
+                    'Time' => $record['Time']
                 ]);
 
                 DB::table('PlayerTimingCheckpointInsight')->where('Id', $PlayerTimingCheckpoint->Id)->update([
