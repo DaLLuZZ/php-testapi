@@ -15,8 +15,8 @@ class CreatePlayerSettingsTable extends Migration
     {
         Schema::create('PlayerSettings', function (Blueprint $table) {
             $table->unsignedInteger('PlayerId');
-            $table->string('Setting', 16);
-            $table->string('Value', 32);
+            $table->string('Setting', 32);
+            $table->string('Value', 64);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unique(['PlayerId', 'Setting']);
