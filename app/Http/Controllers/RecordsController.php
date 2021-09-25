@@ -44,6 +44,8 @@ class RecordsController extends Controller
                         ->where('PlayerTimingStage.PlayerTimingId', $mainRecord->Id)
                         ->orderBy('Stage', 'asc')
                         ->get();
+
+                $this->checkExists($addRecords);
             }
             else if ($mainRecord->Type == 'Checkpoint') {
                 $addRecords = DB::table('PlayerTimingCheckpoint')
@@ -55,9 +57,9 @@ class RecordsController extends Controller
                         ->where('PlayerTimingCheckpoint.PlayerTimingId', $mainRecord->Id)
                         ->orderBy('Checkpoint', 'asc')
                         ->get();
-            }
 
-            $this->checkExists($addRecords);
+                $this->checkExists($addRecords);
+            }
 
             $addRecords = (array)$addRecords;
             $mainRecord = (array)$mainRecord;
@@ -111,6 +113,8 @@ class RecordsController extends Controller
                                     ->where('PlayerTimingStage.PlayerTimingId', $mainRecord->Id)
                                     ->orderBy('Stage', 'asc')
                                     ->get();
+
+                $this->checkExists($addRecords);
             }
             else if ($mainRecord->Type == 'Checkpoint') {
                 $addRecords = DB::table('PlayerTimingCheckpoint')
@@ -122,9 +126,9 @@ class RecordsController extends Controller
                                     ->where('PlayerTimingCheckpoint.PlayerTimingId', $mainRecord->Id)
                                     ->orderBy('Checkpoint', 'asc')
                                     ->get();
-            }
 
-            $this->checkExists($addRecords);
+                $this->checkExists($addRecords);
+            }
 
             $addRecords = (array)$addRecords;
             $mainRecord = (array)$mainRecord;
