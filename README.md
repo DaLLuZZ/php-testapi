@@ -12,12 +12,20 @@ The PHP API for fuckTimer.
 2. Install an MySQL server.
    1. MariaDB 10.2 or above
    2. MySQL 5.7 or above
-4. Install composer.
+4. [Install Composer](https://getcomposer.org/doc/00-intro.md).
 
 ### Installation
-1. `composer install`
+1. `composer install --optimize-autoloader --no-dev`
 2. Copy `.env.example` to `.env` and populate values.
 3. `php artisan migrate:fresh` if you've not set up the DB already.
 
 ### Run
-1. `php -S localhost:8080 -t public/` to serve locally.
+Example #1:
+- `php -S localhost:8080 -t public/` to serve locally.
+
+Example #2:
+- [nginx config](https://laravel.com/docs/8.x/deployment#nginx)
+
+### Update from older version(s):
+- Upload files from this repository
+- Run `php artisan migrate`
