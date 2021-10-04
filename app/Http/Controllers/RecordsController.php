@@ -8,20 +8,25 @@ use Illuminate\Support\Facades\DB;
 class RecordsController extends Controller
 {
     public function GetMapRecord(Request $request, $MapId) {
-        $mainRecords = DB::table('PlayerTiming')
-                        ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
-                        ->join('Player', 'PlayerTiming.PlayerId', '=', 'Player.Id')
-                        ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'Player.Name', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Type', 'PlayerTiming.Tickrate', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
-                                'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
-                                'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
-                                'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
-                                'PlayerTimingInsight.EndAngleX', 'PlayerTimingInsight.EndAngleY', 'PlayerTimingInsight.EndAngleZ',
-                                'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
-                                'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
-                        ->where('PlayerTiming.MapId', $MapId)
-                        ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
-                        ->orderBy('PlayerTiming.Time', 'asc')
-                        ->get();
+        $mainRecords = DB::select(
+            "SELECT 
+                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Status,
+                PlayerTimingInsightJoin.StartPositionX, PlayerTimingInsightJoin.StartPositionY, PlayerTimingInsightJoin.StartPositionZ,
+                PlayerTimingInsightJoin.EndPositionX, PlayerTimingInsightJoin.EndPositionY, PlayerTimingInsightJoin.EndPositionZ,
+                PlayerTimingInsightJoin.StartAngleX, PlayerTimingInsightJoin.StartAngleY, PlayerTimingInsightJoin.StartAngleZ,
+                PlayerTimingInsightJoin.EndAngleX, PlayerTimingInsightJoin.EndAngleY, PlayerTimingInsightJoin.EndAngleZ,
+                PlayerTimingInsightJoin.StartVelocityX, PlayerTimingInsightJoin.StartVelocityY, PlayerTimingInsightJoin.StartVelocityZ,
+                PlayerTimingInsightJoin.EndVelocityX, PlayerTimingInsightJoin.EndVelocityY, PlayerTimingInsightJoin.EndVelocityZ
+            FROM PlayerTiming PlayerTiming
+            JOIN Player AS PlayerJoin ON PlayerJoin.Id = PlayerTiming.PlayerId
+            JOIN PlayerTimingInsight AS PlayerTimingInsightJoin ON PlayerTiming.Id = PlayerTimingInsightJoin.PlayerTimingId
+            INNER JOIN (
+                SELECT Level, StyleId, min(Time) AS BestTime
+                FROM PlayerTiming
+                GROUP BY Level, StyleId
+            ) PlayerTimingInnerJoin ON PlayerTiming.Level = PlayerTimingInnerJoin.Level AND PlayerTiming.StyleId AND PlayerTimingInnerJoin.StyleId AND PlayerTiming.Time = PlayerTimingInnerJoin.BestTime
+            WHERE PlayerTiming.MapId = " . $MapId . ";"
+        );
 
         $this->checkExists($mainRecords);
 
@@ -76,21 +81,25 @@ class RecordsController extends Controller
     }
 
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId) {
-        $mainRecords = DB::table('PlayerTiming')
-                            ->join('PlayerTimingInsight', 'PlayerTiming.Id', '=', 'PlayerTimingInsight.PlayerTimingId')
-                            ->join('Player', 'PlayerTiming.PlayerId', '=', 'Player.Id')
-                            ->select('PlayerTiming.Id', 'PlayerTiming.MapId', 'PlayerTiming.PlayerId', 'Player.Name', 'PlayerTiming.StyleId', 'PlayerTiming.Level', 'PlayerTiming.Tickrate', 'PlayerTiming.Type', 'PlayerTiming.Time', 'PlayerTiming.TimeInZone', 'PlayerTiming.Attempts', 'PlayerTiming.Status',
-                                    'PlayerTimingInsight.StartPositionX', 'PlayerTimingInsight.StartPositionY', 'PlayerTimingInsight.StartPositionZ',
-                                    'PlayerTimingInsight.EndPositionX', 'PlayerTimingInsight.EndPositionY', 'PlayerTimingInsight.EndPositionZ',
-                                    'PlayerTimingInsight.StartAngleX', 'PlayerTimingInsight.StartAngleY', 'PlayerTimingInsight.StartAngleZ',
-                                    'PlayerTimingInsight.EndAngleX', 'PlayerTimingInsight.EndAngleY', 'PlayerTimingInsight.EndAngleZ',
-                                    'PlayerTimingInsight.StartVelocityX', 'PlayerTimingInsight.StartVelocityY', 'PlayerTimingInsight.StartVelocityZ',
-                                    'PlayerTimingInsight.EndVelocityX', 'PlayerTimingInsight.EndVelocityY', 'PlayerTimingInsight.EndVelocityZ' )
-                            ->where('PlayerTiming.MapId', $MapId)
-                            ->where('PlayerTiming.PlayerId', $PlayerId)
-                            ->groupBy('PlayerTiming.StyleId', 'PlayerTiming.Level')
-                            ->orderBy('PlayerTiming.Time', 'asc')
-                            ->get();
+        $mainRecords = DB::select(
+            "SELECT 
+                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Status,
+                PlayerTimingInsightJoin.StartPositionX, PlayerTimingInsightJoin.StartPositionY, PlayerTimingInsightJoin.StartPositionZ,
+                PlayerTimingInsightJoin.EndPositionX, PlayerTimingInsightJoin.EndPositionY, PlayerTimingInsightJoin.EndPositionZ,
+                PlayerTimingInsightJoin.StartAngleX, PlayerTimingInsightJoin.StartAngleY, PlayerTimingInsightJoin.StartAngleZ,
+                PlayerTimingInsightJoin.EndAngleX, PlayerTimingInsightJoin.EndAngleY, PlayerTimingInsightJoin.EndAngleZ,
+                PlayerTimingInsightJoin.StartVelocityX, PlayerTimingInsightJoin.StartVelocityY, PlayerTimingInsightJoin.StartVelocityZ,
+                PlayerTimingInsightJoin.EndVelocityX, PlayerTimingInsightJoin.EndVelocityY, PlayerTimingInsightJoin.EndVelocityZ
+            FROM PlayerTiming PlayerTiming
+            JOIN Player AS PlayerJoin ON PlayerJoin.Id = PlayerTiming.PlayerId
+            JOIN PlayerTimingInsight AS PlayerTimingInsightJoin ON PlayerTiming.Id = PlayerTimingInsightJoin.PlayerTimingId
+            INNER JOIN (
+                SELECT Level, StyleId, min(Time) AS BestTime
+                FROM PlayerTiming
+                GROUP BY Level, StyleId
+            ) PlayerTimingInnerJoin ON PlayerTiming.Level = PlayerTimingInnerJoin.Level AND PlayerTiming.StyleId AND PlayerTimingInnerJoin.StyleId AND PlayerTiming.Time = PlayerTimingInnerJoin.BestTime
+            WHERE PlayerTiming.MapId = " . $MapId . " AND PlayerTiming.PlayerId = " . $PlayerId . ";"
+        );
 
         $this->checkExists($mainRecords);
 
