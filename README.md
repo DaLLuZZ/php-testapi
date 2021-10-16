@@ -6,13 +6,15 @@ The PHP API for fuckTimer.
 ### Requirements
 (Install Webserver. (Tested: nginx (all common versions?))
 1. Install PHP 7.4 or above as well as:
-   1. `php-xml`
-   2. `php-mysql`
-   3. `php-mbstring`
+   - `php-xml`
+   - `php-mysql`
+   - `php-mbstring`
 2. Install an MySQL server.
-   1. MariaDB 10.2 or above
-   2. MySQL 5.7 or above
-4. [Install Composer](https://getcomposer.org/doc/00-intro.md).
+   - `MariaDB 10.2` or above
+   - `MySQL 5.7` or above
+3. Install composer.
+   - `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
+   - https://getcomposer.org/doc/00-intro.md
 
 ### Installation
 1. `composer install --optimize-autoloader --no-dev`
