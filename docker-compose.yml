@@ -22,14 +22,12 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80" # Change 8080 to your port which you want
     volumes:
       - ./:/var/www
       - ./conf.d/:/etc/nginx/conf.d/
     networks:
       - app-network
-
 
 networks:
   app-network:
