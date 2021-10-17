@@ -22,13 +22,13 @@ The PHP API for fuckTimer.
 3. `php artisan migrate:fresh` if you've not set up the DB already.
 
 ### Run
-Example #1:
+PHP Example:
 - `php -S localhost:8080 -t public/` to serve locally.
 
-Example #2:
-- [nginx config](https://laravel.com/docs/8.x/deployment#nginx)
+nginx Example:
+- [config example](https://laravel.com/docs/8.x/deployment#nginx)
 
-Example #3:
+Docker Example:
 - `curl -sSL https://get.docker.com/ | CHANNEL=stable bash`
 - `apt install docker-compose`
 - Change webserver port in docker-compose.yml, if you don't want 8080
