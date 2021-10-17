@@ -28,9 +28,10 @@ Example #1:
 Example #2:
 - [nginx config](https://laravel.com/docs/8.x/deployment#nginx)
 
-Example #3 (TODO: Change default port):
+Example #3:
 - `curl -sSL https://get.docker.com/ | CHANNEL=stable bash`
 - `apt install docker-compose`
+- Change webserver port in docker-compose.yml, if you don't want 8080
 - `docker-compose up -d`
 
 ### Update from older version(s):
