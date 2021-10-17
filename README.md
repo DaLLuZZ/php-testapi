@@ -28,6 +28,11 @@ Example #1:
 Example #2:
 - [nginx config](https://laravel.com/docs/8.x/deployment#nginx)
 
+Example #3 (TODO: Change default port):
+- `curl -sSL https://get.docker.com/ | CHANNEL=stable bash`
+- `apt install docker-compose`
+- `docker-compose up -d`
+
 ### Update from older version(s):
 - Upload files from this repository
 - Run `php artisan migrate`

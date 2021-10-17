@@ -1,4 +1,4 @@
-FROM php:8.0.10-fpm
+FROM php:8.0.11-fpm
 # Both 7.4 and 8.0.3 works
 
 COPY composer.lock composer.json /var/www/
@@ -19,7 +19,7 @@ RUN docker-php-ext-install pdo_mysql zip exif pcntl
 
 # Install composer and install production packages
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN cd /var/www/ && composer install --no-dev
+RUN cd /var/www/ && composer install --optimize-autoloader --no-dev
 
 # Add user for application
 RUN groupadd -g 1000 www
