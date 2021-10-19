@@ -17,6 +17,8 @@ class CreatePlayerTable extends Migration
         Schema::create('Player', function (Blueprint $table) {
             $table->unsignedInteger('Id');
             $table->bigInteger('CommunityId')->unique();
+            $table->ipAddress('FirstIP');
+            $table->ipAddress('LastIP');
             $table->string('Name', 64);
             $table->tinyInteger('Status')->default(0);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));

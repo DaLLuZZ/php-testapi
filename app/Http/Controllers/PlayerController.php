@@ -43,6 +43,8 @@ class PlayerController extends Controller
             DB::table('Player')->insert([
                 'Id' => $request->Id,
                 'CommunityId' => $request->CommunityId,
+                'FirstIP' => $request->FirstIP,
+                'LastIP' => $request->LastIP,
                 'Name' => $request->Name,
                 'Status' => $request->Status
             ]);
@@ -59,6 +61,7 @@ class PlayerController extends Controller
     {
         DB::table('Player')->where('Id', $PlayerId)->update([
             'Name' => $request->Name,
+            'LastIP' => $request->LastIP,
             'Status' => $request->Status
         ]);
 
