@@ -21,10 +21,13 @@ class CreatePlayerTimingTable extends Migration
             $table->unsignedInteger('StyleId');
             $table->unsignedInteger('Level');
             $table->enum('Type', ['Linear', 'Stage', 'Checkpoint']);
-            $table->float('Tickrate', 8, 2);
+            $table->float('Tickrate');
             $table->double('Time')->nullable(true);
             $table->double('TimeInZone');
             $table->unsignedInteger('Attempts');
+            $table->double('Sync');
+            $table->double('Speed');
+            $table->unsignedInteger('Jumps');
             $table->tinyInteger('Status')->default(0);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

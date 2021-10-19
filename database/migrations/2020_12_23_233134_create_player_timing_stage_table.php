@@ -21,6 +21,9 @@ class CreatePlayerTimingStageTable extends Migration
             $table->double('Time');
             $table->double('TimeInZone');
             $table->unsignedInteger('Attempts');
+            $table->double('Sync');
+            $table->double('Speed');
+            $table->unsignedInteger('Jumps');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->unique(['PlayerTimingId', 'Stage']);

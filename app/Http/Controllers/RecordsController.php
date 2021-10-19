@@ -10,7 +10,7 @@ class RecordsController extends Controller
     public function GetMapRecord(Request $request, $MapId) {
         $mainRecords = DB::select(
             "SELECT 
-                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Status,
+                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Sync, PlayerTiming.Speed, PlayerTiming.Jumps, PlayerTiming.Status,
                 PlayerTimingInsightJoin.StartPositionX, PlayerTimingInsightJoin.StartPositionY, PlayerTimingInsightJoin.StartPositionZ,
                 PlayerTimingInsightJoin.EndPositionX, PlayerTimingInsightJoin.EndPositionY, PlayerTimingInsightJoin.EndPositionZ,
                 PlayerTimingInsightJoin.StartAngleX, PlayerTimingInsightJoin.StartAngleY, PlayerTimingInsightJoin.StartAngleZ,
@@ -39,7 +39,7 @@ class RecordsController extends Controller
             if ($mainRecord->Type == 'Stage') {
                 $addRecords = DB::table('PlayerTimingStage')
                         ->join('PlayerTimingStageInsight', 'PlayerTimingStage.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
-                        ->select('PlayerTimingStage.Id', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts',
+                        ->select('PlayerTimingStage.Id', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts', 'PlayerTimingStage.Sync', 'PlayerTimingStage.Speed', 'PlayerTimingStage.Jumps',
                                 'PlayerTimingStageInsight.StartPositionX', 'PlayerTimingStageInsight.StartPositionY', 'PlayerTimingStageInsight.StartPositionZ',
                                 'PlayerTimingStageInsight.EndPositionX', 'PlayerTimingStageInsight.EndPositionY', 'PlayerTimingStageInsight.EndPositionZ',
                                 'PlayerTimingStageInsight.StartAngleX', 'PlayerTimingStageInsight.StartAngleY', 'PlayerTimingStageInsight.StartAngleZ',
@@ -55,7 +55,7 @@ class RecordsController extends Controller
             else if ($mainRecord->Type == 'Checkpoint') {
                 $addRecords = DB::table('PlayerTimingCheckpoint')
                         ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoint.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
-                        ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time',
+                        ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time', 'PlayerTimingCheckpoint.Sync', 'PlayerTimingCheckpoint.Speed', 'PlayerTimingCheckpoint.Jumps',
                                 'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
                                 'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
                                 'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
@@ -83,7 +83,7 @@ class RecordsController extends Controller
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId) {
         $mainRecords = DB::select(
             "SELECT 
-                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Status,
+                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Sync, PlayerTiming.Speed, PlayerTiming.Jumps, PlayerTiming.Status,
                 PlayerTimingInsightJoin.StartPositionX, PlayerTimingInsightJoin.StartPositionY, PlayerTimingInsightJoin.StartPositionZ,
                 PlayerTimingInsightJoin.EndPositionX, PlayerTimingInsightJoin.EndPositionY, PlayerTimingInsightJoin.EndPositionZ,
                 PlayerTimingInsightJoin.StartAngleX, PlayerTimingInsightJoin.StartAngleY, PlayerTimingInsightJoin.StartAngleZ,
@@ -112,7 +112,7 @@ class RecordsController extends Controller
             if ($mainRecord->Type == 'Stage') {
                 $addRecords = DB::table('PlayerTimingStage')
                                     ->join('PlayerTimingStageInsight', 'PlayerTimingStage.Id', '=', 'PlayerTimingStageInsight.PlayerTimingStageId')
-                                    ->select('PlayerTimingStage.Id', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts',
+                                    ->select('PlayerTimingStage.Id', 'PlayerTimingStage.Stage', 'PlayerTimingStage.Time', 'PlayerTimingStage.TimeInZone', 'PlayerTimingStage.Attempts', 'PlayerTimingStage.Sync', 'PlayerTimingStage.Speed', 'PlayerTimingStage.Jumps',
                                             'PlayerTimingStageInsight.StartPositionX', 'PlayerTimingStageInsight.StartPositionY', 'PlayerTimingStageInsight.StartPositionZ',
                                             'PlayerTimingStageInsight.EndPositionX', 'PlayerTimingStageInsight.EndPositionY', 'PlayerTimingStageInsight.EndPositionZ',
                                             'PlayerTimingStageInsight.StartAngleX', 'PlayerTimingStageInsight.StartAngleY', 'PlayerTimingStageInsight.StartAngleZ',
@@ -128,7 +128,7 @@ class RecordsController extends Controller
             else if ($mainRecord->Type == 'Checkpoint') {
                 $addRecords = DB::table('PlayerTimingCheckpoint')
                                     ->join('PlayerTimingCheckpointInsight', 'PlayerTimingCheckpoint.Id', '=', 'PlayerTimingCheckpointInsight.PlayerTimingCheckpointId')
-                                    ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time',
+                                    ->select('PlayerTimingCheckpoint.Id', 'PlayerTimingCheckpoint.Checkpoint', 'PlayerTimingCheckpoint.Time', 'PlayerTimingCheckpoint.Sync', 'PlayerTimingCheckpoint.Speed', 'PlayerTimingCheckpoint.Jumps',
                                             'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
                                             'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
                                             'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
@@ -164,7 +164,10 @@ class RecordsController extends Controller
                 'Tickrate' => $request->Tickrate,
                 'Time' => $request->Time,
                 'TimeInZone' => $request->TimeInZone,
-                'Attempts' => $request->Attempts
+                'Attempts' => $request->Attempts,
+                'Sync' => $request->Sync,
+                'Speed' => $request->Speed,
+                'Jumps' => $request->Jumps
             ]);
 
             DB::table('PlayerTimingInsight')->insert([
@@ -196,7 +199,10 @@ class RecordsController extends Controller
                         'Stage' => $record['Stage'],
                         'Time' => $record['Time'],
                         'TimeInZone' => $record['TimeInZone'],
-                        'Attempts' => $record['Attempts']
+                        'Attempts' => $record['Attempts'],
+                        'Sync' => $record['Sync'],
+                        'Speed' => $record['Speed'],
+                        'Jumps' => $record['Jumps']
                     ]);
 
                     DB::table('PlayerTimingStageInsight')->insert([
@@ -227,7 +233,10 @@ class RecordsController extends Controller
                     $PlayerTimingCheckpointId = DB::table('PlayerTimingCheckpoint')->insertGetId([
                         'PlayerTimingId' => $PlayerTimingId,
                         'Checkpoint' => $record['Checkpoint'],
-                        'Time' => $record['Time']
+                        'Time' => $record['Time'],
+                        'Sync' => $record['Sync'],
+                        'Speed' => $record['Speed'],
+                        'Jumps' => $record['Jumps']
                     ]);
 
                     DB::table('PlayerTimingCheckpointInsight')->insert([
@@ -264,7 +273,10 @@ class RecordsController extends Controller
         DB::table('PlayerTiming')->where('Id', $PlayerTiming->Id)->update([
             'Time' => $request->Time,
             'TimeInZone' => $request->TimeInZone,
-            'Attempts' => $request->Attempts
+            'Attempts' => $request->Attempts,
+            'Sync' => $request->Sync,
+            'Speed' => $request->Speed,
+            'Jumps' => $request->Jumps
         ]);
 
         DB::table('PlayerTimingInsight')->where('PlayerTimingId', $PlayerTiming->Id)->update([
@@ -299,7 +311,10 @@ class RecordsController extends Controller
                 DB::table('PlayerTimingStage')->where('Id', $PlayerTimingStage->Id)->update([
                     'Time' => $record['Time'],
                     'TimeInZone' => $record['TimeInZone'],
-                    'Attempts' => $record['Attempts']
+                    'Attempts' => $record['Attempts'],
+                    'Sync' => $record['Sync'],
+                    'Speed' => $record['Speed'],
+                    'Jumps' => $record['Jumps']
                 ]);
 
                 DB::table('PlayerTimingStageInsight')->where('Id', $PlayerTimingStage->Id)->update([
@@ -333,7 +348,10 @@ class RecordsController extends Controller
                                 ->first();
 
                 DB::table('PlayerTimingCheckpoint')->where('Id', $PlayerTimingCheckpoint->Id)->update([
-                    'Time' => $record['Time']
+                    'Time' => $record['Time'],
+                    'Sync' => $record['Sync'],
+                    'Speed' => $record['Speed'],
+                    'Jumps' => $record['Jumps']
                 ]);
 
                 DB::table('PlayerTimingCheckpointInsight')->where('Id', $PlayerTimingCheckpoint->Id)->update([
