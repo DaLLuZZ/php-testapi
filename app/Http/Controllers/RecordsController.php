@@ -80,6 +80,34 @@ class RecordsController extends Controller
         return response()->json($detailedRecords);
     }
 
+    public function GetMapRecordsCount(Request $request, $MapId) {
+        $counts = DB::select(
+            "SELECT 
+                StyleId, Level, COUNT(Time) AS Count
+            FROM PlayerTiming
+            WHERE MapId = " . $MapId . "
+            GROUP BY StyleId, Level;"
+        );
+
+        $this->checkExists($counts);
+
+        return response()->json($counts);
+    }
+
+    public function GetMapRecordsAvgTime(Request $request, $MapId) {
+        $avgs = DB::select(
+            "SELECT 
+                StyleId, Level, AVG(Time) AS AvgTime
+            FROM PlayerTiming
+            WHERE MapId = " . $MapId . "
+            GROUP BY StyleId, Level;"
+        );
+
+        $this->checkExists($avgs);
+
+        return response()->json($avgs);
+    }
+
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId) {
         $mainRecords = DB::select(
             "SELECT 
