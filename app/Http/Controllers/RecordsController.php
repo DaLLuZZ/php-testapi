@@ -25,7 +25,7 @@ class RecordsController extends Controller
                 FROM PlayerTiming
                 GROUP BY Level, StyleId
             ) PlayerTimingInnerJoin ON PlayerTiming.Level = PlayerTimingInnerJoin.Level AND PlayerTiming.StyleId AND PlayerTimingInnerJoin.StyleId AND PlayerTiming.Time = PlayerTimingInnerJoin.BestTime
-            WHERE PlayerTiming.MapId = " . $MapId . ";"
+            WHERE PlayerTiming.MapId = " . $MapId . " AND PlayerTiming.Status = 1;"
         );
 
         $this->checkExists($mainRecords);
@@ -85,7 +85,7 @@ class RecordsController extends Controller
             "SELECT 
                 StyleId, Level, COUNT(Time) AS Count
             FROM PlayerTiming
-            WHERE MapId = " . $MapId . "
+            WHERE MapId = " . $MapId . " AND Status = 1
             GROUP BY StyleId, Level;"
         );
 
@@ -99,7 +99,7 @@ class RecordsController extends Controller
             "SELECT 
                 StyleId, Level, AVG(Time) AS AvgTime
             FROM PlayerTiming
-            WHERE MapId = " . $MapId . "
+            WHERE MapId = " . $MapId . " AND Status = 1
             GROUP BY StyleId, Level;"
         );
 
@@ -126,7 +126,7 @@ class RecordsController extends Controller
                 FROM PlayerTiming
                 GROUP BY Level, StyleId
             ) PlayerTimingInnerJoin ON PlayerTiming.Level = PlayerTimingInnerJoin.Level AND PlayerTiming.StyleId AND PlayerTimingInnerJoin.StyleId AND PlayerTiming.Time = PlayerTimingInnerJoin.BestTime
-            WHERE PlayerTiming.MapId = " . $MapId . " AND PlayerTiming.PlayerId = " . $PlayerId . ";"
+            WHERE PlayerTiming.MapId = " . $MapId . " AND PlayerTiming.PlayerId = " . $PlayerId . " AND PlayerTiming.Status = 1;"
         );
 
         $this->checkExists($mainRecords);
