@@ -17,7 +17,7 @@ class CreateStyleTable extends Migration
         Schema::create('Style', function (Blueprint $table) {
             $table->unsignedInteger('Id')->autoIncrement();
             $table->string('Name', 32)->unique();
-            $table->tinyInteger('Status')->default(0);
+            $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->engine = 'InnoDB';
