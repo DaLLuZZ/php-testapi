@@ -20,7 +20,7 @@ class CreatePlayerTimingCheckpointTable extends Migration
             $table->unsignedInteger('Checkpoint');
             $table->double('Time');
             $table->double('Sync');
-            $table->double('Speed');
+            $table->unsignedInteger('Speed');
             $table->unsignedInteger('Jumps');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

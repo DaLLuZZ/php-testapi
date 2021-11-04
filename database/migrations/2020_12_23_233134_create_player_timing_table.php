@@ -26,7 +26,7 @@ class CreatePlayerTimingTable extends Migration
             $table->double('TimeInZone');
             $table->unsignedInteger('Attempts');
             $table->double('Sync');
-            $table->double('Speed');
+            $table->unsignedInteger('Speed');
             $table->unsignedInteger('Jumps');
             $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
