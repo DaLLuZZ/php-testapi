@@ -11,8 +11,8 @@ class LocationController extends Controller
     {
         $locations = DB::table('PlayerLocations')
                         ->join('PlayerLocationInsight', 'PlayerLocations.Id', '=', 'PlayerLocationInsight.PlayerLocationId')
-                        ->select('PlayerLocations.Id', 'PlayerLocations.MapId', 'PlayerLocations.PlayerId', 'PlayerLocations.StyleId', 'PlayerLocations.Level',
-                                'PlayerLocations.Type', 'PlayerLocations.Tickrate', 'PlayerLocations.Time', 'PlayerLocations.Sync', 'PlayerLocations.Speed', 'PlayerLocations.Jumps', 'PlayerLocations.CSLevel', 'PlayerLocations.CSTime',
+                        ->select('PlayerLocations.Id', 'PlayerLocations.MapId', 'PlayerLocations.PlayerId', 'PlayerLocations.StyleId', 'PlayerLocations.Level', 'PlayerLocations.Type',
+                                'PlayerLocations.Tickrate', 'PlayerLocations.Time', 'PlayerLocations.Sync', 'PlayerLocations.Speed', 'PlayerLocations.Jumps', 'PlayerLocations.CSLevel', 'PlayerLocations.CSTime', 'PlayerLocations.Status',
                                 'PlayerLocationInsight.PositionX', 'PlayerLocationInsight.PositionY', 'PlayerLocationInsight.PositionZ',
                                 'PlayerLocationInsight.AngleX', 'PlayerLocationInsight.AngleY', 'PlayerLocationInsight.AngleZ',
                                 'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
@@ -63,6 +63,15 @@ class LocationController extends Controller
         }
 
         return response()->json($request, 201);
+    }
+
+    public function UpdateLocation(Request $request, $LocationId)
+    {
+        DB::table('PlayerLocations')->where('Id', $LocationId)->update([
+            'Status' => $request->Status
+        ]);
+
+        return response()->json('OK');
     }
 
     public function DeleteLocation(Request $request, $LocationId)
