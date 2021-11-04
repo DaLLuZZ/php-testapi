@@ -10,10 +10,17 @@ class LocationController extends Controller
     public function GetPlayerLocations(Request $request, $MapId, $PlayerId)
     {
         $locations = DB::table('PlayerLocations')
-                    ->select('*')
-                    ->where('MapId', $MapId)
-                    ->where('PlayerId', $PlayerId)
-                    ->get();
+                        ->join('PlayerLocationInsight', 'PlayerLocations.Id', '=', 'PlayerLocationInsight.PlayerLocationId')
+                        ->select('PlayerLocations.Id', 'PlayerLocations.MapId', 'PlayerLocations.PlayerId', 'PlayerLocations.StyleId', 'PlayerLocations.Level',
+                                'PlayerLocations.Type', 'PlayerLocations.Tickrate', 'PlayerLocations.Time', 'PlayerLocations.Sync', 'PlayerLocations.Speed', 'PlayerLocations.Jumps', 'PlayerLocations.CSLevel', 'PlayerLocations.CSTime',
+                                'PlayerLocationInsight.PositionX', 'PlayerLocationInsight.PositionY', 'PlayerLocationInsight.PositionZ',
+                                'PlayerLocationInsight.AngleX', 'PlayerLocationInsight.AngleY', 'PlayerLocationInsight.AngleZ',
+                                'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
+                        ->where('MapId', $MapId)
+                        ->where('PlayerId', $PlayerId)
+                        ->orderBy('PlayerLocations.Level', 'asc')
+                        ->orderBy('PlayerLocations.CSLevel', 'asc')
+                        ->get();
 
         $this->checkExists($locations);
 
