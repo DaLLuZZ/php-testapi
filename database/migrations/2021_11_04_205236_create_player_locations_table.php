@@ -30,7 +30,6 @@ class CreatePlayerLocationsTable extends Migration
             $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique(['MapId', 'PlayerId', 'StyleId', 'Level']);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
