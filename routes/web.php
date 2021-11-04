@@ -91,6 +91,9 @@ $router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use 
     $router->post('/', 'RecordsController@InsertRecord');
 
     $router->put('/', 'RecordsController@UpdateRecord');
+
+    $router->delete('/PlayerTimingId/{PlayerTimingId}', 'RecordsController@DeleteRecord');
+    // TODO: Delete all records by Map, Player, Style?
 });
 
 $router->group(['prefix' => 'Location', 'middleware' => 'auth'], function () use ($router) {
