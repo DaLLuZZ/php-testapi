@@ -129,3 +129,9 @@ $router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use 
 
     $router->put('/', 'RecordsController@UpdateRecord');
 });
+
+$router->group(['prefix' => 'Location', 'middleware' => 'auth'], function () use ($router) {
+    $router->get('/MapId/{MapId}/PlayerId/{PlayerId}', 'LocationController@GetPlayerLocations');
+    $router->post('/', 'LocationController@InsertLocation');
+    $router->delete('/LocationId/{LocationId}', 'LocationController@DeleteLocation');
+});
