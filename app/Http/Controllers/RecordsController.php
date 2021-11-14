@@ -399,7 +399,7 @@ class RecordsController extends Controller
         return response()->json('OK');
     }
 
-    public function DeleteRecord(Request $request, $PlayerTimingId)
+    public function DeleteRecordByPlayerTimingId(Request $request, $PlayerTimingId)
     {
         $record = DB::table('PlayerTiming')
                     ->select('*')

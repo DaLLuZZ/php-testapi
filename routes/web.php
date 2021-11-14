@@ -92,8 +92,12 @@ $router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use 
 
     $router->put('/', 'RecordsController@UpdateRecord');
 
-    $router->delete('/PlayerTimingId/{PlayerTimingId}', 'RecordsController@DeleteRecord');
+    $router->delete('/PlayerTimingId/{PlayerTimingId}', 'RecordsController@DeleteRecordByPlayerTimingId');
     // TODO: Delete all records by Map, Player, Style?
+});
+
+$router->group(['prefix' => 'Ranks', 'middleware' => 'auth'], function () use ($router) {
+    $router->get('/MapId/{MapId}', 'RanksController@CalclatePlayerRanksByMapId');
 });
 
 $router->group(['prefix' => 'Location', 'middleware' => 'auth'], function () use ($router) {
