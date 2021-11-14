@@ -13,10 +13,6 @@ class StyleController extends Controller
 
         $this->checkExists($styles);
 
-        foreach ($styles as $style) {
-            $style->Status = (bool)$style->Status;
-        }
-
         return response()->json($styles);
     }
 
@@ -26,8 +22,6 @@ class StyleController extends Controller
 
         $this->checkExists($style);
 
-        $style->Status = (bool)$style->Status;
-
         return response()->json($style);
     }
 
@@ -36,8 +30,6 @@ class StyleController extends Controller
         $style = DB::table('Style')->select('*')->where('Name', $StyleName)->first();
 
         $this->checkExists($style);
-
-        $style->Status = (bool)$style->Status;
 
         return response()->json($style);
     }

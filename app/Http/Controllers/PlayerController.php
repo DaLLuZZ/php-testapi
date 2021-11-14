@@ -15,10 +15,6 @@ class PlayerController extends Controller
 
         $this->checkExists($players);
 
-        foreach ($players as $player) {
-            $player->Status = (bool)$player->Status;
-        }
-
         return response()->json($players);
     }
 
@@ -30,8 +26,6 @@ class PlayerController extends Controller
                         ->first();
 
         $this->checkExists($player);
-
-        $player->Status = (bool)$player->Status;
 
         return response()->json($player);
     }

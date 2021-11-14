@@ -15,10 +15,6 @@ class MapController extends Controller
 
         $this->checkExists($maps);
 
-        foreach ($maps as $map) {
-            $map->Status = (bool)$map->Status;
-        }
-
         return response()->json($maps);
     }
 
@@ -31,8 +27,6 @@ class MapController extends Controller
 
         $this->checkExists($map);
 
-        $map->Status = (bool)$map->Status;
-
         return response()->json($map);
     }
 
@@ -44,8 +38,6 @@ class MapController extends Controller
                     ->first();
 
         $this->checkExists($map);
-
-        $map->Status = (bool)$map->Status;
 
         return response()->json($map);
     }
@@ -60,10 +52,6 @@ class MapController extends Controller
                     ->get();
 
         $this->checkExists($maps);
-
-        foreach ($maps as $map) {
-            $map->Status = (bool)$map->Status;
-        }
 
         return response()->json($maps);
     }
