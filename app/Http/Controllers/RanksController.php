@@ -24,8 +24,6 @@ class RanksController extends Controller
         $level = 0;
         $rank = 0;
 
-        $aRanks = [];
-
         DB::beginTransaction();
 
         try {
@@ -52,24 +50,15 @@ class RanksController extends Controller
                     'Level' => $record->Level,
                     'Rank' => $rank
                 ]);
-                    
-                $aRank = [
-                    'PlayerId' => $record->PlayerId,
-                    'StyleId' => $record->StyleId,
-                    'Level' => $record->Level,
-                    'Time' => $record->Time,
-                    'Rank' => $rank
-                ];
-
-                array_push($aRanks, $aRank);
             }
 
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+
             response()->json('Conflict', 409)->send();
         }
 
-        return response()->json($aRanks);
+        return response()->json('OK');
     }
 }
