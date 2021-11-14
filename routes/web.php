@@ -98,6 +98,8 @@ $router->group(['prefix' => 'Records', 'middleware' => 'auth'], function () use 
 
 $router->group(['prefix' => 'Ranks', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/MapId/{MapId}', 'RanksController@CalclatePlayerRanksByMapId');
+
+    $router->get('/PlayerId/{PlayerId}', 'RanksController@GetPlayerRanks');
 });
 
 $router->group(['prefix' => 'Location', 'middleware' => 'auth'], function () use ($router) {

@@ -61,4 +61,15 @@ class RanksController extends Controller
 
         return response()->json('OK');
     }
+
+    public function GetPlayerRanks(Request $request, $PlayerId) {
+        $ranks = DB::table('PlayerRanks')
+                    ->select(['StyleId', 'Level', 'Rank'])
+                    ->where('PlayerId', $PlayerId)
+                    ->get();
+
+        $this->checkExists($ranks);
+        
+        return response()->json($ranks);
+    }
 }
