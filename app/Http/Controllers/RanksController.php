@@ -8,10 +8,8 @@ use Illuminate\Support\Facades\DB;
 class RanksController extends Controller
 {
     public function CalclatePlayerRanksByMapId(Request $request, $MapId) {
-        DB::table('PlayerRanks')->truncate();
-
         $records = DB::table('PlayerTiming')
-                    ->select(['PlayerId', 'StyleId', 'Level', 'Time'])
+                    ->select(['Id', 'PlayerId', 'StyleId', 'Level', 'Time'])
                     ->orderBy('StyleId')
                     ->orderBy('Level')
                     ->orderBy('Time')
@@ -44,12 +42,9 @@ class RanksController extends Controller
                     $level = $record->Level;
                 }
 
-                DB::table('PlayerRanks')->insert([
-                    'PlayerId' => $record->PlayerId,
-                    'StyleId' => $record->StyleId,
-                    'Level' => $record->Level,
-                    'Rank' => $rank
-                ]);
+                DB::table('PlayerTiming')
+                    ->where('Id', '=', $record->Id)
+                    ->update(['Rank' => $rank]);
             }
 
             DB::commit();
@@ -60,16 +55,5 @@ class RanksController extends Controller
         }
 
         return response()->json('OK');
-    }
-
-    public function GetPlayerRanks(Request $request, $PlayerId) {
-        $ranks = DB::table('PlayerRanks')
-                    ->select(['StyleId', 'Level', 'Rank'])
-                    ->where('PlayerId', $PlayerId)
-                    ->get();
-
-        $this->checkExists($ranks);
-        
-        return response()->json($ranks);
     }
 }

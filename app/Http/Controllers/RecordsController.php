@@ -10,7 +10,7 @@ class RecordsController extends Controller
     public function GetMapRecord(Request $request, $MapId) {
         $mainRecords = DB::select(
             "SELECT 
-                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Sync, PlayerTiming.Speed, PlayerTiming.Jumps, PlayerTiming.Status,
+                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.Rank, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Sync, PlayerTiming.Speed, PlayerTiming.Jumps, PlayerTiming.Status,
                 PlayerTimingInsightJoin.StartPositionX, PlayerTimingInsightJoin.StartPositionY, PlayerTimingInsightJoin.StartPositionZ,
                 PlayerTimingInsightJoin.EndPositionX, PlayerTimingInsightJoin.EndPositionY, PlayerTimingInsightJoin.EndPositionZ,
                 PlayerTimingInsightJoin.StartAngleX, PlayerTimingInsightJoin.StartAngleY, PlayerTimingInsightJoin.StartAngleZ,
@@ -111,7 +111,7 @@ class RecordsController extends Controller
     public function GetMapPlayerRecord(Request $request, $MapId, $PlayerId) {
         $mainRecords = DB::select(
             "SELECT 
-                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Sync, PlayerTiming.Speed, PlayerTiming.Jumps, PlayerTiming.Status,
+                PlayerTiming.Id, PlayerTiming.MapId, PlayerTiming.PlayerId, PlayerJoin.Name, PlayerTiming.StyleId, PlayerTiming.Level, PlayerTiming.Type, PlayerTiming.Tickrate, PlayerTiming.Time, PlayerTiming.Rank, PlayerTiming.TimeInZone, PlayerTiming.Attempts, PlayerTiming.Sync, PlayerTiming.Speed, PlayerTiming.Jumps, PlayerTiming.Status,
                 PlayerTimingInsightJoin.StartPositionX, PlayerTimingInsightJoin.StartPositionY, PlayerTimingInsightJoin.StartPositionZ,
                 PlayerTimingInsightJoin.EndPositionX, PlayerTimingInsightJoin.EndPositionY, PlayerTimingInsightJoin.EndPositionZ,
                 PlayerTimingInsightJoin.StartAngleX, PlayerTimingInsightJoin.StartAngleY, PlayerTimingInsightJoin.StartAngleZ,
