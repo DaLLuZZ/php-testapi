@@ -77,7 +77,6 @@ class LocationController extends Controller
     public function DeleteLocation(Request $request, $LocationId)
     {
         DB::table('PlayerLocations')->where('Id', $LocationId)->delete();
-        DB::table('PlayerLocationInsight')->where('PlayerLocationId', $LocationId)->delete();
 
         return response()->json('OK');
     }

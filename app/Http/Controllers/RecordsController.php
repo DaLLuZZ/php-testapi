@@ -401,41 +401,6 @@ class RecordsController extends Controller
 
     public function DeleteRecordByPlayerTimingId(Request $request, $PlayerTimingId)
     {
-        $record = DB::table('PlayerTiming')
-                    ->select('*')
-                    ->where('Id', $PlayerTimingId)
-                    ->first();
-
-        if ($record->Type == 'Checkpoint')
-        {
-            $checkpoints = DB::table('PlayerTimingCheckpoint')
-                    ->select('*')
-                    ->where('PlayerTimingId', $PlayerTimingId)
-                    ->get();
-
-            foreach ($checkpoints as $checkpoint)
-            {
-                DB::table('PlayerTimingCheckpointInsight')->where('PlayerTimingCheckpointId', $checkpoint->Id)->delete();
-            }
-        
-            DB::table('PlayerTimingCheckpoint')->where('PlayerTimingId', $PlayerTimingId)->delete();
-        }
-        else if ($record->Type == 'Stage')
-        {
-            $stages = DB::table('PlayerTimingStage')
-                    ->select('*')
-                    ->where('PlayerTimingId', $PlayerTimingId)
-                    ->get();
-
-            foreach ($stages as $stage)
-            {
-                DB::table('PlayerTimingStageInsight')->where('PlayerTimingStageId', $stage->Id)->delete();
-            }
-
-            DB::table('PlayerTimingStage')->where('PlayerTimingId', $PlayerTimingId)->delete();
-        }
-
-        DB::table('PlayerTimingInsight')->where('PlayerTimingId', $PlayerTimingId)->delete();
         DB::table('PlayerTiming')->where('Id', $PlayerTimingId)->delete();
 
         return response()->json('OK');
