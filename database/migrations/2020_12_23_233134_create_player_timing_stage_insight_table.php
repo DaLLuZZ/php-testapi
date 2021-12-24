@@ -37,6 +37,7 @@ class CreatePlayerTimingStageInsightTable extends Migration
             $table->double('EndVelocityZ');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->foreignId('PlayerTimingStageId')->constrained('PlayerTimingStage', 'Id')->onUpdate('cascade')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

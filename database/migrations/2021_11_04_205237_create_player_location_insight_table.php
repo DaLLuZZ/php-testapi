@@ -27,6 +27,7 @@ class CreatePlayerLocationInsightTable extends Migration
             $table->double('VelocityZ');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->foreignId('PlayerLocationId')->constrained('PlayerLocation', 'Id')->onUpdate('cascade')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

@@ -30,6 +30,9 @@ class CreatePlayerLocationsTable extends Migration
             $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->foreignId('MapId')->constrained('Map', 'Id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('PlayerId')->constrained('Player', 'Id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('StyleId')->constrained('Style', 'Id')->onUpdate('cascade')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
