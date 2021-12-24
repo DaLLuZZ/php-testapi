@@ -14,13 +14,12 @@ class CreatePlayerHudTable extends Migration
     public function up()
     {
         Schema::create('PlayerHud', function (Blueprint $table) {
-            $table->unsignedInteger('PlayerId');
+            $table->foreignId('PlayerId')->constrained('Player', 'Id')->onUpdate('cascade')->onDelete('cascade');
             $table->enum('Side', ['Left', 'Right']);
             $table->unsignedTinyInteger('Line');
             $table->unsignedTinyInteger('Key');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->foreignId('PlayerId')->constrained('Player', 'Id')->onUpdate('cascade')->onDelete('cascade');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

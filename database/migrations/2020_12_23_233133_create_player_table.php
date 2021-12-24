@@ -15,7 +15,7 @@ class CreatePlayerTable extends Migration
     public function up()
     {
         Schema::create('Player', function (Blueprint $table) {
-            $table->unsignedInteger('Id');
+            $table->id('Id');
             $table->bigInteger('CommunityId')->unique();
             $table->ipAddress('FirstIP');
             $table->ipAddress('LastIP');
@@ -23,7 +23,6 @@ class CreatePlayerTable extends Migration
             $table->tinyInteger('Status')->default(1);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->primary('Id');
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';

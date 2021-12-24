@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreatePlayerTimingStageTable extends Migration
+class CreatePlayerTimingCheckpointTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,20 +14,17 @@ class CreatePlayerTimingStageTable extends Migration
      */
     public function up()
     {
-        Schema::create('PlayerTimingStage', function (Blueprint $table) {
-            $table->unsignedInteger('Id')->autoIncrement();
-            $table->unsignedInteger('PlayerTimingId');
-            $table->unsignedInteger('Stage');
+        Schema::create('PlayerTimingCheckpoint', function (Blueprint $table) {
+            $table->id('Id')->autoIncrement();
+            $table->foreignId('PlayerTimingId')->constrained('PlayerTiming', 'Id')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedInteger('Checkpoint');
             $table->double('Time');
-            $table->double('TimeInZone');
-            $table->unsignedInteger('Attempts');
             $table->double('Sync');
             $table->unsignedInteger('Speed');
             $table->unsignedInteger('Jumps');
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->unique(['PlayerTimingId', 'Stage']);
-            $table->foreignId('PlayerTimingId')->constrained('PlayerTiming', 'Id')->onUpdate('cascade')->onDelete('cascade');
+            $table->unique(['PlayerTimingId', 'Checkpoint']);
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
@@ -41,6 +38,6 @@ class CreatePlayerTimingStageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PlayerTimingStage');
+        Schema::dropIfExists('PlayerTimingCheckpoint');
     }
 }

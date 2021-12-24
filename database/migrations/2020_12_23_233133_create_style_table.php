@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateMapTable extends Migration
+class CreateStyleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,10 @@ class CreateMapTable extends Migration
      */
     public function up()
     {
-        Schema::create('Map', function (Blueprint $table) {
-            $table->unsignedInteger('Id')->autoIncrement();
-            $table->string('Name', 64)->unique();
-            $table->unsignedTinyInteger('Tier');
+        Schema::create('Style', function (Blueprint $table) {
+            $table->id('Id')->autoIncrement();
+            $table->string('Name', 32)->unique();
             $table->tinyInteger('Status')->default(1);
-            $table->string('MapAuthor', 64);
-            $table->string('ZoneAuthor', 64);
             $table->dateTimeTz('CreatedDate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTimeTz('LastModifiedDate')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->engine = 'InnoDB';
@@ -36,6 +33,6 @@ class CreateMapTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Map');
+        Schema::dropIfExists('Style');
     }
 }
