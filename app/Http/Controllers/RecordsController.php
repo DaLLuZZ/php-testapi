@@ -121,12 +121,8 @@ class RecordsController extends Controller
             FROM PlayerTiming PlayerTiming
             JOIN Player AS PlayerJoin ON PlayerJoin.Id = PlayerTiming.PlayerId
             JOIN PlayerTimingInsight AS PlayerTimingInsightJoin ON PlayerTiming.Id = PlayerTimingInsightJoin.PlayerTimingId
-            INNER JOIN (
-                SELECT Level, StyleId, min(Time) AS BestTime
-                FROM PlayerTiming
-                GROUP BY Level, StyleId
-            ) PlayerTimingInnerJoin ON PlayerTiming.Level = PlayerTimingInnerJoin.Level AND PlayerTiming.StyleId AND PlayerTimingInnerJoin.StyleId AND PlayerTiming.Time = PlayerTimingInnerJoin.BestTime
-            WHERE PlayerTiming.MapId = " . $MapId . " AND PlayerTiming.PlayerId = " . $PlayerId . " AND PlayerTiming.Status = 1;"
+            WHERE PlayerTiming.MapId = " . $MapId . " AND PlayerTiming.PlayerId = " . $PlayerId . " AND PlayerTiming.Status = 1
+            GROUP BY PlayerTiming.Level, PlayerTiming.StyleId;"
         );
 
         $this->checkExists($mainRecords);
