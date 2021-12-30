@@ -22,7 +22,7 @@ class MapController extends Controller
     {
         $map = DB::table('Map')
                     ->select('*')
-                    ->where('Id', $MapId)
+                    ->where('Id', '=', $MapId)
                     ->first();
 
         $this->checkExists($map);
@@ -34,7 +34,7 @@ class MapController extends Controller
     {
         $map = DB::table('Map')
                     ->select('*')
-                    ->where('Name', $MapName)
+                    ->where('Name', '=', $MapName)
                     ->first();
 
         $this->checkExists($map);
@@ -76,7 +76,7 @@ class MapController extends Controller
 
     public function UpdateMap(Request $request, $MapId)
     {
-        DB::table('Map')->where('Id', $MapId)->update([
+        DB::table('Map')->where('Id', '=', $MapId)->update([
             'Name' => $request->Name,
             'Tier' => $request->Tier,
             'Status' => $request->Status,
@@ -89,7 +89,7 @@ class MapController extends Controller
 
     public function DeleteMap(Request $request, $MapId)
     {
-        DB::table('Map')->where('Id', $MapId)->delete();
+        DB::table('Map')->where('Id', '=', $MapId)->delete();
 
         return response()->json('OK');
     }

@@ -16,8 +16,9 @@ class LocationController extends Controller
                                 'PlayerLocationInsight.PositionX', 'PlayerLocationInsight.PositionY', 'PlayerLocationInsight.PositionZ',
                                 'PlayerLocationInsight.AngleX', 'PlayerLocationInsight.AngleY', 'PlayerLocationInsight.AngleZ',
                                 'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
-                        ->where('MapId', $MapId)
-                        ->where('PlayerId', $PlayerId)
+                        ->where('MapId', '=', $MapId)
+                        ->where('PlayerId', '=', $PlayerId)
+                        ->where('Status', '=', '1')
                         ->orderBy('PlayerLocations.Level', 'asc')
                         ->orderBy('PlayerLocations.CSLevel', 'asc')
                         ->get();
@@ -67,7 +68,7 @@ class LocationController extends Controller
 
     public function UpdateLocation(Request $request, $LocationId)
     {
-        DB::table('PlayerLocations')->where('Id', $LocationId)->update([
+        DB::table('PlayerLocations')->where('Id', '=', $LocationId)->update([
             'Status' => $request->Status
         ]);
 
@@ -76,7 +77,7 @@ class LocationController extends Controller
 
     public function DeleteLocation(Request $request, $LocationId)
     {
-        DB::table('PlayerLocations')->where('Id', $LocationId)->delete();
+        DB::table('PlayerLocations')->where('Id', '=', $LocationId)->delete();
 
         return response()->json('OK');
     }

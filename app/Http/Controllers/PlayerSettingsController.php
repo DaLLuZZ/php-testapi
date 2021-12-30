@@ -11,8 +11,8 @@ class PlayerSettingsController extends Controller
     {
         $setting = DB::table('PlayerSettings')
                         ->select('*')
-                        ->where('PlayerId', $PlayerId)
-                        ->where('Setting', $SettingName)
+                        ->where('PlayerId', '=', $PlayerId)
+                        ->where('Setting', '=', $SettingName)
                         ->first();
 
         $this->checkExists($setting);
@@ -24,7 +24,7 @@ class PlayerSettingsController extends Controller
     {
         $settings = DB::table('PlayerSettings')
                         ->select('*')
-                        ->where('PlayerId', $PlayerId)
+                        ->where('PlayerId', '=', $PlayerId)
                         ->get();
 
         $this->checkExists($settings);
@@ -36,7 +36,7 @@ class PlayerSettingsController extends Controller
     {
         $settings = DB::table('PlayerSettings')
                         ->select('*')
-                        ->where('Setting', $SettingName)
+                        ->where('Setting', '=', $SettingName)
                         ->get();
 
         $this->checkExists($settings);
@@ -65,8 +65,8 @@ class PlayerSettingsController extends Controller
     public function UpdateSetting(Request $request, $PlayerId, $SettingName)
     {
         DB::table('PlayerSettings')
-            ->where('PlayerID', $PlayerId)
-            ->where('Setting', $SettingName)
+            ->where('PlayerID', '=', $PlayerId)
+            ->where('Setting', '=', $SettingName)
             ->update(['Value' => $request->Value]);
 
         return response()->json('Success', 204);
@@ -75,7 +75,7 @@ class PlayerSettingsController extends Controller
     public function DeleteSettingsByPlayerId(Request $request, $PlayerId)
     {
         DB::table('PlayerSettings')
-            ->where('PlayerId', $PlayerId)
+            ->where('PlayerId', '=', $PlayerId)
             ->delete();
 
         return response()->json('OK');
@@ -84,7 +84,7 @@ class PlayerSettingsController extends Controller
     public function DeleteSettingsBySettingName(Request $request, $SettingName)
     {
         DB::table('PlayerSettings')
-            ->where('Setting', $SettingName)
+            ->where('Setting', '=', $SettingName)
             ->delete();
 
         return response()->json('OK');
@@ -93,8 +93,8 @@ class PlayerSettingsController extends Controller
     public function DeleteSettingsByIdAndName(Request $request, $PlayerId, $SettingName)
     {
         DB::table('PlayerSettings')
-            ->where('PlayerId', $PlayerId)
-            ->where('Setting', $SettingName)
+            ->where('PlayerId', '=', $PlayerId)
+            ->where('Setting', '=', $SettingName)
             ->delete();
 
         return response()->json('OK');

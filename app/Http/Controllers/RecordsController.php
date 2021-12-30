@@ -46,7 +46,7 @@ class RecordsController extends Controller
                                 'PlayerTimingStageInsight.EndAngleX', 'PlayerTimingStageInsight.EndAngleY', 'PlayerTimingStageInsight.EndAngleZ',
                                 'PlayerTimingStageInsight.StartVelocityX', 'PlayerTimingStageInsight.StartVelocityY', 'PlayerTimingStageInsight.StartVelocityZ',
                                 'PlayerTimingStageInsight.EndVelocityX', 'PlayerTimingStageInsight.EndVelocityY', 'PlayerTimingStageInsight.EndVelocityZ' )
-                        ->where('PlayerTimingStage.PlayerTimingId', $mainRecord->Id)
+                        ->where('PlayerTimingStage.PlayerTimingId', '=', $mainRecord->Id)
                         ->orderBy('Stage', 'asc')
                         ->get();
 
@@ -59,7 +59,7 @@ class RecordsController extends Controller
                                 'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
                                 'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
                                 'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
-                        ->where('PlayerTimingCheckpoint.PlayerTimingId', $mainRecord->Id)
+                        ->where('PlayerTimingCheckpoint.PlayerTimingId', '=', $mainRecord->Id)
                         ->orderBy('Checkpoint', 'asc')
                         ->get();
 
@@ -143,7 +143,7 @@ class RecordsController extends Controller
                                             'PlayerTimingStageInsight.EndAngleX', 'PlayerTimingStageInsight.EndAngleY', 'PlayerTimingStageInsight.EndAngleZ',
                                             'PlayerTimingStageInsight.StartVelocityX', 'PlayerTimingStageInsight.StartVelocityY', 'PlayerTimingStageInsight.StartVelocityZ',
                                             'PlayerTimingStageInsight.EndVelocityX', 'PlayerTimingStageInsight.EndVelocityY', 'PlayerTimingStageInsight.EndVelocityZ' )
-                                    ->where('PlayerTimingStage.PlayerTimingId', $mainRecord->Id)
+                                    ->where('PlayerTimingStage.PlayerTimingId', '=', $mainRecord->Id)
                                     ->orderBy('Stage', 'asc')
                                     ->get();
 
@@ -156,7 +156,7 @@ class RecordsController extends Controller
                                             'PlayerTimingCheckpointInsight.PositionX', 'PlayerTimingCheckpointInsight.PositionY', 'PlayerTimingCheckpointInsight.PositionZ',
                                             'PlayerTimingCheckpointInsight.AngleX', 'PlayerTimingCheckpointInsight.AngleY', 'PlayerTimingCheckpointInsight.AngleZ',
                                             'PlayerTimingCheckpointInsight.VelocityX', 'PlayerTimingCheckpointInsight.VelocityY', 'PlayerTimingCheckpointInsight.VelocityZ')
-                                    ->where('PlayerTimingCheckpoint.PlayerTimingId', $mainRecord->Id)
+                                    ->where('PlayerTimingCheckpoint.PlayerTimingId', '=', $mainRecord->Id)
                                     ->orderBy('Checkpoint', 'asc')
                                     ->get();
 
@@ -288,13 +288,13 @@ class RecordsController extends Controller
     public function UpdateRecord(Request $request) {
         $PlayerTiming = DB::table('PlayerTiming')
                                 ->select('Id', 'Type')
-                                ->where('MapId', $request->MapId)
-                                ->where('PlayerId', $request->PlayerId)
-                                ->where('StyleId', $request->StyleId)
-                                ->where('Level', $request->Level)
+                                ->where('MapId', '=', $request->MapId)
+                                ->where('PlayerId', '=', $request->PlayerId)
+                                ->where('StyleId', '=', $request->StyleId)
+                                ->where('Level', '=', $request->Level)
                                 ->first();
 
-        DB::table('PlayerTiming')->where('Id', $PlayerTiming->Id)->update([
+        DB::table('PlayerTiming')->where('Id', '=', $PlayerTiming->Id)->update([
             'Time' => $request->Time,
             'TimeInZone' => $request->TimeInZone,
             'Attempts' => $request->Attempts,
@@ -303,7 +303,7 @@ class RecordsController extends Controller
             'Jumps' => $request->Jumps
         ]);
 
-        DB::table('PlayerTimingInsight')->where('PlayerTimingId', $PlayerTiming->Id)->update([
+        DB::table('PlayerTimingInsight')->where('PlayerTimingId', '=', $PlayerTiming->Id)->update([
             'StartPositionX' => $request->StartPositionX,
             'StartPositionY' => $request->StartPositionY,
             'StartPositionZ' => $request->StartPositionZ,
@@ -328,11 +328,11 @@ class RecordsController extends Controller
             foreach ($request->Details as $record) {
                 $PlayerTimingStage = DB::table('PlayerTimingStage')
                                 ->select('Id')
-                                ->where('PlayerTimingId', $PlayerTiming->Id)
-                                ->where('Stage', $record['Stage'])
+                                ->where('PlayerTimingId', '=', $PlayerTiming->Id)
+                                ->where('Stage', '=', $record['Stage'])
                                 ->first();
 
-                DB::table('PlayerTimingStage')->where('Id', $PlayerTimingStage->Id)->update([
+                DB::table('PlayerTimingStage')->where('Id', '=', $PlayerTimingStage->Id)->update([
                     'Time' => $record['Time'],
                     'TimeInZone' => $record['TimeInZone'],
                     'Attempts' => $record['Attempts'],
@@ -341,7 +341,7 @@ class RecordsController extends Controller
                     'Jumps' => $record['Jumps']
                 ]);
 
-                DB::table('PlayerTimingStageInsight')->where('Id', $PlayerTimingStage->Id)->update([
+                DB::table('PlayerTimingStageInsight')->where('Id', '=', $PlayerTimingStage->Id)->update([
                     'StartPositionX' => $record['StartPositionX'],
                     'StartPositionY' => $record['StartPositionY'],
                     'StartPositionZ' => $record['StartPositionZ'],
@@ -367,18 +367,18 @@ class RecordsController extends Controller
             foreach ($request->Details as $record) {
                 $PlayerTimingCheckpoint = DB::table('PlayerTimingCheckpoint')
                                 ->select('Id')
-                                ->where('PlayerTimingId', $PlayerTiming->Id)
-                                ->where('Checkpoint', $record['Checkpoint'])
+                                ->where('PlayerTimingId', '=', $PlayerTiming->Id)
+                                ->where('Checkpoint', '=', $record['Checkpoint'])
                                 ->first();
 
-                DB::table('PlayerTimingCheckpoint')->where('Id', $PlayerTimingCheckpoint->Id)->update([
+                DB::table('PlayerTimingCheckpoint')->where('Id', '=', $PlayerTimingCheckpoint->Id)->update([
                     'Time' => $record['Time'],
                     'Sync' => $record['Sync'],
                     'Speed' => $record['Speed'],
                     'Jumps' => $record['Jumps']
                 ]);
 
-                DB::table('PlayerTimingCheckpointInsight')->where('Id', $PlayerTimingCheckpoint->Id)->update([
+                DB::table('PlayerTimingCheckpointInsight')->where('Id', '=', $PlayerTimingCheckpoint->Id)->update([
                     'PositionX' => $record['PositionX'],
                     'PositionY' => $record['PositionY'],
                     'PositionZ' => $record['PositionZ'],
@@ -397,7 +397,7 @@ class RecordsController extends Controller
 
     public function DeleteRecordByPlayerTimingId(Request $request, $PlayerTimingId)
     {
-        DB::table('PlayerTiming')->where('Id', $PlayerTimingId)->delete();
+        DB::table('PlayerTiming')->where('Id', '=', $PlayerTimingId)->delete();
 
         return response()->json('OK');
     }

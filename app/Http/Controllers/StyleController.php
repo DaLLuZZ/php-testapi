@@ -18,7 +18,7 @@ class StyleController extends Controller
 
     public function GetStyleById(Request $request, $StyleId)
     {
-        $style = DB::table('Style')->select('*')->where('Id', $StyleId)->first();
+        $style = DB::table('Style')->select('*')->where('Id', '=', $StyleId)->first();
 
         $this->checkExists($style);
 
@@ -27,7 +27,7 @@ class StyleController extends Controller
 
     public function GetStyleByName(Request $request, $StyleName)
     {
-        $style = DB::table('Style')->select('*')->where('Name', $StyleName)->first();
+        $style = DB::table('Style')->select('*')->where('Name', '=', $StyleName)->first();
 
         $this->checkExists($style);
 
@@ -53,7 +53,7 @@ class StyleController extends Controller
 
     public function UpdateStyle(Request $request, $StyleId)
     {
-        DB::table('Style')->where('Id', $StyleId)->update([
+        DB::table('Style')->where('Id', '=', $StyleId)->update([
             'Name' => $request->Name,
             'Status' => $request->Status
         ]);
@@ -63,7 +63,7 @@ class StyleController extends Controller
 
     public function DeleteStyle(Request $request, $StyleId)
     {
-        DB::table('Style')->where('Id', $StyleId)->delete();
+        DB::table('Style')->where('Id', '=', $StyleId)->delete();
 
         return response()->json('OK');
     }

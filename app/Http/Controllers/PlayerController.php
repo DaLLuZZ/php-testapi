@@ -22,7 +22,7 @@ class PlayerController extends Controller
     {
         $player = DB::table('Player')
                         ->select('*')
-                        ->where('Id', $PlayerId)
+                        ->where('Id', '=', $PlayerId)
                         ->first();
 
         $this->checkExists($player);
@@ -53,7 +53,7 @@ class PlayerController extends Controller
 
     public function UpdatePlayer(Request $request, $PlayerId)
     {
-        DB::table('Player')->where('Id', $PlayerId)->update([
+        DB::table('Player')->where('Id', '=', $PlayerId)->update([
             'Name' => $request->Name,
             'LastIP' => $request->LastIP,
             'Status' => $request->Status
@@ -64,7 +64,7 @@ class PlayerController extends Controller
 
     public function DeletePlayer(Request $request, $PlayerId)
     {
-        DB::table('Player')->where('Id', $PlayerId)->delete();
+        DB::table('Player')->where('Id', '=', $PlayerId)->delete();
 
         return response()->json('OK');
     }

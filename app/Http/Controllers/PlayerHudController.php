@@ -11,7 +11,7 @@ class PlayerHudController extends Controller
     {
         $hud = DB::table('PlayerHud')
                 ->select('*')
-                ->where('PlayerId', $PlayerId)
+                ->where('PlayerId', '=', $PlayerId)
                 ->get();
 
         $this->checkExists($hud);
@@ -24,7 +24,7 @@ class PlayerHudController extends Controller
         try
         {
             DB::table('PlayerHud')
-                ->where('PlayerId', $PlayerId)
+                ->where('PlayerId', '=', $PlayerId)
                 ->delete();
         }
         catch (\Illuminate\Database\QueryException $e)
@@ -54,9 +54,9 @@ class PlayerHudController extends Controller
         foreach ($keys as $key)
         {
             DB::table('PlayerHud')
-                ->where('PlayerID', $PlayerId)
-                ->where('Side', $key['Side'])
-                ->where('Line', $key['Line'])
+                ->where('PlayerID', '=', $PlayerId)
+                ->where('Side', '=', $key['Side'])
+                ->where('Line', '=', $key['Line'])
                 ->update(['Key' => $key['Key']]);
         }
 
@@ -66,7 +66,7 @@ class PlayerHudController extends Controller
     public function DeleteHudByPlayerId(Request $request, $PlayerId)
     {
         DB::table('PlayerHud')
-            ->where('PlayerId', $PlayerId)
+            ->where('PlayerId', '=', $PlayerId)
             ->delete();
 
         return response()->json('OK');
@@ -75,8 +75,8 @@ class PlayerHudController extends Controller
     public function DeleteHudByPlayerIdAndKey(Request $request, $PlayerId, $Key)
     {
         DB::table('PlayerHud')
-            ->where('PlayerId', $PlayerId)
-            ->where('Key', $Key)
+            ->where('PlayerId', '=', $PlayerId)
+            ->where('Key', '=', $Key)
             ->delete();
 
         return response()->json('OK');

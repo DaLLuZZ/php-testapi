@@ -13,7 +13,7 @@ class RanksController extends Controller
                     ->orderBy('StyleId')
                     ->orderBy('Level')
                     ->orderBy('Time')
-                    ->where('MapId', $MapId)
+                    ->where('MapId', '=', $MapId)
                     ->get();
 
         $this->checkExists($records);
