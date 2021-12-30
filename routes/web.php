@@ -101,6 +101,7 @@ $router->group(['prefix' => 'Ranks', 'middleware' => 'auth'], function () use ($
 });
 
 $router->group(['prefix' => 'Location', 'middleware' => 'auth'], function () use ($router) {
+    $router->get('/MapId/{MapId}', 'LocationController@GetSharedRecords');
     $router->get('/MapId/{MapId}/PlayerId/{PlayerId}', 'LocationController@GetPlayerLocations');
     $router->post('/', 'LocationController@InsertLocation');
     $router->put('/LocationId/{LocationId}', 'LocationController@UpdateLocation');

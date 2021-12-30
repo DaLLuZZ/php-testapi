@@ -7,6 +7,26 @@ use Illuminate\Support\Facades\DB;
 
 class LocationController extends Controller
 {
+    public function GetSharedRecords(Request $request, $MapId)
+    {
+        $locations = DB::table('PlayerLocations')
+                        ->join('PlayerLocationInsight', 'PlayerLocations.Id', '=', 'PlayerLocationInsight.PlayerLocationId')
+                        ->select('PlayerLocations.Id', 'PlayerLocations.MapId', 'PlayerLocations.PlayerId', 'Player.Name', 'PlayerLocations.StyleId', 'PlayerLocations.Level', 'PlayerLocations.Type',
+                                'PlayerLocations.Tickrate', 'PlayerLocations.Time', 'PlayerLocations.Sync', 'PlayerLocations.Speed', 'PlayerLocations.Jumps', 'PlayerLocations.CSLevel', 'PlayerLocations.CSTime', 'PlayerLocations.Status',
+                                'PlayerLocationInsight.PositionX', 'PlayerLocationInsight.PositionY', 'PlayerLocationInsight.PositionZ',
+                                'PlayerLocationInsight.AngleX', 'PlayerLocationInsight.AngleY', 'PlayerLocationInsight.AngleZ',
+                                'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
+                        ->where('MapId', '=', $MapId)
+                        ->where('Status', '=', '2')
+                        ->orderBy('PlayerLocations.Level', 'asc')
+                        ->orderBy('PlayerLocations.CSLevel', 'asc')
+                        ->get();
+
+        $this->checkExists($locations);
+
+        return response()->json($locations);
+    }
+
     public function GetPlayerLocations(Request $request, $MapId, $PlayerId)
     {
         $locations = DB::table('PlayerLocations')
@@ -18,7 +38,7 @@ class LocationController extends Controller
                                 'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
                         ->where('MapId', '=', $MapId)
                         ->where('PlayerId', '=', $PlayerId)
-                        ->where('Status', '=', '1')
+                        ->where('Status', '>', '1')
                         ->orderBy('PlayerLocations.Level', 'asc')
                         ->orderBy('PlayerLocations.CSLevel', 'asc')
                         ->get();
