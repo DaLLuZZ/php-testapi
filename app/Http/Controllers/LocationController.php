@@ -10,14 +10,15 @@ class LocationController extends Controller
     public function GetSharedRecords(Request $request, $MapId)
     {
         $locations = DB::table('PlayerLocations')
+                        ->join('Player', 'Player.Id', '=', 'PlayerLocations.PlayerId')
                         ->join('PlayerLocationInsight', 'PlayerLocations.Id', '=', 'PlayerLocationInsight.PlayerLocationId')
                         ->select('PlayerLocations.Id', 'PlayerLocations.MapId', 'PlayerLocations.PlayerId', 'Player.Name', 'PlayerLocations.StyleId', 'PlayerLocations.Level', 'PlayerLocations.Type',
                                 'PlayerLocations.Tickrate', 'PlayerLocations.Time', 'PlayerLocations.Sync', 'PlayerLocations.Speed', 'PlayerLocations.Jumps', 'PlayerLocations.CSLevel', 'PlayerLocations.CSTime', 'PlayerLocations.Status',
                                 'PlayerLocationInsight.PositionX', 'PlayerLocationInsight.PositionY', 'PlayerLocationInsight.PositionZ',
                                 'PlayerLocationInsight.AngleX', 'PlayerLocationInsight.AngleY', 'PlayerLocationInsight.AngleZ',
                                 'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
-                        ->where('MapId', '=', $MapId)
-                        ->where('Status', '=', '2')
+                        ->where('PlayerLocations.MapId', '=', $MapId)
+                        ->where('PlayerLocations.Status', '=', '2')
                         ->orderBy('PlayerLocations.Level', 'asc')
                         ->orderBy('PlayerLocations.CSLevel', 'asc')
                         ->get();
@@ -36,9 +37,9 @@ class LocationController extends Controller
                                 'PlayerLocationInsight.PositionX', 'PlayerLocationInsight.PositionY', 'PlayerLocationInsight.PositionZ',
                                 'PlayerLocationInsight.AngleX', 'PlayerLocationInsight.AngleY', 'PlayerLocationInsight.AngleZ',
                                 'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
-                        ->where('MapId', '=', $MapId)
-                        ->where('PlayerId', '=', $PlayerId)
-                        ->where('Status', '>', '1')
+                        ->where('PlayerLocations.MapId', '=', $MapId)
+                        ->where('PlayerLocations.PlayerId', '=', $PlayerId)
+                        ->where('PlayerLocations.Status', '>', '1')
                         ->orderBy('PlayerLocations.Level', 'asc')
                         ->orderBy('PlayerLocations.CSLevel', 'asc')
                         ->get();
