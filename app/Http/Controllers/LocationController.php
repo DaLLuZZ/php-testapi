@@ -39,7 +39,7 @@ class LocationController extends Controller
                                 'PlayerLocationInsight.VelocityX', 'PlayerLocationInsight.VelocityY', 'PlayerLocationInsight.VelocityZ')
                         ->where('PlayerLocations.MapId', '=', $MapId)
                         ->where('PlayerLocations.PlayerId', '=', $PlayerId)
-                        ->where('PlayerLocations.Status', '>', '1')
+                        ->where('PlayerLocations.Status', '>', '0')
                         ->orderBy('PlayerLocations.Level', 'asc')
                         ->orderBy('PlayerLocations.CSLevel', 'asc')
                         ->get();
