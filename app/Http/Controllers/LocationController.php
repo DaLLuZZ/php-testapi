@@ -64,7 +64,8 @@ class LocationController extends Controller
                 'Speed' => $request->Speed,
                 'Jumps' => $request->Jumps,
                 'CSLevel' => $request->CSLevel,
-                'CSTime' => $request->CSTime
+                'CSTime' => $request->CSTime,
+                'Status' => $request->Status
             ]);
 
             DB::table('PlayerLocationInsight')->insert([
