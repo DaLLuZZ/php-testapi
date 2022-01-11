@@ -85,6 +85,8 @@ class LocationController extends Controller
             return response()->json("Duplicate entry", 409);
         }
 
+        $request->request->set('Id', $PlayerLocationId);
+
         return response()->json($request, 201);
     }
 
